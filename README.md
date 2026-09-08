@@ -34,4 +34,7 @@ _(se completa durante las semanas 2 a 4)_
 | 3 | 2026-09-08 | 2ea9ed0 | [update]: Agregar resumen de commits al README |
 | 4 | 2026-09-08 | 1ce0288 | [new]: Implementar tabla-commits.sh para la creacion de la tabla de commits en el README |
 | 5 | 2026-09-08 | dee93e7 | [update]: Implementa la forma en la que la tabla se actualiza automáticamente |
+| 6 | 2026-09-08 | 42563ef | [update]: Actualización de la tabla de commits |
+| 7 | 2026-09-08 | 1f415a4 | [new]: Maquetar el encabezado y la navegación del catálogo |
+| 8 | 2026-09-08 | fb97352 | [update]: Implementar parte del cuerpo de catalogo.html |
 <!-- FIN TABLA COMMITS -->
