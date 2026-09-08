@@ -15,7 +15,8 @@
         <!-- aria-label en el nav distingue esta navegación de otras que puedan existir en la página. -->
         <nav aria-label="Principal">
             <ul>
-                <li><a href="catalogo.html" aria-current="page">Catálogo</a></li> <!--  aria-current="page" marca el enlace de la página actual, y permite darle un estilo distinto sin agregar una clase.-->
+                <li><a href="catalogo.html" aria-current="page">Catálogo</a></li>
+                <!--  aria-current="page" marca el enlace de la página actual, y permite darle un estilo distinto sin agregar una clase.-->
                 <li><a href="publicar.html">Publicar iniciativa</a></li>
                 <li><a href="proyectos.html">Proyectos</a></li>
                 <li><a href="perfil.html">Mi perfil</a></li>
@@ -23,6 +24,224 @@
             </ul>
         </nav>
     </header>
+
+    <main>
+        <h1>Catálogo de iniciativas</h1>
+
+        <aside aria-labelledby="titulo-filtros">
+            <h2 id="titulo-filtros">Filtrar iniciativas</h2>
+            <form>
+                <p>
+                    <label for="filtro-tipo">Tipo</label>
+                    <select id="filtro-tipo" name="tipo">
+                        <option value="">Todos</option>
+                        <option value="idea">Idea</option>
+                        <option value="necesidad">Necesidad</option>
+                        <option value="reto">Reto</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="filtro-categoria">Categoría</label>
+                    <select id="filtro-categoria" name="categoria">
+                        <option value="">Todas</option>
+                        <option value="educacion">Educación</option>
+                        <option value="ambiente">Ambiente</option>
+                        <option value="comunidad">Gestión comunitaria</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="filtro-competencia">Competencia requerida</label>
+                    <input type="text" id="filtro-competencia" name="competencia">
+                </p>
+                <p><button type="submit">Aplicar filtros</button></p>
+            </form>
+        </aside>
+
+        <section aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">8 iniciativas encontradas</h2>
+            <article>
+                <h3>Coordinar voluntarios universitarios</h3>
+                <p>Idea · Gestión comunitaria</p>
+                <p>Plataforma para publicar turnos de voluntariado, asignar
+                    participantes y registrar las horas cumplidas.</p>
+                <p>Publicado por <strong>Ana Rojas</strong> el
+                    <time datetime="2026-08-24">24 de agosto de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Diseño de interfaces</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> En progreso
+                    </span>
+                    · 3 de 5 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Coordinar voluntarios</a></p>
+            </article>
+
+            <article>
+                <h3>Crear una plataforma de intercambio de libros</h3>
+                <p>Idea · Educación</p>
+                <p>Aplicación para que estudiantes puedan publicar libros disponibles,
+                    buscar títulos y coordinar intercambios dentro de la universidad.</p>
+                <p>Publicado por <strong>María Fernández</strong> el
+                    <time datetime="2026-08-26">26 de agosto de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>React</li>
+                    <li>JavaScript</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Aceptada
+                    </span>
+                    · 4 de 6 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Crear una plataforma de intercambio de libros</a></p>
+            </article>
+
+            <article>
+                <h3>Mejorar el acceso a tutorías estudiantiles</h3>
+                <p>Necesidad · Educación</p>
+                <p>Plataforma para facilitar que los estudiantes encuentren compañeros
+                    que puedan brindar tutorías en diferentes materias.</p>
+                <p>Publicado por <strong>Carlos Mora</strong> el
+                    <time datetime="2026-08-28">28 de agosto de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Pendiente
+                    </span>
+                    · 2 de 5 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Mejorar el acceso a tutorías estudiantiles</a></p>
+            </article>
+
+            <article>
+                <h3>Reducir el uso de plástico en la universidad</h3>
+                <p>Reto · Ambiente</p>
+                <p>Proyecto para promover alternativas reutilizables y reducir la cantidad
+                    de residuos plásticos generados dentro del campus universitario.</p>
+                <p>Publicado por <strong>Laura Jiménez</strong> el
+                    <time datetime="2026-08-30">30 de agosto de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>Diseño de interfaces</li>
+                    <li>JavaScript</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Aceptada
+                    </span>
+                    · 3 de 4 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Reducir el uso de plástico en la universidad</a></p>
+            </article>
+
+            <article>
+                <h3>Organizar jornadas de limpieza comunitaria</h3>
+                <p>Idea · Gestión Comunitaria</p>
+                <p>Plataforma para organizar jornadas de limpieza, publicar fechas
+                    y permitir que voluntarios se inscriban en las actividades.</p>
+                <p>Publicado por <strong>Daniel Vargas</strong> el
+                    <time datetime="2026-09-01">1 de septiembre de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Node.js</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Pendiente
+                    </span>
+                    · 2 de 6 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Organizar jornadas de limpieza comunitaria</a></p>
+            </article>
+
+            <article>
+                <h3>Facilitar la recolección de materiales reciclables</h3>
+                <p>Necesidad · Ambiente</p>
+                <p>Sistema para informar sobre puntos de reciclaje y coordinar la
+                    recolección de materiales reciclables dentro de la comunidad.</p>
+                <p>Publicado por <strong>Sofía Castro</strong> el
+                    <time datetime="2026-09-02">2 de septiembre de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Bases de datos</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Rechazada
+                    </span>
+                    · 3 de 5 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Facilitar la recolección de materiales reciclables</a></p>
+            </article>
+
+            <article>
+                <h3>Conectar voluntarios con organizaciones locales</h3>
+                <p>Reto · Gestión Comunitaria</p>
+                <p>Plataforma para conectar personas interesadas en realizar voluntariado
+                    con organizaciones que necesitan apoyo en diferentes actividades.</p>
+                <p>Publicado por <strong>Andrés Solano</strong> el
+                    <time datetime="2026-09-04">4 de septiembre de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Bases de datos</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Cancelada
+                    </span>
+                    · 2 de 4 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Conectar voluntarios con organizaciones locales</a></p>
+            </article>
+
+            <article>
+                <h3>Crear recursos educativos para estudiantes</h3>
+                <p>Necesidad · Educación</p>
+                <p>Plataforma donde estudiantes y profesores puedan compartir materiales
+                    educativos, guías de estudio y recursos de apoyo académico.</p>
+                <p>Publicado por <strong>Valeria Hernández</strong> el
+                    <time datetime="2026-09-06">6 de septiembre de 2026</time>
+                </p>
+                <h4>Competencias requeridas</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Diseño de interfaces</li>
+                </ul>
+                <p>
+                    <span class="estado">
+                        <span aria-hidden="true">●</span> Aceptada
+                    </span>
+                    · 5 de 7 miembros
+                </p>
+                <p><a href="detalle.html">Ver la iniciativa: Crear recursos educativos para estudiantes</a></p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Innovation Hub · Universidad CENFOTEC</p>
+        <p><a href="mailto:hub@ejemplo.ac.cr">hub@ejemplo.ac.cr</a></p>
+    </footer>
+
 </body>
 
 </html>
