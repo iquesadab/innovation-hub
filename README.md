@@ -32,10 +32,5 @@ _(se completa durante las semanas 2 a 4)_
 | 1 | 2026-09-08 | 13292e1 | [init]: Crear estructura del avance 1 y documentación inicial |
 | 2 | 2026-09-08 | a27f8b4 | [update]: Eliminar numero en el gitignore agregado por error |
 | 3 | 2026-09-08 | 2ea9ed0 | [update]: Agregar resumen de commits al README |
+| 4 | 2026-09-08 | 1ce0288 | [new]: Implementar tabla-commits.sh para la creacion de la tabla de commits en el README |
 <!-- FIN TABLA COMMITS -->
-
-
-| # | Fecha | Hash | Mensaje | Zona | Cambio |
-|---|---|---|---|---|---|
-| 1 | 2026-09-08 | 13292e1 | [init]: Crear estructura del avance 1 y documentación inicial | General | Inicialización del proyecto con la estructura del primer avance
-| 2 | 2026-09-08 | a27f8b4 | [update]: Eliminar numero en el gitignore agregado por error | gitignore | Eliminación de número agregado por error
