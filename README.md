@@ -38,6 +38,5 @@ _(se completa durante las semanas 2 a 4)_
 | 7 | 2026-09-08 | 1f415a4 | [new]: Maquetar el encabezado y la navegación del catálogo |
 | 8 | 2026-09-08 | fb97352 | [update]: Implementar parte del cuerpo de catalogo.html |
 | 9 | 2026-09-08 | ce250b5 | [update]: Actualiza tabla de commits |
+| 10 | 2026-09-08 | d2ff76a | [prueba]: Prueba de funcionamiento de hook |
 <!-- FIN TABLA COMMITS -->
-
-prueba de hook
