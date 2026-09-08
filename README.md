@@ -25,4 +25,8 @@ Abrir `avance1/index.html` en el navegador. No requiere instalación.
 _(se completa durante las semanas 2 a 4)_
 
 ## Resumen de commits
-_(ver la tabla al final de este archivo)_
+
+| # | Fecha | Hash | Mensaje | Zona | Cambio |
+|---|---|---|---|---|---|
+| 1 | 2026-09-08 | 13292e1 | [init]: Crear estructura del avance 1 y documentación inicial | General | Inicialización del proyecto con la estructura del primer avance
+| 2 | 2026-09-08 | a27f8b4 | [update]: Eliminar numero en el gitignore agregado por error | gitignore | Eliminación de número agregado por error
