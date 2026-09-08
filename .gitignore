@@ -10,5 +10,4 @@ Thumbs.db
 *.css.map
 # secretos: los vas a necesitar desde el Avance 2
 .env
-4
 .env.local
