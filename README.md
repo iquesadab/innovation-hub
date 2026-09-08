@@ -33,4 +33,5 @@ _(se completa durante las semanas 2 a 4)_
 | 2 | 2026-09-08 | a27f8b4 | [update]: Eliminar numero en el gitignore agregado por error |
 | 3 | 2026-09-08 | 2ea9ed0 | [update]: Agregar resumen de commits al README |
 | 4 | 2026-09-08 | 1ce0288 | [new]: Implementar tabla-commits.sh para la creacion de la tabla de commits en el README |
+| 5 | 2026-09-08 | dee93e7 | [update]: Implementa la forma en la que la tabla se actualiza automáticamente |
 <!-- FIN TABLA COMMITS -->
