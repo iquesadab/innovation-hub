@@ -39,4 +39,5 @@ _(se completa durante las semanas 2 a 4)_
 | 8 | 2026-09-08 | fb97352 | [update]: Implementar parte del cuerpo de catalogo.html |
 | 9 | 2026-09-08 | ce250b5 | [update]: Actualiza tabla de commits |
 | 10 | 2026-09-08 | d2ff76a | [prueba]: Prueba de funcionamiento de hook |
+| 11 | 2026-09-08 | b5a644f | [delete]: Elimina texto de prueba |
 <!-- FIN TABLA COMMITS -->
