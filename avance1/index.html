@@ -23,9 +23,12 @@
 
     <!-- Encabezado -->
     <header>
-
+        <!-- navbar-expand-lg: indica que a partir de pantallas grandes (lg) 
+         el menú se muestra expandido -->
         <nav class="navbar navbar-expand-lg">
 
+            <!--container: centra el contenido y hace que tenga márgenes/espacios 
+            adecuados según el tamaño de la pantalla -->
             <div class="container">
 
                 <!-- Nombre del sistema -->
@@ -35,6 +38,13 @@
 
 
                 <!-- Botón para dispositivos pequeños -->
+                <!-- 
+                class="navbar-toggler": indica que este botón es el encargado de abrir/cerrar el menú del navbar cuando está colapsado.
+                data-bs-toggle="collapse": Cuando presionen este botón, quiero mostrar u ocultar algo.
+                data-bs-target: qué elemento debe mostrar u ocultar. El # significa que estamos buscando un id
+                aria-controls: Accesibilidad. Indica que este botón controla el elemento llamado menuPrincipal
+                aria-expanded: Accesibilidad. Indica si el menú está abierto o cerrado
+                -->
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -44,18 +54,30 @@
                     aria-expanded="false"
                     aria-label="Mostrar navegación"
                 >
+                    <!-- class="navbar-toggler-icon": Coloca el ícono típico de menú de tres líneas -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
 
                 <!-- Navegación principal -->
+                <!-- 
+                collapse: permite que ese contenido se pueda mostrar y ocultar.
+                navbar-collapse: le indica a Bootstrap que ese contenido que se está colapsando pertenece al navbar
+                -->
                 <div
+            
                     class="collapse navbar-collapse"
                     id="menuPrincipal"
                 >
 
+                    <!-- 
+                    navbar-nav: Acomoda y da formato apropiado a esos elementos dentro de la barra de navegación
+                    margin-start: auto: empujar las opciones hacia el final o la derecha
+                    -->
                     <ul class="navbar-nav ms-auto">
 
+                        <!--nav-link active: Le indica a Bootstrap que este es un enlace en el nav y active le esta diciando que esta 
+                        opcion pertenece a la pagina en la que estamos -->
                         <li class="nav-item">
                             <a
                                 class="nav-link active"
@@ -176,11 +198,7 @@
 
     <!-- Pie de página -->
     <footer>
-
-        <p>
-            Innovation Hub - Programación Web Avanzada
-        </p>
-
+        <p>Innovation Hub · Universidad CENFOTEC</p>
     </footer>
 
 

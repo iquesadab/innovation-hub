@@ -6,241 +6,330 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- para que el diseño adaptable funcione en teléfonos -->
     <title>Catálogo de iniciativas — Innovation Hub</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="../css/estilos.css">
+
 </head>
 
 <body>
+    <!-- Encabezado -->
     <header>
-        <a href="../index.html">Innovation Hub</a>
+        <!-- navbar-expand-lg: indica que a partir de pantallas grandes (lg) 
+         el menú se muestra expandido -->
+        <nav class="navbar navbar-expand-lg">
 
-        <!-- aria-label en el nav distingue esta navegación de otras que puedan existir en la página. -->
-        <nav aria-label="Principal">
-            <ul>
-                <li><a href="catalogo.html" aria-current="page">Catálogo</a></li>
-                <!--  aria-current="page" marca el enlace de la página actual, y permite darle un estilo distinto sin agregar una clase.-->
-                <li><a href="publicar.html">Publicar iniciativa</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="perfil.html">Mi perfil</a></li>
-                <li><a href="solicitudes.html">Mis solicitudes</a></li>
-            </ul>
+            <!--container: centra el contenido y hace que tenga márgenes/espacios 
+            adecuados según el tamaño de la pantalla -->
+            <div class="container">
+
+                <!-- Nombre del sistema -->
+                <a class="navbar-brand" href="../index.html">
+                    Innovation Hub
+                </a>
+
+
+                <!-- Botón para dispositivos pequeños -->
+                <!-- 
+                class="navbar-toggler": indica que este botón es el encargado de abrir/cerrar el menú del navbar cuando está colapsado.
+                data-bs-toggle="collapse": Cuando presionen este botón, quiero mostrar u ocultar algo.
+                data-bs-target: qué elemento debe mostrar u ocultar. El # significa que estamos buscando un id
+                aria-controls: Accesibilidad. Indica que este botón controla el elemento llamado menuPrincipal
+                aria-expanded: Accesibilidad. Indica si el menú está abierto o cerrado
+                -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal" aria-expanded="false" aria-label="Mostrar navegación">
+                    <!-- class="navbar-toggler-icon": Coloca el ícono típico de menú de tres líneas -->
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <!-- Navegación principal -->
+                <!-- 
+                collapse: permite que ese contenido se pueda mostrar y ocultar.
+                navbar-collapse: le indica a Bootstrap que ese contenido que se está colapsando pertenece al navbar
+                -->
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+
+                    <!-- 
+                    navbar-nav: Acomoda y da formato apropiado a esos elementos dentro de la barra de navegación
+                    margin-start: auto: empujar las opciones hacia el final o la derecha
+                    -->
+                    <ul class="navbar-nav ms-auto">
+
+                        <!--nav-link active: Le indica a Bootstrap que este es un enlace en el nav y active le esta diciando que esta 
+                        opcion pertenece a la pagina en la que estamos -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                Inicio
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="paginas/catalogo.html" aria-current="page">
+                                Iniciativas
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="paginas/publicar.html">
+                                Publicar
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="paginas/perfil.html">
+                                Perfil
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
         </nav>
+
     </header>
 
-    <main>
-        <h1>Catálogo de iniciativas</h1>
+    <main class="container py-4">
 
-        <aside aria-labelledby="titulo-filtros">
-            <h2 id="titulo-filtros">Filtrar iniciativas</h2>
+    <!--
+    container: centra el contenido y deja espacios laterales adecuados
+    dependiendo del tamaño de la pantalla.
+    
+    py-4: agrega espacio interno (padding) arriba y abajo.
+    p = padding
+    y = eje vertical (arriba y abajo)
+    4 = cantidad de espacio que agrega Bootstrap
+    -->
+
+
+        <!-- Título de la página -->
+        <!--
+        mb-4: agrega un margen debajo de esta sección.
+        m = margin
+        b = bottom (abajo)
+        4 = cantidad de espacio
+        -->
+        <section class="mb-4">
+
+            <h1>Catálogo de iniciativas</h1>
+
+            <p>
+                Explora las iniciativas disponibles y encuentra
+                oportunidades para colaborar.
+            </p>
+
+        </section>
+
+
+        <!-- Búsqueda y filtros -->
+        <!--
+        mb-5: agrega un margen debajo del aside para separarlo
+        de la sección de resultados.
+        -->
+        <aside aria-labelledby="titulo-filtros" class="mb-5">
+
+            <!--
+            mb-3: agrega un margen debajo del título.
+            -->
+            <h2 id="titulo-filtros" class="mb-3">
+                Buscar y filtrar iniciativas
+            </h2>
+
             <form>
-                <p>
-                    <label for="filtro-tipo">Tipo</label>
-                    <select id="filtro-tipo" name="tipo">
-                        <option value="">Todos</option>
-                        <option value="idea">Idea</option>
-                        <option value="necesidad">Necesidad</option>
-                        <option value="reto">Reto</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="filtro-categoria">Categoría</label>
-                    <select id="filtro-categoria" name="categoria">
-                        <option value="">Todas</option>
-                        <option value="educacion">Educación</option>
-                        <option value="ambiente">Ambiente</option>
-                        <option value="comunidad">Gestión comunitaria</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="filtro-competencia">Competencia requerida</label>
-                    <input type="text" id="filtro-competencia" name="competencia">
-                </p>
-                <p><button type="submit">Aplicar filtros</button></p>
+
+                <!--
+                row: crea una fila utilizando el sistema Grid de Bootstrap.
+
+                g-3: agrega separación entre los elementos que se encuentran
+                dentro de la fila.
+                g = gap (espacio)
+                3 = cantidad de espacio
+                -->
+                <div class="row g-3">
+
+
+                    <!-- Búsqueda -->
+                    <!--
+                    col-12: hace que este elemento ocupe las 12 columnas
+                    disponibles, es decir, todo el ancho.
+                    -->
+                    <div class="col-12">
+
+                        <!--
+                        form-label: aplica el formato de Bootstrap
+                        para las etiquetas de los formularios.
+                        -->
+                        <label for="busqueda" class="form-label">
+                            Buscar iniciativa
+                        </label>
+
+                        <!--
+                        form-control: aplica el formato de Bootstrap
+                        a campos como input y textarea.
+                        -->
+                        <input type="search" class="form-control" id="busqueda" name="busqueda"
+                            placeholder="Buscar por título o palabra clave">
+
+                    </div>
+
+
+                    <!-- Tipo -->
+                    <!--
+                    col-12: en pantallas pequeñas ocupa las 12 columnas,
+                    por lo tanto utiliza todo el ancho.
+
+                    col-md-4: a partir de pantallas medianas (md),
+                    ocupa 4 de las 12 columnas disponibles.
+
+                    Como tenemos tres filtros de 4 columnas:
+                    4 + 4 + 4 = 12.
+                    Por eso pueden aparecer uno al lado del otro.
+                    -->
+                    <div class="col-12 col-md-4">
+
+                        <label for="filtro-tipo" class="form-label">
+                            Tipo
+                        </label>
+
+                        <!--
+                        form-select: aplica el formato de Bootstrap
+                        a una lista desplegable (select).
+                        -->
+                        <select class="form-select" id="filtro-tipo" name="tipo">
+                            <option value="">Todos</option>
+                            <option value="idea">Idea</option>
+                            <option value="necesidad">Necesidad</option>
+                            <option value="reto">Reto</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Categoría -->
+                    <!--
+                    col-12 col-md-4: ocupa todo el ancho en pantallas pequeñas
+                    y 4 columnas a partir de pantallas medianas.
+                    -->
+                    <div class="col-12 col-md-4">
+
+                        <label for="filtro-categoria" class="form-label">
+                            Categoría
+                        </label>
+
+                        <!--
+                        form-select: aplica los estilos de Bootstrap
+                        al select.
+                        -->
+                        <select class="form-select" id="filtro-categoria" name="categoria">
+                            <option value="">Todas</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="educacion">Educación</option>
+                            <option value="sostenibilidad">Sostenibilidad</option>
+                            <option value="impacto-social">Impacto social</option>
+
+                            <option value="negocios-emprendimiento">
+                                Negocios y emprendimiento
+                            </option>
+
+                            <option value="salud-bienestar">
+                                Salud y bienestar
+                            </option>
+
+                            <option value="cultura-creatividad">
+                                Cultura y creatividad
+                            </option>
+
+                            <option value="otro">Otro</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Competencia -->
+                    <!--
+                    col-12 col-md-4: en celular ocupa todo el ancho
+                    y desde md ocupa 4 de las 12 columnas.
+                    -->
+                    <div class="col-12 col-md-4">
+
+                        <label for="filtro-competencia" class="form-label">
+                            Competencia requerida
+                        </label>
+
+                        <!--
+                        form-control: aplica el estilo de Bootstrap
+                        al campo de texto.
+                        -->
+                        <input type="text" class="form-control" id="filtro-competencia" name="competencia"
+                            placeholder="Ej. JavaScript">
+
+                    </div>
+
+
+                    <!-- Botón -->
+                    <div class="col-12">
+
+                        <!--
+                        btn: aplica el formato básico de botón de Bootstrap.
+
+                        btn-primary: indica que este es un botón principal.
+                        Por ahora utiliza el color predeterminado de Bootstrap,
+                        pero después cambiaremos ese color con nuestro CSS
+                        para utilizar la paleta de Innovation Hub.
+                        -->
+                        <button type="submit" class="btn btn-primary">
+                            Aplicar filtros
+                        </button>
+
+                    </div>
+
+                </div>
+
             </form>
+
         </aside>
 
+
+        <!-- Resultados -->
         <section aria-labelledby="titulo-resultados">
-            <h2 id="titulo-resultados">8 iniciativas encontradas</h2>
-            <article>
-                <h3>Coordinar voluntarios universitarios</h3>
-                <p>Idea · Gestión comunitaria</p>
-                <p>Plataforma para publicar turnos de voluntariado, asignar
-                    participantes y registrar las horas cumplidas.</p>
-                <p>Publicado por <strong>Ana Rojas</strong> el
-                    <time datetime="2026-08-24">24 de agosto de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>React</li>
-                    <li>Diseño de interfaces</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> En progreso
-                    </span>
-                    · 3 de 5 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Coordinar voluntarios</a></p>
-            </article>
 
-            <article>
-                <h3>Crear una plataforma de intercambio de libros</h3>
-                <p>Idea · Educación</p>
-                <p>Aplicación para que estudiantes puedan publicar libros disponibles,
-                    buscar títulos y coordinar intercambios dentro de la universidad.</p>
-                <p>Publicado por <strong>María Fernández</strong> el
-                    <time datetime="2026-08-26">26 de agosto de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>React</li>
-                    <li>JavaScript</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Aceptada
-                    </span>
-                    · 4 de 6 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Crear una plataforma de intercambio de libros</a></p>
-            </article>
+            <!--
+            mb-4: agrega margen debajo del título para separarlo
+            de las tarjetas de iniciativas.
+            -->
+            <h2 id="titulo-resultados" class="mb-4">
+                Iniciativas
+            </h2>
 
-            <article>
-                <h3>Mejorar el acceso a tutorías estudiantiles</h3>
-                <p>Necesidad · Educación</p>
-                <p>Plataforma para facilitar que los estudiantes encuentren compañeros
-                    que puedan brindar tutorías en diferentes materias.</p>
-                <p>Publicado por <strong>Carlos Mora</strong> el
-                    <time datetime="2026-08-28">28 de agosto de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Pendiente
-                    </span>
-                    · 2 de 5 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Mejorar el acceso a tutorías estudiantiles</a></p>
-            </article>
 
-            <article>
-                <h3>Reducir el uso de plástico en la universidad</h3>
-                <p>Reto · Ambiente</p>
-                <p>Proyecto para promover alternativas reutilizables y reducir la cantidad
-                    de residuos plásticos generados dentro del campus universitario.</p>
-                <p>Publicado por <strong>Laura Jiménez</strong> el
-                    <time datetime="2026-08-30">30 de agosto de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>Diseño de interfaces</li>
-                    <li>JavaScript</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Aceptada
-                    </span>
-                    · 3 de 4 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Reducir el uso de plástico en la universidad</a></p>
-            </article>
+            <!--
+            row: crea una fila del Grid de Bootstrap.
 
-            <article>
-                <h3>Organizar jornadas de limpieza comunitaria</h3>
-                <p>Idea · Gestión Comunitaria</p>
-                <p>Plataforma para organizar jornadas de limpieza, publicar fechas
-                    y permitir que voluntarios se inscriban en las actividades.</p>
-                <p>Publicado por <strong>Daniel Vargas</strong> el
-                    <time datetime="2026-09-01">1 de septiembre de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>React</li>
-                    <li>Node.js</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Pendiente
-                    </span>
-                    · 2 de 6 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Organizar jornadas de limpieza comunitaria</a></p>
-            </article>
+            g-4: agrega separación entre las tarjetas que JavaScript
+            colocará dentro de esta fila.
+            -->
+            <div id="lista-iniciativas" class="row g-4">
+                <!-- Las iniciativas se cargarán con JavaScript -->
+            </div>
 
-            <article>
-                <h3>Facilitar la recolección de materiales reciclables</h3>
-                <p>Necesidad · Ambiente</p>
-                <p>Sistema para informar sobre puntos de reciclaje y coordinar la
-                    recolección de materiales reciclables dentro de la comunidad.</p>
-                <p>Publicado por <strong>Sofía Castro</strong> el
-                    <time datetime="2026-09-02">2 de septiembre de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>React</li>
-                    <li>Bases de datos</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Rechazada
-                    </span>
-                    · 3 de 5 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Facilitar la recolección de materiales reciclables</a></p>
-            </article>
-
-            <article>
-                <h3>Conectar voluntarios con organizaciones locales</h3>
-                <p>Reto · Gestión Comunitaria</p>
-                <p>Plataforma para conectar personas interesadas en realizar voluntariado
-                    con organizaciones que necesitan apoyo en diferentes actividades.</p>
-                <p>Publicado por <strong>Andrés Solano</strong> el
-                    <time datetime="2026-09-04">4 de septiembre de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>Node.js</li>
-                    <li>Bases de datos</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Cancelada
-                    </span>
-                    · 2 de 4 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Conectar voluntarios con organizaciones locales</a></p>
-            </article>
-
-            <article>
-                <h3>Crear recursos educativos para estudiantes</h3>
-                <p>Necesidad · Educación</p>
-                <p>Plataforma donde estudiantes y profesores puedan compartir materiales
-                    educativos, guías de estudio y recursos de apoyo académico.</p>
-                <p>Publicado por <strong>Valeria Hernández</strong> el
-                    <time datetime="2026-09-06">6 de septiembre de 2026</time>
-                </p>
-                <h4>Competencias requeridas</h4>
-                <ul>
-                    <li>React</li>
-                    <li>Diseño de interfaces</li>
-                </ul>
-                <p>
-                    <span class="estado">
-                        <span aria-hidden="true">●</span> Aceptada
-                    </span>
-                    · 5 de 7 miembros
-                </p>
-                <p><a href="detalle.html">Ver la iniciativa: Crear recursos educativos para estudiantes</a></p>
-            </article>
         </section>
+
     </main>
 
     <footer>
         <p>Innovation Hub · Universidad CENFOTEC</p>
-        <p><a href="mailto:hub@ejemplo.ac.cr">hub@ejemplo.ac.cr</a></p>
     </footer>
+
+    <!-- JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
 
 </body>
 

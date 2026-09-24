@@ -40,4 +40,5 @@ _(se completa durante las semanas 2 a 4)_
 | 9 | 2026-09-08 | ce250b5 | [update]: Actualiza tabla de commits |
 | 10 | 2026-09-08 | d2ff76a | [prueba]: Prueba de funcionamiento de hook |
 | 11 | 2026-09-08 | b5a644f | [delete]: Elimina texto de prueba |
+| 12 | 2026-09-22 | b205d2f | [new]: Agrega estructura inicial de la página principal con Bootstrap |
 <!-- FIN TABLA COMMITS -->
