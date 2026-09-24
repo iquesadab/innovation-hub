@@ -1,0 +1,239 @@
+[
+    {
+        "id": 1,
+        "titulo": "Plataforma de tutorías entre estudiantes",
+        "tipo": "Idea",
+        "resumen": "Plataforma para conectar estudiantes que necesitan tutorías con estudiantes que pueden brindarlas.",
+        "descripcion": "Espacio digital donde los estudiantes pueden encontrar y ofrecer tutorías en diferentes materias, facilitando el apoyo académico entre compañeros.",
+        "problema": "Algunos estudiantes tienen dificultad para encontrar apoyo académico en materias específicas.",
+        "beneficiarios": "Estudiantes universitarios",
+        "categoria": "Educación",
+        "competencias": [
+            "React",
+            "Diseño de interfaces"
+        ],
+        "miembrosEstimados": 5,
+        "visibilidad": "Pública",
+        "etiquetas": [
+            "educación",
+            "tutorías",
+            "estudiantes"
+        ],
+        "propietario": "María Fernández",
+        "fechaCreacion": "2026-09-10",
+        "fechaModificacion": "2026-09-10",
+        "estado": "Publicada",
+        "miembros": [
+            "María Fernández",
+            "Carlos Mora"
+        ]
+    },
+    {
+        "id": 2,
+        "titulo": "Sistema inteligente de reciclaje en el campus",
+        "tipo": "Reto",
+        "resumen": "Sistema para mejorar la clasificación y recolección de residuos mediante tecnología dentro del campus.",
+        "descripcion": "La iniciativa busca desarrollar una solución tecnológica que facilite la identificación, clasificación y seguimiento de los residuos reciclables generados en el campus universitario.",
+        "problema": "La separación incorrecta de residuos dificulta los procesos de reciclaje dentro de la universidad.",
+        "beneficiarios": "Estudiantes, docentes y personal universitario",
+        "categoria": "Sostenibilidad",
+        "competencias": [
+            "JavaScript",
+            "IoT"
+        ],
+        "miembrosEstimados": 6,
+        "visibilidad": "Pública",
+        "etiquetas": [
+            "reciclaje",
+            "tecnología",
+            "ambiente"
+        ],
+        "propietario": "Daniel Vargas",
+        "fechaCreacion": "2026-09-11",
+        "fechaModificacion": "2026-09-14",
+        "estado": "En formación de equipo",
+        "miembros": [
+            "Daniel Vargas",
+            "Sofía Castro",
+            "Andrés Solano"
+        ]
+    },
+    {
+        "id": 3,
+        "titulo": "Red de apoyo para adultos mayores",
+        "tipo": "Necesidad",
+        "resumen": "Red colaborativa para conectar adultos mayores con personas voluntarias que puedan brindar acompañamiento y apoyo.",
+        "descripcion": "La iniciativa propone crear una red que facilite la coordinación de actividades de acompañamiento, orientación y apoyo para adultos mayores de comunidades cercanas.",
+        "problema": "Algunos adultos mayores cuentan con redes de apoyo limitadas para realizar actividades cotidianas o recibir acompañamiento.",
+        "beneficiarios": "Adultos mayores de comunidades cercanas",
+        "categoria": "Impacto social",
+        "competencias": [
+            "Comunicación",
+            "Gestión de proyectos"
+        ],
+        "miembrosEstimados": 5,
+        "visibilidad": "Pública",
+        "etiquetas": [
+            "adultos mayores",
+            "voluntariado",
+            "comunidad"
+        ],
+        "propietario": "Ana Rojas",
+        "fechaCreacion": "2026-09-12",
+        "fechaModificacion": "2026-09-12",
+        "estado": "Publicada",
+        "miembros": [
+            "Ana Rojas",
+            "Laura Jiménez"
+        ]
+    },
+    {
+        "id": 4,
+        "titulo": "Aplicación para organizar finanzas de emprendedores",
+        "tipo": "Idea",
+        "resumen": "Aplicación sencilla para ayudar a pequeños emprendedores a organizar ingresos, gastos y metas financieras.",
+        "descripcion": "La propuesta consiste en desarrollar una aplicación que permita registrar movimientos financieros y visualizar de manera sencilla la situación económica de pequeños emprendimientos.",
+        "problema": "Muchos pequeños emprendedores no cuentan con herramientas sencillas para llevar el control básico de sus finanzas.",
+        "beneficiarios": "Emprendedores y pequeños negocios",
+        "categoria": "Negocios y emprendimiento",
+        "competencias": [
+            "JavaScript",
+            "Diseño UX/UI"
+        ],
+        "miembrosEstimados": 4,
+        "visibilidad": "Institucional",
+        "etiquetas": [
+            "finanzas",
+            "emprendimiento",
+            "aplicación"
+        ],
+        "propietario": "Carlos Mora",
+        "fechaCreacion": "2026-09-13",
+        "fechaModificacion": "2026-09-15",
+        "estado": "En formación de equipo",
+        "miembros": [
+            "Carlos Mora",
+            "Valeria Hernández",
+            "María Fernández"
+        ]
+    },
+    {
+        "id": 5,
+        "titulo": "Plataforma para promover hábitos saludables",
+        "tipo": "Idea",
+        "resumen": "Plataforma para compartir recursos y actividades que ayuden a promover hábitos saludables entre estudiantes.",
+        "descripcion": "La plataforma permitirá consultar información y actividades relacionadas con alimentación, actividad física y bienestar general dentro de la comunidad universitaria.",
+        "problema": "Los estudiantes no siempre cuentan con un espacio centralizado para consultar recursos relacionados con hábitos saludables.",
+        "beneficiarios": "Estudiantes universitarios",
+        "categoria": "Salud y bienestar",
+        "competencias": [
+            "Diseño UX/UI",
+            "Desarrollo web"
+        ],
+        "miembrosEstimados": 4,
+        "visibilidad": "Institucional",
+        "etiquetas": [
+            "bienestar",
+            "salud",
+            "estudiantes"
+        ],
+        "propietario": "Sofía Castro",
+        "fechaCreacion": "2026-09-14",
+        "fechaModificacion": "2026-09-14",
+        "estado": "Publicada",
+        "miembros": [
+            "Sofía Castro",
+            "Daniel Vargas"
+        ]
+    },
+    {
+        "id": 6,
+        "titulo": "Digitalización de actividades culturales universitarias",
+        "tipo": "Necesidad",
+        "resumen": "Espacio digital para divulgar actividades culturales y facilitar la participación de la comunidad universitaria.",
+        "descripcion": "La iniciativa busca centralizar la información sobre talleres, exposiciones, presentaciones y otras actividades culturales realizadas en la universidad.",
+        "problema": "La información sobre actividades culturales se encuentra distribuida en diferentes medios y puede ser difícil de encontrar.",
+        "beneficiarios": "Comunidad universitaria",
+        "categoria": "Cultura y creatividad",
+        "competencias": [
+            "Diseño gráfico",
+            "Desarrollo web"
+        ],
+        "miembrosEstimados": 6,
+        "visibilidad": "Institucional",
+        "etiquetas": [
+            "cultura",
+            "actividades",
+            "universidad"
+        ],
+        "propietario": "Valeria Hernández",
+        "fechaCreacion": "2026-09-15",
+        "fechaModificacion": "2026-09-17",
+        "estado": "En formación de equipo",
+        "miembros": [
+            "Valeria Hernández",
+            "Andrés Solano",
+            "Laura Jiménez",
+            "Carlos Mora"
+        ]
+    },
+    {
+        "id": 7,
+        "titulo": "Mejorar la accesibilidad de los servicios universitarios",
+        "tipo": "Reto",
+        "resumen": "Reto orientado a identificar y mejorar barreras de accesibilidad en servicios digitales universitarios.",
+        "descripcion": "La iniciativa busca analizar diferentes servicios digitales utilizados por la comunidad universitaria y proponer mejoras que faciliten su utilización por personas con distintas necesidades de accesibilidad.",
+        "problema": "Algunos servicios digitales pueden presentar barreras que dificultan su utilización por parte de ciertos usuarios.",
+        "beneficiarios": "Comunidad universitaria",
+        "categoria": "Tecnología",
+        "competencias": [
+            "Accesibilidad web",
+            "JavaScript"
+        ],
+        "miembrosEstimados": 5,
+        "visibilidad": "Pública",
+        "etiquetas": [
+            "accesibilidad",
+            "tecnología",
+            "universidad"
+        ],
+        "propietario": "Andrés Solano",
+        "fechaCreacion": "2026-09-16",
+        "fechaModificacion": "2026-09-16",
+        "estado": "Publicada",
+        "miembros": [
+            "Andrés Solano",
+            "Ana Rojas"
+        ]
+    },
+    {
+        "id": 8,
+        "titulo": "Banco comunitario de herramientas y recursos",
+        "tipo": "Necesidad",
+        "resumen": "Sistema para facilitar el préstamo y aprovechamiento compartido de herramientas y otros recursos comunitarios.",
+        "descripcion": "La iniciativa propone organizar un banco comunitario donde las personas puedan registrar recursos disponibles y coordinar su préstamo de manera ordenada.",
+        "problema": "Algunas personas necesitan herramientas de uso ocasional que otras personas de la comunidad podrían compartir.",
+        "beneficiarios": "Personas y organizaciones de la comunidad",
+        "categoria": "Otro",
+        "competencias": [
+            "Gestión de proyectos",
+            "Comunicación"
+        ],
+        "miembrosEstimados": 5,
+        "visibilidad": "Restringida",
+        "etiquetas": [
+            "comunidad",
+            "recursos",
+            "colaboración"
+        ],
+        "propietario": "Laura Jiménez",
+        "fechaCreacion": "2026-09-17",
+        "fechaModificacion": "2026-09-18",
+        "estado": "Publicada",
+        "miembros": [
+            "Laura Jiménez",
+            "Daniel Vargas",
+            "Sofía Castro"
+        ]
+    }
+]
