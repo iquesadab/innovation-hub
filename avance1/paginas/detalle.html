@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
+    <title>Detalle de iniciativa | Innovation Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+
+        <nav class="navbar navbar-expand-lg">
+
+            <div class="container">
+                <a class="navbar-brand" href="../index.html"> Innovation Hub </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal" aria-expanded="false" aria-label="Mostrar menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuPrincipal" >
+
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html" > Inicio </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="catalogo.html"> Iniciativas </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="publicar.html"> Publicar </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.html"> Perfil </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Contenido principal -->
+    <main class="container py-5">
+
+        <!-- Regresar al catálogo -->
+        <section class="mb-4">
+            <a href="catalogo.html" class="btn btn-outline-secondary"> ← Volver a iniciativas </a>
+        </section>
+
+        <!-- Detalle de la iniciativa -->
+        <article
+            id="detalle-iniciativa" aria-labelledby="titulo-iniciativa">
+
+            <!-- Contenido dinámico -->
+
+            <!-- alert-info: utiliza el componente Alert mientras se cargan los datos -->
+            <div class="alert alert-info">
+                Cargando información de la iniciativa...
+            </div>
+        </article>
+
+    </main>
+
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container py-4">
+            <p class="mb-0">
+                Innovation Hub · Universidad CENFOTEC
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- JavaScript propio -->
+    <script src="../js/detalle.js"></script>
+
+</body>
+</html>

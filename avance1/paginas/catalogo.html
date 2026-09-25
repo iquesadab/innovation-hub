@@ -98,7 +98,7 @@
 
     <main class="container py-4">
 
-    <!--
+        <!--
     container: centra el contenido y deja espacios laterales adecuados
     dependiendo del tamaño de la pantalla.
     
@@ -142,7 +142,7 @@
                 Buscar y filtrar iniciativas
             </h2>
 
-            <form>
+            <form id="form-filtros">
 
                 <!--
                 row: crea una fila utilizando el sistema Grid de Bootstrap.
@@ -204,9 +204,6 @@
                         -->
                         <select class="form-select" id="filtro-tipo" name="tipo">
                             <option value="">Todos</option>
-                            <option value="idea">Idea</option>
-                            <option value="necesidad">Necesidad</option>
-                            <option value="reto">Reto</option>
                         </select>
 
                     </div>
@@ -229,24 +226,6 @@
                         -->
                         <select class="form-select" id="filtro-categoria" name="categoria">
                             <option value="">Todas</option>
-                            <option value="tecnologia">Tecnología</option>
-                            <option value="educacion">Educación</option>
-                            <option value="sostenibilidad">Sostenibilidad</option>
-                            <option value="impacto-social">Impacto social</option>
-
-                            <option value="negocios-emprendimiento">
-                                Negocios y emprendimiento
-                            </option>
-
-                            <option value="salud-bienestar">
-                                Salud y bienestar
-                            </option>
-
-                            <option value="cultura-creatividad">
-                                Cultura y creatividad
-                            </option>
-
-                            <option value="otro">Otro</option>
                         </select>
 
                     </div>

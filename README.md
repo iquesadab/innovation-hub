@@ -42,4 +42,5 @@ _(se completa durante las semanas 2 a 4)_
 | 11 | 2026-09-08 | b5a644f | [delete]: Elimina texto de prueba |
 | 12 | 2026-09-22 | b205d2f | [new]: Agrega estructura inicial de la página principal con Bootstrap |
 | 13 | 2026-09-23 | 1d8db3b | [improve]: Actualiza página principal y catálogo con Bootstrap |
+| 14 | 2026-09-24 | f6d44b8 | [new]: Agrega datos y carga dinámica de iniciativas |
 <!-- FIN TABLA COMMITS -->
