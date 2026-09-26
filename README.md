@@ -45,4 +45,5 @@ _(se completa durante las semanas 2 a 4)_
 | 14 | 2026-09-24 | f6d44b8 | [new]: Agrega datos y carga dinámica de iniciativas |
 | 15 | 2026-09-24 | e8597b1 | [improve]: Completa filtros del catálogo y agrega detalle de iniciativas |
 | 16 | 2026-09-25 | 8bce1c1 | [new]: Implementa detalle de iniciativas y corrige comentarios del catálogo |
+| 17 | 2026-09-25 | fd5a307 | [new]: Agrega formulario para publicar iniciativas |
 <!-- FIN TABLA COMMITS -->
