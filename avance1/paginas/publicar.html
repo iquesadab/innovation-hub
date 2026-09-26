@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar iniciativa | Innovation Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link
+        rel="stylesheet"href="../css/estilos.css">
+
+</head>
+
+<body>
+
+    <!-- Encabezado y navegación -->
+    <header>
+
+        <nav class="navbar navbar-expand-lg">
+        
+            <div class="container">
+
+                <a class="navbar-brand" href="../index.html">
+                    Innovation Hub
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal"
+                    aria-expanded="false"
+                    aria-label="Mostrar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div
+                    class="collapse navbar-collapse" id="menuPrincipal">
+
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                Inicio
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="catalogo.html">
+                                Iniciativas
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="publicar.html" aria-current="page">
+                                Publicar
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.html">
+                                Perfil
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="container py-5">
+
+        <section class="mb-4">
+
+            <h1>Publicar iniciativa</h1>
+
+            <p>
+                Comparte una idea, necesidad o reto y encuentra personas interesadas en colaborar.
+            </p>
+
+        </section>
+
+
+        <!-- Formulario para publicar una iniciativa -->
+        <section aria-labelledby="titulo-formulario">
+
+            <h2 id="titulo-formulario" class="h4 mb-4">
+                Información de la iniciativa
+            </h2>
+
+            <form id="form-publicar">
+
+                <div class="row g-4">
+
+                    <!-- Título -->
+                    <div class="col-12">
+
+                        <label for="titulo" class="form-label">
+                            Título
+                        </label>
+
+                        <!-- form-control: aplica el formato de Bootstrap al campo de texto -->
+                        <input type="text" class="form-control" id="titulo" name="titulo">
+                    </div>
+
+
+                    <!-- Tipo -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="tipo" class="form-label">
+                            Tipo
+                        </label>
+
+                        <!-- form-select: aplica el formato de Bootstrap al select -->
+                        <select class="form-select" id="tipo" name="tipo">
+                            <option value="">
+                                Seleccione un tipo
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Categoría -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="categoria" class="form-label">
+                            Categoría
+                        </label>
+
+                        <select class="form-select" id="categoria" name="categoria">
+                            <option value="">
+                                Seleccione una categoría
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Resumen -->
+                    <div class="col-12">
+
+                        <label for="resumen" class="form-label">
+                            Resumen
+                        </label>
+
+                        <textarea class="form-control" id="resumen" name="resumen" rows="3"></textarea>
+                    </div>
+
+
+                    <!-- Descripción -->
+                    <div class="col-12">
+
+                        <label
+                            for="descripcion"
+                            class="form-label"
+                        >
+                            Descripción
+                        </label>
+
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="5"></textarea>
+                    </div>
+
+
+                    <!-- Problema -->
+                    <div class="col-12">
+
+                        <label for="problema" class="form-label">
+                            Problema identificado
+                        </label>
+
+                        <textarea class="form-control" id="problema" name="problema" rows="4"></textarea>
+                    </div>
+
+
+                    <!-- Beneficiarios -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="beneficiarios" class="form-label">
+                            Beneficiarios
+                        </label>
+
+                        <input type="text" class="form-control" id="beneficiarios" name="beneficiarios">
+                    </div>
+
+
+                    <!-- Miembros estimados -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="miembros-estimados" class="form-label">
+                            Cantidad estimada de miembros
+                        </label>
+
+                        <input type="number" class="form-control" id="miembros-estimados" name="miembrosEstimados" min="1">
+
+                    </div>
+
+
+                    <!-- Competencias -->
+                    <div class="col-12">
+
+                        <label for="competencias" class="form-label">
+                            Competencias requeridas
+                        </label>
+
+                        <input type="text" class="form-control" id="competencias" name="competencias" 
+                        placeholder="Ej. JavaScript, diseño UX/UI, comunicación">
+
+                        <!-- form-text: muestra un texto de ayuda asociado a un campo del formulario -->
+                        <div class="form-text">
+                            Separe las competencias utilizando comas.
+                        </div>
+                    </div>
+
+
+                    <!-- Etiquetas -->
+                    <div class="col-12">
+
+                        <label for="etiquetas" class="form-label">
+                            Etiquetas
+                        </label>
+
+                        <input type="text" class="form-control" id="etiquetas" name="etiquetas"
+                            placeholder="Ej. educación, estudiantes, tecnología">
+
+                        <div class="form-text">
+                            Separe las etiquetas utilizando comas.
+                        </div>
+                    </div>
+
+
+                    <!-- Visibilidad -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="visibilidad" class="form-label">
+                            Visibilidad
+                        </label>
+
+                        <select class="form-select" id="visibilidad" name="visibilidad">
+                            <option value="">
+                                Seleccione la visibilidad
+                            </option>
+
+                            <option value="Pública">
+                                Pública
+                            </option>
+
+                            <option value="Institucional">
+                                Institucional
+                            </option>
+
+                            <option value="Restringida">
+                                Restringida
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <!-- Mensajes del formulario -->
+                    <div id="mensaje-formulario" class="col-12" aria-live="polite">
+                        <!-- Mensajes de error o publicación exitosa -->
+                    </div>
+
+
+                    <!-- Botones -->
+                    <div class="col-12">
+
+                        <!-- 
+                        d-flex: utiliza Flexbox de Bootstrap
+                        flex-wrap: permite que los botones bajen de línea si no tienen suficiente espacio
+                        -->
+                        <div class="d-flex gap-2 flex-wrap">
+
+                            <button type="submit" class="btn btn-primary">
+                                Publicar iniciativa
+                            </button>
+
+
+                            <!-- btn-outline-secondary: botón secundario con estilo de borde de Bootstrap -->
+                            <a href="catalogo.html" class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <div class="container py-4">
+            <p class="mb-0">
+                Innovation Hub · Universidad CENFOTEC
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- JavaScript propio -->
+    <script src="../js/publicar.js"></script>
+
+</body>
+
+</html>
