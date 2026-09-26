@@ -43,4 +43,5 @@ _(se completa durante las semanas 2 a 4)_
 | 12 | 2026-09-22 | b205d2f | [new]: Agrega estructura inicial de la página principal con Bootstrap |
 | 13 | 2026-09-23 | 1d8db3b | [improve]: Actualiza página principal y catálogo con Bootstrap |
 | 14 | 2026-09-24 | f6d44b8 | [new]: Agrega datos y carga dinámica de iniciativas |
+| 15 | 2026-09-24 | e8597b1 | [improve]: Completa filtros del catálogo y agrega detalle de iniciativas |
 <!-- FIN TABLA COMMITS -->

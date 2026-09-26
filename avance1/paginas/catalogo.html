@@ -2,9 +2,8 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8"> <!-- Evita que los acentos y la ñ se vean corruptos -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- para que el diseño adaptable funcione en teléfonos -->
     <title>Catálogo de iniciativas — Innovation Hub</title>
 
     <!-- Bootstrap -->
@@ -69,19 +68,19 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="paginas/catalogo.html" aria-current="page">
+                            <a class="nav-link active" href="../paginas/catalogo.html" aria-current="page">
                                 Iniciativas
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="paginas/publicar.html">
+                            <a class="nav-link" href="../paginas/publicar.html">
                                 Publicar
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="paginas/perfil.html">
+                            <a class="nav-link" href="../paginas/perfil.html">
                                 Perfil
                             </a>
                         </li>
@@ -98,24 +97,9 @@
 
     <main class="container py-4">
 
-        <!--
-    container: centra el contenido y deja espacios laterales adecuados
-    dependiendo del tamaño de la pantalla.
-    
-    py-4: agrega espacio interno (padding) arriba y abajo.
-    p = padding
-    y = eje vertical (arriba y abajo)
-    4 = cantidad de espacio que agrega Bootstrap
-    -->
-
+        <!-- py-4: agrega espacio interno (padding) arriba y abajo -->
 
         <!-- Título de la página -->
-        <!--
-        mb-4: agrega un margen debajo de esta sección.
-        m = margin
-        b = bottom (abajo)
-        4 = cantidad de espacio
-        -->
         <section class="mb-4">
 
             <h1>Catálogo de iniciativas</h1>
@@ -129,51 +113,26 @@
 
 
         <!-- Búsqueda y filtros -->
-        <!--
-        mb-5: agrega un margen debajo del aside para separarlo
-        de la sección de resultados.
-        -->
         <aside aria-labelledby="titulo-filtros" class="mb-5">
 
-            <!--
-            mb-3: agrega un margen debajo del título.
-            -->
             <h2 id="titulo-filtros" class="mb-3">
                 Buscar y filtrar iniciativas
             </h2>
 
             <form id="form-filtros">
 
-                <!--
-                row: crea una fila utilizando el sistema Grid de Bootstrap.
-
-                g-3: agrega separación entre los elementos que se encuentran
-                dentro de la fila.
-                g = gap (espacio)
-                3 = cantidad de espacio
-                -->
                 <div class="row g-3">
 
 
                     <!-- Búsqueda -->
-                    <!--
-                    col-12: hace que este elemento ocupe las 12 columnas
-                    disponibles, es decir, todo el ancho.
-                    -->
                     <div class="col-12">
 
-                        <!--
-                        form-label: aplica el formato de Bootstrap
-                        para las etiquetas de los formularios.
-                        -->
+                        <!-- form-label: aplica el formato de Bootstrap para las etiquetas de los formularios -->
                         <label for="busqueda" class="form-label">
                             Buscar iniciativa
                         </label>
 
-                        <!--
-                        form-control: aplica el formato de Bootstrap
-                        a campos como input y textarea.
-                        -->
+                        <!-- form-control: aplica el formato de Bootstrap a campos como input y textarea -->
                         <input type="search" class="form-control" id="busqueda" name="busqueda"
                             placeholder="Buscar por título o palabra clave">
 
@@ -181,27 +140,13 @@
 
 
                     <!-- Tipo -->
-                    <!--
-                    col-12: en pantallas pequeñas ocupa las 12 columnas,
-                    por lo tanto utiliza todo el ancho.
-
-                    col-md-4: a partir de pantallas medianas (md),
-                    ocupa 4 de las 12 columnas disponibles.
-
-                    Como tenemos tres filtros de 4 columnas:
-                    4 + 4 + 4 = 12.
-                    Por eso pueden aparecer uno al lado del otro.
-                    -->
                     <div class="col-12 col-md-4">
 
                         <label for="filtro-tipo" class="form-label">
                             Tipo
                         </label>
 
-                        <!--
-                        form-select: aplica el formato de Bootstrap
-                        a una lista desplegable (select).
-                        -->
+                        <!-- form-select: aplica el formato de Bootstrap una lista desplegable (select) -->
                         <select class="form-select" id="filtro-tipo" name="tipo">
                             <option value="">Todos</option>
                         </select>
@@ -210,20 +155,13 @@
 
 
                     <!-- Categoría -->
-                    <!--
-                    col-12 col-md-4: ocupa todo el ancho en pantallas pequeñas
-                    y 4 columnas a partir de pantallas medianas.
-                    -->
                     <div class="col-12 col-md-4">
 
                         <label for="filtro-categoria" class="form-label">
                             Categoría
                         </label>
 
-                        <!--
-                        form-select: aplica los estilos de Bootstrap
-                        al select.
-                        -->
+                        <!-- form-select: aplica los estilos de Bootstrap al select -->
                         <select class="form-select" id="filtro-categoria" name="categoria">
                             <option value="">Todas</option>
                         </select>
@@ -232,20 +170,13 @@
 
 
                     <!-- Competencia -->
-                    <!--
-                    col-12 col-md-4: en celular ocupa todo el ancho
-                    y desde md ocupa 4 de las 12 columnas.
-                    -->
                     <div class="col-12 col-md-4">
 
                         <label for="filtro-competencia" class="form-label">
                             Competencia requerida
                         </label>
 
-                        <!--
-                        form-control: aplica el estilo de Bootstrap
-                        al campo de texto.
-                        -->
+                        <!-- form-control: aplica el estilo de Bootstrap al campo de texto -->
                         <input type="text" class="form-control" id="filtro-competencia" name="competencia"
                             placeholder="Ej. JavaScript">
 
@@ -255,14 +186,6 @@
                     <!-- Botón -->
                     <div class="col-12">
 
-                        <!--
-                        btn: aplica el formato básico de botón de Bootstrap.
-
-                        btn-primary: indica que este es un botón principal.
-                        Por ahora utiliza el color predeterminado de Bootstrap,
-                        pero después cambiaremos ese color con nuestro CSS
-                        para utilizar la paleta de Innovation Hub.
-                        -->
                         <button type="submit" class="btn btn-primary">
                             Aplicar filtros
                         </button>
@@ -279,21 +202,11 @@
         <!-- Resultados -->
         <section aria-labelledby="titulo-resultados">
 
-            <!--
-            mb-4: agrega margen debajo del título para separarlo
-            de las tarjetas de iniciativas.
-            -->
             <h2 id="titulo-resultados" class="mb-4">
                 Iniciativas
             </h2>
 
 
-            <!--
-            row: crea una fila del Grid de Bootstrap.
-
-            g-4: agrega separación entre las tarjetas que JavaScript
-            colocará dentro de esta fila.
-            -->
             <div id="lista-iniciativas" class="row g-4">
                 <!-- Las iniciativas se cargarán con JavaScript -->
             </div>
