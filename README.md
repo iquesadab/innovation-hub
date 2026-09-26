@@ -46,4 +46,5 @@ _(se completa durante las semanas 2 a 4)_
 | 15 | 2026-09-24 | e8597b1 | [improve]: Completa filtros del catálogo y agrega detalle de iniciativas |
 | 16 | 2026-09-25 | 8bce1c1 | [new]: Implementa detalle de iniciativas y corrige comentarios del catálogo |
 | 17 | 2026-09-25 | fd5a307 | [new]: Agrega formulario para publicar iniciativas |
+| 18 | 2026-09-26 | 2d21b20 | [new]: Implementa lógica y validaciones para publicar iniciativas |
 <!-- FIN TABLA COMMITS -->

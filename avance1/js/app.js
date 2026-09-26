@@ -12,6 +12,10 @@ const filtroTipo = document.getElementById("filtro-tipo");
 const filtroCategoria = document.getElementById("filtro-categoria");
 /* Obtiene del DOM el select utilizado para filtrar las iniciativas por competencia */
 const filtroCompetencia = document.getElementById("filtro-competencia");
+const botonConfirmarEliminar = document.getElementById("btn-confirmar-eliminar");
+
+// Guarda temporalmente el id de la iniciativa que se desea eliminar
+let idEliminar = null;
 
 // Guarda todas las iniciativas cargadas desde el JSON.
 // Se declara fuera de las funciones para poder utilizarla
@@ -143,6 +147,12 @@ function mostrarIniciativas(iniciativas) {
                 Ver iniciativa
             </a>
 
+            ${iniciativa.local ? `
+            <a href="publicar.html?id=${iniciativa.id}" class="btn btn-outline-primary">Editar</a>
+            <button type="button" class="btn btn-outline-danger btn-eliminar" data-id="${iniciativa.id}" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
+            ` : ""}
+            
+
         </div>
     `;
 
@@ -154,6 +164,62 @@ function mostrarIniciativas(iniciativas) {
     });
 
 }
+
+// Detecta el botón Eliminar y guarda el id de la iniciativa seleccionada.
+listaIniciativas.addEventListener("click", function(evento) {
+
+    if (evento.target.classList.contains("btn-eliminar")) {
+
+        idEliminar = Number(evento.target.dataset.id);
+
+    }
+
+});
+
+// Elimina una iniciativa registrada localmente.
+function eliminarIniciativa() {
+
+    // Obtiene las iniciativas guardadas localmente.
+    let iniciativasLocales = JSON.parse(localStorage.getItem("iniciativasLocales")) || [];
+
+    // Conserva todas las iniciativas excepto la seleccionada.
+    iniciativasLocales = iniciativasLocales.filter(function(iniciativa) {
+
+        return iniciativa.id !== idEliminar;
+
+    });
+
+    // Actualiza localStorage.
+    localStorage.setItem("iniciativasLocales", JSON.stringify(iniciativasLocales));
+
+    // Elimina también la iniciativa del arreglo que muestra el catálogo.
+    iniciativas = iniciativas.filter(function(iniciativa) {
+
+        // Conserve todas las iniciativas cuyo ID sea diferente al que queremos eliminar
+        return iniciativa.id !== idEliminar;
+
+    });
+
+    // Actualiza el catálogo sin recargar la página.
+    mostrarIniciativas(iniciativas);
+
+}
+
+// Confirma la eliminación desde el modal.
+botonConfirmarEliminar.addEventListener("click", function() {
+
+    // Elimina la iniciativa seleccionada.
+    eliminarIniciativa();
+
+    // Obtiene el modal abierto.
+    const modalEliminar = bootstrap.Modal.getInstance(document.getElementById("modalEliminar"));
+
+    // Cierra el modal.
+    modalEliminar.hide();
+
+    // Limpia el id guardado.
+    idEliminar = null;
+});
 
 /* Función para normalizar un texto. Convierte el texto a minúsculas y elimina las tildes 
 para facilitar las búsquedas */
@@ -265,12 +331,18 @@ async function cargarIniciativas() {
             );
         }
 
-        // Guarda las iniciativas obtenidas del JSON
-        // en la variable general.
+        // Guarda las iniciativas obtenidas del JSON en la variable general.
         iniciativas = await respuesta.json();
 
-        // Muestra los datos en consola para comprobar que se cargaron.
-        console.log(iniciativas);
+        // Obtiene las iniciativas registradas localmente.
+        const iniciativasLocales = JSON.parse(localStorage.getItem("iniciativasLocales")) || [];
+        iniciativasLocales.forEach(function (iniciativa) {
+            iniciativa.local = true;
+        });
+
+        // Une las iniciativas del JSON con las registradas por el usuario.
+        iniciativas = [...iniciativas, ...iniciativasLocales];
+
         mostrarIniciativas(iniciativas);
 
     } catch (error) {

@@ -21,8 +21,6 @@
          el menú se muestra expandido -->
         <nav class="navbar navbar-expand-lg">
 
-            <!--container: centra el contenido y hace que tenga márgenes/espacios 
-            adecuados según el tamaño de la pantalla -->
             <div class="container">
 
                 <!-- Nombre del sistema -->
@@ -96,8 +94,6 @@
     </header>
 
     <main class="container py-4">
-
-        <!-- py-4: agrega espacio interno (padding) arriba y abajo -->
 
         <!-- Título de la página -->
         <section class="mb-4">
@@ -189,13 +185,9 @@
                         <button type="submit" class="btn btn-primary">
                             Aplicar filtros
                         </button>
-
                     </div>
-
                 </div>
-
             </form>
-
         </aside>
 
 
@@ -210,10 +202,35 @@
             <div id="lista-iniciativas" class="row g-4">
                 <!-- Las iniciativas se cargarán con JavaScript -->
             </div>
-
         </section>
-
     </main>
+
+    <!-- Modal para confirmar la eliminación -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="tituloModalEliminar" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="tituloModalEliminar">Eliminar iniciativa</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    ¿Está seguro de que desea eliminar esta iniciativa?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <footer>
         <p>Innovation Hub · Universidad CENFOTEC</p>
