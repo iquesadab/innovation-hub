@@ -9,6 +9,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Tipografía Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- CSS propio -->
     <link rel="stylesheet" href="../css/estilos.css">
 
@@ -290,11 +295,19 @@
     </main>
 
 
+    <!-- Pie de página -->
     <footer>
+        <!-- container: mantiene el contenido alineado con el resto de la página -->
         <div class="container py-4">
-            <p class="mb-0">
-                Innovation Hub · Universidad CENFOTEC
-            </p>
+            <!-- flex-md-row: acomoda el contenido en fila a partir de pantallas medianas -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                <p>
+                    <strong>Innovation Hub</strong> · Universidad CENFOTEC
+                </p>
+                <p>
+                    Personas · Ideas · Impacto
+                </p>
+            </div>
         </div>
     </footer>
 

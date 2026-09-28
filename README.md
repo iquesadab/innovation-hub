@@ -6,23 +6,58 @@
 **Docente:** Álvaro Cordero Peña
 
 ## Descripción
-Aplicación web que permite publicar ideas, necesidades y retos,
-declarar las competencias que cada iniciativa requiere y conformar
-equipos interdisciplinarios dentro de la comunidad universitaria.
+Innovation Hub es una aplicación web que permite publicar ideas, necesidades y retos, indicar las competencias requeridas y facilitar la colaboración entre personas de la comunidad universitaria.
+
+El prototipo permite explorar iniciativas, realizar búsquedas y filtros, consultar sus detalles, publicar nuevas iniciativas, modificarlas o eliminarlas y enviar solicitudes de participación.
+
 
 ## Estructura del repositorio
-- `avance1/` — prototipo con HTML, CSS, JavaScript, Bootstrap y Sass
- - `paginas/` — pantallas del prototipo
- - `datos/` — archivos JSON con datos simulados
- - `js/` — módulos de JavaScript
- - `scss/` — variables y parciales de Sass
- - `css/` — hoja de estilos compilada
+- `avance1/` — prototipo principal de Innovation Hub
+  - `index.html` — página principal
+  - `paginas/` — pantallas del prototipo
+  - `datos/` — archivos JSON con datos simulados
+  - `js/` — archivos JavaScript con la lógica del sistema
+  - `css/` — estilos propios y personalización de Bootstrap
+
+## Tecnologías utilizadas
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5
+- JSON
+- LocalStorage
 
 ## Cómo ejecutar
-Abrir `avance1/index.html` en el navegador. No requiere instalación.
+1. Abrir el proyecto en Visual Studio Code.
+2. Abrir `avance1/index.html`.
+3. Ejecutar el proyecto utilizando Live Server.
+
+No requiere instalación de dependencias ni conexión a una base de datos.
+
+## Funcionalidades principales
+- Visualización de iniciativas.
+- Búsqueda por diferentes datos de las iniciativas.
+- Filtrado de iniciativas.
+- Consulta del detalle de una iniciativa.
+- Publicación de nuevas iniciativas.
+- Modificación de iniciativas creadas localmente.
+- Eliminación de iniciativas creadas localmente.
+- Almacenamiento local mediante LocalStorage.
+- Visualización del perfil de usuario.
+- Solicitud de participación en iniciativas.
+- Validación de formularios mediante JavaScript.
+- Diseño responsive mediante Bootstrap.
 
 ## Decisiones de diseño
-_(se completa durante las semanas 2 a 4)_
+Se utilizó Bootstrap para facilitar la creación de una interfaz responsive y mantener una estructura consistente entre las diferentes pantallas.
+
+La identidad visual de Innovation Hub utiliza azul oscuro como color principal, turquesa como color secundario y coral como color de acento. También se utiliza la tipografía Poppins.
+
+Los componentes de Bootstrap fueron personalizados desde la hoja de estilos propia utilizando variables CSS y variables de Bootstrap como `--bs-btn-bg`, permitiendo mantener la funcionalidad del framework sin utilizar únicamente sus estilos predeterminados.
+
+Las iniciativas iniciales se cargan desde archivos JSON. Las iniciativas creadas por el usuario se almacenan en LocalStorage para simular la persistencia de información sin utilizar todavía una base de datos.
+
+La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y las utilidades de Bootstrap para adaptarse a diferentes tamaños de pantalla.
 
 ## Resumen de commits
 
@@ -49,4 +84,5 @@ _(se completa durante las semanas 2 a 4)_
 | 18 | 2026-09-26 | 2d21b20 | [new]: Implementa lógica y validaciones para publicar iniciativas |
 | 19 | 2026-09-26 | 5261b3a | [improve]: Agrega edición y eliminación de iniciativas guardadas localmente |
 | 20 | 2026-09-26 | a7c28b5 | [new]: Agrega perfil de usuario con competencias, intereses y proyectos |
+| 21 | 2026-09-27 | 30e9203 | [new]: Agrega perfil, solicitud de participación e integración con iniciativas |
 <!-- FIN TABLA COMMITS -->

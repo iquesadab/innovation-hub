@@ -88,7 +88,7 @@ function mostrarDetalle(iniciativa) {
         <section class="mb-4">
 
             <!-- 
-            badge: muestra el contenido como una etiqueta.
+            badge: muestra información corta como una pequeña etiqueta visual
             text-bg-primary: aplica el color principal al fondo
             y ajusta el color del texto para que tenga buen contraste. -->
             <p class="mb-2">
