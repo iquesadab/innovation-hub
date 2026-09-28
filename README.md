@@ -85,4 +85,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 19 | 2026-09-26 | 5261b3a | [improve]: Agrega edición y eliminación de iniciativas guardadas localmente |
 | 20 | 2026-09-26 | a7c28b5 | [new]: Agrega perfil de usuario con competencias, intereses y proyectos |
 | 21 | 2026-09-27 | 30e9203 | [new]: Agrega perfil, solicitud de participación e integración con iniciativas |
+| 22 | 2026-09-27 | 65d4360 | [improve]: Completa solicitudes, integración y diseño visual de Innovation Hub |
 <!-- FIN TABLA COMMITS -->
