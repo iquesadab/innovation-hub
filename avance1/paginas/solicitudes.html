@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Solicitud de participación | Innovation Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="../css/estilos.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Encabezado -->
+    <header>
+
+        <nav class="navbar navbar-expand-lg">
+
+            <div class="container">
+
+                <a class="navbar-brand" href="../index.html">Innovation Hub</a>
+
+                <!-- navbar-toggler: muestra u oculta el menú en pantallas pequeñas -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Mostrar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+
+                    <!-- ms-auto: empuja las opciones del menú hacia la derecha -->
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">Inicio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="catalogo.html">Iniciativas</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="publicar.html">Publicar</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.html">Perfil</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Contenido principal -->
+    <main class="container py-5">
+
+
+        <!-- Introducción -->
+        <section class="mb-4">
+
+            <h1>Solicitud de participación</h1>
+
+            <p>
+                Complete la información para solicitar su participación en la iniciativa.
+            </p>
+
+        </section>
+
+
+        <!-- Información de la iniciativa -->
+        <section class="mb-4" aria-labelledby="titulo-iniciativa">
+
+            <!-- alert: componente de Bootstrap para destacar información -->
+            <div class="alert alert-light border" role="status">
+
+                <strong>Iniciativa:</strong>
+                <span id="titulo-iniciativa">Iniciativa seleccionada</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- Formulario de solicitud -->
+        <section aria-labelledby="titulo-formulario">
+
+            <h2 class="h4 mb-4" id="titulo-formulario">Datos de la solicitud</h2>
+
+
+            <form id="form-solicitud" novalidate>
+
+                <!-- row y g-4: utiliza la grilla de Bootstrap y agrega espacio entre los campos -->
+                <div class="row g-4">
+
+
+                    <!-- Mensaje de presentación -->
+                    <div class="col-12">
+
+                        <label for="mensaje" class="form-label">Mensaje de presentación</label>
+
+                        <!-- form-control: aplica el formato de Bootstrap al campo -->
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="4" placeholder="Explique brevemente por qué desea participar"></textarea>
+
+                        <div class="invalid-feedback" id="error-mensaje"></div>
+
+                    </div>
+
+
+                    <!-- Competencia principal -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="competencia" class="form-label">Competencia principal que aporta</label>
+
+                        <!-- form-select: aplica el formato de Bootstrap a la lista de opciones -->
+                        <select class="form-select" id="competencia" name="competencia">
+
+                            <option value="">Seleccione una competencia</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="HTML y CSS">HTML y CSS</option>
+                            <option value="Diseño UX/UI">Diseño UX/UI</option>
+                            <option value="Comunicación">Comunicación</option>
+                            <option value="Gestión de proyectos">Gestión de proyectos</option>
+
+                        </select>
+
+                        <div class="invalid-feedback" id="error-competencia"></div>
+
+                    </div>
+
+
+                    <!-- Rol deseado -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="rol" class="form-label">Rol deseado</label>
+
+                        <select class="form-select" id="rol" name="rol">
+
+                            <option value="">Seleccione un rol</option>
+                            <option value="Colaborador">Colaborador</option>
+                            <option value="Desarrollador">Desarrollador</option>
+                            <option value="Diseñador">Diseñador</option>
+                            <option value="Investigador">Investigador</option>
+                            <option value="Coordinador">Coordinador</option>
+
+                        </select>
+
+                        <div class="invalid-feedback" id="error-rol"></div>
+
+                    </div>
+
+
+                    <!-- Disponibilidad -->
+                    <div class="col-12">
+
+                        <label for="disponibilidad" class="form-label">Disponibilidad</label>
+
+                        <textarea class="form-control" id="disponibilidad" name="disponibilidad" rows="3" placeholder="Ej. Lunes y miércoles por la tarde"></textarea>
+
+                        <div class="invalid-feedback" id="error-disponibilidad"></div>
+
+                    </div>
+
+
+                    <!-- Botón -->
+                    <div class="col-12">
+
+                        <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+
+                    </div>
+
+
+                    <!-- JavaScript mostrará aquí el resultado del envío -->
+                    <div class="col-12">
+
+                        <!-- aria-live: permite que lectores de pantalla anuncien los mensajes que aparezcan -->
+                        <div id="mensaje-solicitud" aria-live="polite"></div>
+
+                    </div>
+
+                </div>
+            </form>
+        </section>
+    </main>
+
+
+    <footer>
+        <div class="container py-4">
+            <p class="mb-0">Innovation Hub · Universidad CENFOTEC</p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript propio -->
+    <script src="../js/solicitud.js"></script>
+
+
+</body>
+
+</html>

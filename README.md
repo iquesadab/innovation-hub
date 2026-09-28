@@ -48,4 +48,5 @@ _(se completa durante las semanas 2 a 4)_
 | 17 | 2026-09-25 | fd5a307 | [new]: Agrega formulario para publicar iniciativas |
 | 18 | 2026-09-26 | 2d21b20 | [new]: Implementa lógica y validaciones para publicar iniciativas |
 | 19 | 2026-09-26 | 5261b3a | [improve]: Agrega edición y eliminación de iniciativas guardadas localmente |
+| 20 | 2026-09-26 | a7c28b5 | [new]: Agrega perfil de usuario con competencias, intereses y proyectos |
 <!-- FIN TABLA COMMITS -->

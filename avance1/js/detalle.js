@@ -12,6 +12,7 @@ const idIniciativa = Number(parametros.get("id"));
 async function cargarDetalle() {
 
     try {
+        // Obtiene las iniciativas del archivo JSON.
         const respuesta =
             await fetch("../datos/iniciativas.json");
 
@@ -24,20 +25,37 @@ async function cargarDetalle() {
         }
 
         // Convierte la respuesta a formato JSON.
-        const iniciativas = await respuesta.json();
+        let iniciativas = await respuesta.json();
 
 
-        /* Busca dentro del arreglo la iniciativa cuyo id coincide con el recibido en la URL */
-        const iniciativa = iniciativas.find(function(iniciativa) {
+        // Busca la iniciativa en el JSON por medio de su id.
+        let iniciativa = iniciativas.find(function(iniciativa) {
+            return iniciativa.id === idIniciativa;
+        });
+
+
+        // Si no está en el JSON, la busca entre las iniciativas locales.
+        if (!iniciativa) {
+
+            const iniciativasLocales =
+                JSON.parse(localStorage.getItem("iniciativasLocales")) || [];
+
+            iniciativa = iniciativasLocales.find(function(iniciativa) {
                 return iniciativa.id === idIniciativa;
             });
+        }
 
         // Verifica que la iniciativa exista.
         if (!iniciativa) {
-            mostrarError( "No se encontró la iniciativa solicitada." );
+
+            mostrarError(
+                "No se encontró la iniciativa solicitada."
+            );
+
             return;
         }
 
+        // Muestra la información según la visibilidad.
         if (iniciativa.visibilidad === "Restringida") {
             mostrarIniciativaRestringida(iniciativa);
         } else {
