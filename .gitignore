@@ -1,13 +1,21 @@
-# dependencias
+# Dependencias
 node_modules/
-# archivos del sistema operativo
+
+# Archivos del sistema operativo
 .DS_Store
 Thumbs.db
-# editores
+
+# Editores
 .vscode/
 .idea/
-# mapas de Sass
+
+# Mapas de Sass
 *.css.map
-# secretos: los vas a necesitar desde el Avance 2
+
+# Variables de entorno y secretos
 .env
-.env.local
+.env.*
+!.env.example
+
+# Archivos generados al compilar
+dist/
