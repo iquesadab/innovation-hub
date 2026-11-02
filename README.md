@@ -87,4 +87,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 21 | 2026-09-27 | 30e9203 | [new]: Agrega perfil, solicitud de participación e integración con iniciativas |
 | 22 | 2026-09-27 | 65d4360 | [improve]: Completa solicitudes, integración y diseño visual de Innovation Hub |
 | 23 | 2026-09-27 | 55adf7b | [update]: Actualiza tabla de commits para entrega final |
+| 24 | 2026-11-02 | 4c58bba | [add]: Configura estructura inicial del servidor |
 <!-- FIN TABLA COMMITS -->
