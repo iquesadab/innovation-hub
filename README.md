@@ -89,4 +89,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 23 | 2026-09-27 | 55adf7b | [update]: Actualiza tabla de commits para entrega final |
 | 24 | 2026-11-02 | 4c58bba | [add]: Configura estructura inicial del servidor |
 | 25 | 2026-11-02 | dcedf85 | [add]: Agrega conexión a MongoDB y servidor Express |
+| 26 | 2026-11-02 | 33a368b | [docs]: Agrega contrato de API y modelo de datos |
 <!-- FIN TABLA COMMITS -->
