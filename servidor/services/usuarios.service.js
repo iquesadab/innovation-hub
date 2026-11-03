@@ -2,6 +2,9 @@ const bcrypt = require("bcryptjs");
 
 const usuariosModel = require("../models/usuarios.model");
 
+// Permite generar tokens para identificar a los usuarios.
+const jwt = require("jsonwebtoken");
+
 // Crea un error con un código HTTP.
 function crearError(estado, codigo, mensaje) {
     const error = new Error(mensaje);
@@ -145,6 +148,87 @@ async function registrarUsuario(datos) {
     }
 }
 
+// Comprueba los datos del usuario y permite iniciar sesión.
+async function iniciarSesion(datos) {
+
+    // Recibe el correo y la contraseña enviados por el usuario.
+    const { correo, contrasena } = datos || {};
+
+    // Comprueba que ambos campos sean textos.
+    if (typeof correo !== "string" || typeof contrasena !== "string") {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Debe ingresar el correo y la contraseña."
+        );
+    }
+
+    // Elimina espacios y convierte el correo a minúsculas.
+    const correoLimpio = correo.trim().toLowerCase();
+
+    // Comprueba que los campos no estén vacíos.
+    if (!correoLimpio || !contrasena) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Debe ingresar el correo y la contraseña."
+        );
+    }
+
+    // Busca al usuario en MongoDB por su correo.
+    const usuario = await usuariosModel.buscarPorCorreo(correoLimpio);
+
+    // Si el usuario no existe, muestra un error.
+    if (!usuario) {
+        throw crearError(
+            401,
+            "CREDENCIALES_INVALIDAS",
+            "Correo o contraseña incorrectos."
+        );
+    }
+
+    // Compara la contraseña ingresada con el hash guardado.
+    const contrasenaCorrecta = await bcrypt.compare(
+        contrasena,
+        usuario.contrasenaHash
+    );
+
+    // Si la contraseña es incorrecta, no permite ingresar.
+    if (!contrasenaCorrecta) {
+        throw crearError(
+            401,
+            "CREDENCIALES_INVALIDAS",
+            "Correo o contraseña incorrectos."
+        );
+    }
+
+    // Comprueba que exista la clave secreta para generar el token.
+    if (!process.env.JWT_SECRET) {
+        throw new Error("Falta configurar JWT_SECRET.");
+    }
+
+    // Genera un token que identifica al usuario.
+    const token = jwt.sign(
+        { id: usuario._id.toString() },
+        process.env.JWT_SECRET,
+        { expiresIn: "2h" }
+    );
+
+    // Devuelve el token y los datos públicos del usuario.
+    return {
+        token,
+        usuario: {
+            id: usuario._id.toString(),
+            nombre: usuario.nombre,
+            correo: usuario.correo,
+            carrera: usuario.carrera,
+            competencias: usuario.competencias,
+            disponibilidad: usuario.disponibilidad
+        }
+    };
+}
+
 module.exports = {
-    registrarUsuario
+    registrarUsuario,
+    iniciarSesion
 };
