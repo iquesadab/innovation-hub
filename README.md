@@ -91,4 +91,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 25 | 2026-11-02 | dcedf85 | [add]: Agrega conexión a MongoDB y servidor Express |
 | 26 | 2026-11-02 | 33a368b | [docs]: Agrega contrato de API y modelo de datos |
 | 27 | 2026-11-02 | c5aa4f6 | [add]: Agrega modelo de usuarios en MongoDB |
+| 28 | 2026-11-02 | 0b14e3e | [add]: Agrega validaciones para registrar usuarios |
 <!-- FIN TABLA COMMITS -->
