@@ -35,7 +35,26 @@ async function login(req, res, next) {
     }
 }
 
+// Recibe la petición para consultar el perfil.
+async function consultarPerfil(req, res, next) {
+    try {
+        // Obtiene el perfil del usuario que inició sesión.
+        const usuario = await usuariosService.obtenerPerfil(req.usuarioId);
+
+        // Devuelve los datos del perfil.
+        res.status(200).json({
+            usuario
+        });
+
+    } catch (error) {
+        // Envía los errores al manejador de Express.
+        next(error);
+    }
+}
+
+
 module.exports = {
     registrar,
-    login
+    login,
+    consultarPerfil
 };
