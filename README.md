@@ -94,4 +94,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 28 | 2026-11-02 | 0b14e3e | [add]: Agrega validaciones para registrar usuarios |
 | 29 | 2026-11-03 | 7e8fcb4 | [add]: Conecta registro de usuarios |
 | 30 | 2026-11-03 | 45a0865 | [add]: Agrega inicio de sesión |
+| 31 | 2026-11-03 | 81a8299 | [add]: Agrega controlador para iniciar sesión |
 <!-- FIN TABLA COMMITS -->
