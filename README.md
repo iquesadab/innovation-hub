@@ -99,4 +99,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 33 | 2026-11-03 | d84d415 | [add]: Agrega revisión del token |
 | 34 | 2026-11-04 | 1c3cbc9 | [add]: Agrega búsqueda de usuario por ID |
 | 35 | 2026-11-04 | 234a2fe | [add]: Agrega consulta del perfil |
+| 36 | 2026-11-04 | 553f66e | [add]: Agrega controlador del perfil |
 <!-- FIN TABLA COMMITS -->
