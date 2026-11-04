@@ -208,6 +208,10 @@ async function iniciarSesion(datos) {
     }
 
     // Genera un token que identifica al usuario.
+    // jwt.sign() = Crea el token.
+    // usuario._id.toString() = Coloca el identificador dentro del token.
+    // process.env.JWT_SECRET = Es una clave secreta del servidor que permite firmarlo.
+    // expiresIn: "2h" = El token vence después de 2 horas.
     const token = jwt.sign(
         { id: usuario._id.toString() },
         process.env.JWT_SECRET,
@@ -228,7 +232,43 @@ async function iniciarSesion(datos) {
     };
 }
 
+// Obtiene los datos del perfil del usuario que inició sesión.
+async function obtenerPerfil(id) {
+
+    // Comprueba que el identificador tenga el formato correcto.
+    if (!/^[a-fA-F0-9]{24}$/.test(id)) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "El identificador del usuario no es válido."
+        );
+    }
+
+    // Busca al usuario en MongoDB.
+    const usuario = await usuariosModel.buscarPorId(id);
+
+    // Si no existe, devuelve un error.
+    if (!usuario) {
+        throw crearError(
+            404,
+            "USUARIO_NO_ENCONTRADO",
+            "No se encontró el usuario."
+        );
+    }
+
+    // Devuelve solamente los datos que podemos mostrar.
+    return {
+        id: usuario._id.toString(),
+        nombre: usuario.nombre,
+        correo: usuario.correo,
+        carrera: usuario.carrera,
+        competencias: usuario.competencias,
+        disponibilidad: usuario.disponibilidad
+    };
+}
+
 module.exports = {
     registrarUsuario,
-    iniciarSesion
+    iniciarSesion,
+    obtenerPerfil
 };

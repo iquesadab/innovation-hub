@@ -97,4 +97,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 31 | 2026-11-03 | 81a8299 | [add]: Agrega controlador para iniciar sesión |
 | 32 | 2026-11-03 | 64de5ab | [add]: Agrega ruta para iniciar sesión |
 | 33 | 2026-11-03 | d84d415 | [add]: Agrega revisión del token |
+| 34 | 2026-11-04 | 1c3cbc9 | [add]: Agrega búsqueda de usuario por ID |
 <!-- FIN TABLA COMMITS -->
