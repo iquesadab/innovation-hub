@@ -1,14 +1,21 @@
+const { ObjectId } = require("mongodb");
 const { obtenerBaseDatos } = require("../database/conexion");
 
-// Obtiene la colección de usuarios.
+// Obtiene la colección de usuarios de MongoDB.
 function obtenerColeccion() {
-    const baseDatos = obtenerBaseDatos();
-    return baseDatos.collection("usuarios");
+    return obtenerBaseDatos().collection("usuarios");
 }
 
 // Busca un usuario mediante su correo.
 async function buscarPorCorreo(correo) {
     return await obtenerColeccion().findOne({ correo });
+}
+
+// Busca un usuario por su identificador.
+async function buscarPorId(id) {
+    return await obtenerColeccion().findOne({
+        _id: new ObjectId(id)
+    });
 }
 
 // Guarda un nuevo usuario.
@@ -27,6 +34,7 @@ async function crearIndiceUsuarios() {
 
 module.exports = {
     buscarPorCorreo,
+    buscarPorId,
     crearUsuario,
     crearIndiceUsuarios
 };
