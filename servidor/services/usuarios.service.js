@@ -401,12 +401,7 @@ async function editarPerfil(id, datos) {
         // 3. Que cada competencia sea texto y tenga
         //    entre 2 y 50 caracteres, sin contar espacios
         //    al inicio o al final.
-        //
-        // Ejemplo correcto:
-        // ["JavaScript", "React"]
-        //
-        // Ejemplo incorrecto:
-        // ["JavaScript", 123]
+
         if (
             !Array.isArray(datos.competencias) ||
             datos.competencias.length > 20 ||
@@ -423,16 +418,12 @@ async function editarPerfil(id, datos) {
             );
         }
 
-        // map() recorre todas las competencias y crea
-        // una lista nueva sin espacios innecesarios.
-        //
+        // map() recorre todas las competencias y crea una lista nueva sin espacios innecesarios.
         const competencias = datos.competencias.map(
             competencia => competencia.trim()
         );
 
-        // Convertimos las competencias a minúsculas
-        // para poder detectar si alguna está repetida.
-        //
+        // Convertimos las competencias a minúsculas para poder detectar si alguna está repetida.
         // Set es una estructura que no guarda valores duplicados.
         const unicas = new Set(
             competencias.map(
@@ -440,11 +431,8 @@ async function editarPerfil(id, datos) {
             )
         );
 
-        // Comparamos cuántas competencias recibimos
-        // con cuántas quedaron después de eliminar repetidas.
-        //
-        // Si las cantidades son diferentes, significa
-        // que había al menos una competencia duplicada.
+        // Comparamos cuántas competencias recibimos con cuántas quedaron después de eliminar repetidas.
+        // Si las cantidades son diferentes, significa que había al menos una competencia duplicada.
         if (unicas.size !== competencias.length) {
             throw crearError(
                 400,
@@ -459,28 +447,113 @@ async function editarPerfil(id, datos) {
     }
 
     // Enviamos los cambios al modelo de usuarios.
-    //
-    // actualizarUsuario() utiliza MongoDB para modificar
-    // solamente los campos que guardamos en "cambios".
-    //
-    // Ejemplo:
-    // cambios = { disponibilidad: "Fines de semana" }
-    //
+    // actualizarUsuario() utiliza MongoDB para modificar solamente los campos que guardamos en "cambios".
     // MongoDB modifica ese campo y conserva los demás.
     await usuariosModel.actualizarUsuario(id, cambios);
 
-    // Consultamos nuevamente el perfil para obtener
-    // los datos actualizados desde MongoDB.
-    //
-    // return devuelve esa información al controlador,
-    // que posteriormente responderá al usuario.
+    // Consultamos nuevamente el perfil para obtener los datos actualizados desde MongoDB.
+    // return devuelve esa información al controlador, que posteriormente responderá al usuario.
     return await obtenerPerfil(id);
 }
 
+ // Esta función recibe los filtros de búsqueda,
+ // comprueba que sean válidos y prepara los resultados.
+async function consultarUsuarios(filtros) {
+
+    // Extraemos los valores del objeto filtros.
+    // Si el usuario no envía alguno, utilizamos los valores que aparecen después del signo =.
+    // buscar = "": si no escribió nada, buscamos sin texto.
+    // pagina = "1": comenzamos en la primera página.
+    // limite = "10": mostramos hasta 10 usuarios por página.
+    // Estos valores llegan como texto desde la URL.
+    const {
+        buscar = "",
+        pagina = "1",
+        limite = "10"
+    } = filtros;
+
+    // Revisamos que los filtros recibidos sean correctos.
+    // typeof buscar !== "string":
+    // El texto de búsqueda debe ser una cadena de texto.
+    // /^[1-9]\d*$/: Comprueba que página y límite sean números enteros positivos
+    // Si alguna condición es incorrecta, devolvemos un error.
+    if (
+        typeof buscar !== "string" ||
+        buscar.length > 100 ||
+        !/^[1-9]\d*$/.test(String(pagina)) ||
+        !/^[1-9]\d*$/.test(String(limite))
+    ) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Los filtros de búsqueda no son válidos."
+        );
+    }
+
+    // Number() convierte los valores recibidos a números.
+    // Necesario porque vamos a realizar operaciones matemáticas para calcular las páginas.
+    const numeroPagina = Number(pagina);
+    const numeroLimite = Number(limite);
+
+    // Otras validaciones.
+    // Number.isSafeInteger() comprueba que el número sea un entero que JavaScript pueda manejar
+    // numeroLimite > 50: No permitimos solicitar más de 50 usuarios por página.
+    // (numeroPagina - 1) * numeroLimite > 100000:
+    // Evita que una petición intente saltar una cantidad demasiado grande de registros
+    if (
+        !Number.isSafeInteger(numeroPagina) ||
+        !Number.isSafeInteger(numeroLimite) ||
+        numeroLimite > 50 ||
+        (numeroPagina - 1) * numeroLimite > 100000
+    ) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Revise la página y la cantidad de resultados."
+        );
+    }
+
+    // Llamamos a la función buscarUsuarios() del modelo.
+    // Le enviamos:
+    // 1. El texto sin espacios al inicio ni al final.
+    // 2. La cantidad máxima de usuarios.
+    // 3. El número de página.
+    // El modelo se encarga de buscar en MongoDB.
+    const resultado = await usuariosModel.buscarUsuarios(
+        buscar.trim(),
+        numeroLimite,
+        numeroPagina
+    );
+
+    // MongoDB guarda el identificador como un ObjectId.
+    // Aquí utilizamos map() para recorrer los usuarios encontrados y preparar una nueva lista.
+    // toString() convierte el identificador a texto
+    // También seleccionamos únicamente los datos que queremos enviar como respuesta.
+    const usuarios = resultado.usuarios.map(usuario => ({
+        id: usuario._id.toString(),
+        nombre: usuario.nombre,
+        carrera: usuario.carrera,
+        competencias: usuario.competencias,
+        disponibilidad: usuario.disponibilidad
+    }));
+
+    // Devolvemos los usuarios y la información necesaria para manejar la paginación.
+    // usuarios: lista de usuarios encontrados.
+    // total: cantidad total de coincidencias.
+    // pagina: página consultada.
+    // limite: máximo de usuarios por página.
+    return {
+        usuarios,
+        total: resultado.total,
+        pagina: numeroPagina,
+        limite: numeroLimite
+    };
+}
 
 module.exports = {
     registrarUsuario,
     iniciarSesion,
     obtenerPerfil,
-    editarPerfil
+    editarPerfil,
+    consultarUsuarios
 };

@@ -21,5 +21,8 @@ router.get("/me", verificarToken, usuariosController.consultarPerfil);
 // Permite editar el perfil del usuario que inició sesión.
 router.patch("/me", verificarToken, usuariosController.actualizarPerfil);
 
+// Busca usuarios. Requiere haber iniciado sesión.
+router.get("/usuarios", verificarToken, usuariosController.listarUsuarios);
+
 // Permite utilizar estas rutas desde server.js.
 module.exports = router;

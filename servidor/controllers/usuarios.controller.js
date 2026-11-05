@@ -70,9 +70,24 @@ async function actualizarPerfil(req, res, next) {
     }
 }
 
+// Recibe una petición para buscar usuarios.
+async function listarUsuarios(req, res, next) {
+    try {
+        const resultado = await usuariosService.consultarUsuarios(
+            req.query
+        );
+
+        res.status(200).json(resultado);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     registrar,
     login,
     consultarPerfil,
-    actualizarPerfil
+    actualizarPerfil,
+    listarUsuarios
 };
