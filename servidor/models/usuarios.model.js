@@ -32,9 +32,20 @@ async function crearIndiceUsuarios() {
     );
 }
 
+// Actualiza los datos de un usuario en MongoDB.
+async function actualizarUsuario(id, cambios) {
+    const resultado = await obtenerColeccion().updateOne(
+        { _id: new ObjectId(id) },
+        { $set: cambios }
+    );
+
+    return resultado.matchedCount;
+}
+
 module.exports = {
     buscarPorCorreo,
     buscarPorId,
     crearUsuario,
-    crearIndiceUsuarios
+    crearIndiceUsuarios,
+    actualizarUsuario
 };

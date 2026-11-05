@@ -18,5 +18,8 @@ router.post("/login", usuariosController.login);
 // Permite consultar el perfil solamente si inició sesión.
 router.get("/me", verificarToken, usuariosController.consultarPerfil);
 
+// Permite editar el perfil del usuario que inició sesión.
+router.patch("/me", verificarToken, usuariosController.actualizarPerfil);
+
 // Permite utilizar estas rutas desde server.js.
 module.exports = router;

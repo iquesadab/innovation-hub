@@ -52,9 +52,27 @@ async function consultarPerfil(req, res, next) {
     }
 }
 
+// Recibe la petición para editar el perfil.
+async function actualizarPerfil(req, res, next) {
+    try {
+        const usuario = await usuariosService.editarPerfil(
+            req.usuarioId,
+            req.body
+        );
+
+        res.status(200).json({
+            mensaje: "Perfil actualizado correctamente.",
+            usuario
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = {
     registrar,
     login,
-    consultarPerfil
+    consultarPerfil,
+    actualizarPerfil
 };

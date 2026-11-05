@@ -267,8 +267,220 @@ async function obtenerPerfil(id) {
     };
 }
 
+
+ // Esta función permite modificar los datos del perfil de un usuario.
+ // Recibe dos parámetros:
+ // id: identifica al usuario que quiere modificar su perfil.
+ // datos: contiene la información nueva que envió el usuario.
+async function editarPerfil(id, datos) {
+
+    // Buscamos el perfil para comprobar que el usuario existe.
+    // Si no existe, obtenerPerfil() genera un error.
+    await obtenerPerfil(id);
+
+    // Creamos una lista con los campos que sí se pueden modificar.
+    // Por seguridad, no incluimos el ID, el correo ni la contraseña.
+    const camposPermitidos = [
+        "nombre",
+        "carrera",
+        "competencias",
+        "disponibilidad"
+    ];
+
+    // Comprobamos que el usuario haya enviado información válida.
+    //
+    // !datos: revisa que no sea null, undefined u otro valor vacío.
+    // typeof datos !== "object": comprueba que sea un objeto.
+    // Array.isArray(datos): evita que envíen una lista en lugar de un objeto.
+    // Object.keys(datos).length === 0: evita recibir un objeto vacío {}.
+    //
+    // Si ocurre alguna de estas situaciones, no continuamos.
+    if (
+        !datos ||
+        typeof datos !== "object" ||
+        Array.isArray(datos) ||
+        Object.keys(datos).length === 0
+    ) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Debe enviar los datos que desea modificar."
+        );
+    }
+
+    // Object.keys() obtiene los nombres de los campos recibidos.
+    //
+    // Ejemplo:
+    // datos = { nombre: "Ana", carrera: "Software" }
+    // camposRecibidos = ["nombre", "carrera"]
+    const camposRecibidos = Object.keys(datos);
+
+    // Revisamos que todos los campos recibidos estén permitidos.
+    //
+    // some(): comprueba si al menos un campo cumple la condición.
+    // includes(): comprueba si el campo está en camposPermitidos.
+    if (
+        camposRecibidos.some(campo =>
+            !camposPermitidos.includes(campo)
+        )
+    ) {
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "Hay campos que no se pueden modificar."
+        );
+    }
+
+    // Creamos un objeto vacío donde guardaremos los datos
+    // que ya hayan pasado todas las validaciones.
+    const cambios = {};
+
+    // Recorremos los tres campos que deben contener texto.
+    //
+    // No incluimos competencias porque ese campo es una lista
+    // y necesita validaciones diferentes.
+    for (const campo of ["nombre", "carrera", "disponibilidad"]) {
+
+        // Revisamos si el usuario envió este campo.
+        //
+        // Por ejemplo, si solamente envió "carrera",
+        // no necesitamos revisar ni modificar "nombre".
+        if (datos[campo] !== undefined) {
+
+            // Comprobamos que el valor sea texto.
+            if (typeof datos[campo] !== "string") {
+                throw crearError(
+                    400,
+                    "DATOS_INVALIDOS",
+                    `El campo ${campo} debe ser texto.`
+                );
+            }
+
+            const valor = datos[campo].trim();
+
+            // Definimos la cantidad mínima de caracteres.
+            //
+            // Si estamos revisando el nombre, el mínimo es 3.
+            // Para carrera y disponibilidad, el mínimo es 2.
+            //
+            // El signo ? significa "si se cumple la condición".
+            // Los dos puntos : indican el valor alternativo.
+            const minimo = campo === "nombre" ? 3 : 2;
+
+            // Revisamos que el texto tenga una longitud válida.
+            //
+            // No permitimos menos del mínimo ni más de 100.
+            if (valor.length < minimo || valor.length > 100) {
+                throw crearError(
+                    400,
+                    "DATOS_INVALIDOS",
+                    `Revise la longitud del campo ${campo}.`
+                );
+            }
+
+            // Si pasó las validaciones, guardamos el valor.
+            //
+            // Ejemplo:
+            // campo = "carrera"
+            // valor = "Ingeniería en Software"
+            //
+            // Resultado:
+            // cambios.carrera = "Ingeniería en Software"
+            cambios[campo] = valor;
+        }
+    }
+
+    // Ahora revisamos las competencias.
+    // Solo hacemos esta revisión si el usuario las envió.
+    if (datos.competencias !== undefined) {
+
+        // Comprobamos tres cosas:
+        //
+        // 1. Que competencias sea una lista (array).
+        // 2. Que no tenga más de 20 competencias.
+        // 3. Que cada competencia sea texto y tenga
+        //    entre 2 y 50 caracteres, sin contar espacios
+        //    al inicio o al final.
+        //
+        // Ejemplo correcto:
+        // ["JavaScript", "React"]
+        //
+        // Ejemplo incorrecto:
+        // ["JavaScript", 123]
+        if (
+            !Array.isArray(datos.competencias) ||
+            datos.competencias.length > 20 ||
+            datos.competencias.some(competencia =>
+                typeof competencia !== "string" ||
+                competencia.trim().length < 2 ||
+                competencia.trim().length > 50
+            )
+        ) {
+            throw crearError(
+                400,
+                "DATOS_INVALIDOS",
+                "Revise las competencias."
+            );
+        }
+
+        // map() recorre todas las competencias y crea
+        // una lista nueva sin espacios innecesarios.
+        //
+        const competencias = datos.competencias.map(
+            competencia => competencia.trim()
+        );
+
+        // Convertimos las competencias a minúsculas
+        // para poder detectar si alguna está repetida.
+        //
+        // Set es una estructura que no guarda valores duplicados.
+        const unicas = new Set(
+            competencias.map(
+                competencia => competencia.toLowerCase()
+            )
+        );
+
+        // Comparamos cuántas competencias recibimos
+        // con cuántas quedaron después de eliminar repetidas.
+        //
+        // Si las cantidades son diferentes, significa
+        // que había al menos una competencia duplicada.
+        if (unicas.size !== competencias.length) {
+            throw crearError(
+                400,
+                "DATOS_INVALIDOS",
+                "No puede repetir competencias."
+            );
+        }
+
+        // Si todas las competencias son válidas,
+        // las agregamos al objeto de cambios.
+        cambios.competencias = competencias;
+    }
+
+    // Enviamos los cambios al modelo de usuarios.
+    //
+    // actualizarUsuario() utiliza MongoDB para modificar
+    // solamente los campos que guardamos en "cambios".
+    //
+    // Ejemplo:
+    // cambios = { disponibilidad: "Fines de semana" }
+    //
+    // MongoDB modifica ese campo y conserva los demás.
+    await usuariosModel.actualizarUsuario(id, cambios);
+
+    // Consultamos nuevamente el perfil para obtener
+    // los datos actualizados desde MongoDB.
+    //
+    // return devuelve esa información al controlador,
+    // que posteriormente responderá al usuario.
+    return await obtenerPerfil(id);
+}
+
+
 module.exports = {
     registrarUsuario,
     iniciarSesion,
-    obtenerPerfil
+    obtenerPerfil,
+    editarPerfil
 };

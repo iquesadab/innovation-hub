@@ -100,4 +100,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 34 | 2026-11-04 | 1c3cbc9 | [add]: Agrega búsqueda de usuario por ID |
 | 35 | 2026-11-04 | 234a2fe | [add]: Agrega consulta del perfil |
 | 36 | 2026-11-04 | 553f66e | [add]: Agrega controlador del perfil |
+| 37 | 2026-11-04 | d931e0d | [add]: Agrega ruta para consultar perfil |
 <!-- FIN TABLA COMMITS -->
