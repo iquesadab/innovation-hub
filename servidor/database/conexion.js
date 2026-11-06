@@ -36,6 +36,11 @@ function obtenerBaseDatos() {
     return baseDatos;
 }
 
+// Devuelve el cliente de MongoDB para poder utilizar transacciones.
+function obtenerCliente() {
+    return clienteMongo;
+}
+
 module.exports = {
     conectarBaseDatos,
     obtenerBaseDatos

@@ -103,4 +103,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 37 | 2026-11-04 | d931e0d | [add]: Agrega ruta para consultar perfil |
 | 38 | 2026-11-04 | 3b1c1fa | [add]: Permite editar el perfil de usuario |
 | 39 | 2026-11-04 | 82bbef5 | [add]: Agrega búsqueda de usuarios |
+| 40 | 2026-11-05 | b4d379d | [add]: Agrega CRUD de iniciativas |
 <!-- FIN TABLA COMMITS -->

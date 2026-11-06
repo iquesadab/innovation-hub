@@ -21,6 +21,12 @@ const { crearIndiceUsuarios } = require("./models/usuarios.model");
 // Importamos las rutas de iniciativas.
 const iniciativasRoutes = require("./routes/iniciativas.routes");
 
+// Importamos las rutas de solicitudes.
+const solicitudesRoutes = require("./routes/solicitudes.routes");
+
+// Importamos la función que crea el índice de solicitudes.
+const { crearIndiceSolicitudes } = require("./models/solicitudes.model");
+
 // Permite recibir datos en formato JSON.
 app.use(express.json());
 
@@ -34,6 +40,10 @@ app.use("/api/auth", usuariosRoutes);
 
 // Todas las rutas de iniciativas comenzarán con /api/initiatives.
 app.use("/api/initiatives", iniciativasRoutes);
+
+// Todas las rutas de solicitudes comenzarán con /api/solicitudes.
+app.use("/api/solicitudes", solicitudesRoutes);
+
 
 // Ruta para comprobar que el servidor funciona.
 app.get("/api/prueba", function (req, res) {
@@ -85,6 +95,9 @@ async function iniciarServidor() {
         
         // Prepara el índice único del correo.
         await crearIndiceUsuarios();
+
+        // Crea el índice para evitar solicitudes pendientes duplicadas.
+        await crearIndiceSolicitudes();
 
         app.listen(puerto, function () {
 
