@@ -18,6 +18,9 @@ const usuariosRoutes = require("./routes/usuarios.routes");
 
 const { crearIndiceUsuarios } = require("./models/usuarios.model");
 
+// Importamos las rutas de iniciativas.
+const iniciativasRoutes = require("./routes/iniciativas.routes");
+
 // Permite recibir datos en formato JSON.
 app.use(express.json());
 
@@ -28,6 +31,9 @@ app.use(cors({
 
 // Rutas de autenticación.
 app.use("/api/auth", usuariosRoutes);
+
+// Todas las rutas de iniciativas comenzarán con /api/initiatives.
+app.use("/api/initiatives", iniciativasRoutes);
 
 // Ruta para comprobar que el servidor funciona.
 app.get("/api/prueba", function (req, res) {
