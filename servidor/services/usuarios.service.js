@@ -456,9 +456,8 @@ async function editarPerfil(id, datos) {
     return await obtenerPerfil(id);
 }
 
- // Esta función recibe los filtros de búsqueda,
- // comprueba que sean válidos y prepara los resultados.
-async function consultarUsuarios(filtros) {
+// Consulta usuarios aplicando búsqueda, filtros y paginación.
+async function consultarUsuarios(filtros = {}) {
 
     // Extraemos los valores del objeto filtros.
     // Si el usuario no envía alguno, utilizamos los valores que aparecen después del signo =.
@@ -468,27 +467,42 @@ async function consultarUsuarios(filtros) {
     // Estos valores llegan como texto desde la URL.
     const {
         buscar = "",
+        carrera = "",
+        competencia = "",
+        disponibilidad = "",
         pagina = "1",
         limite = "10"
     } = filtros;
 
-    // Revisamos que los filtros recibidos sean correctos.
-    // typeof buscar !== "string":
-    // El texto de búsqueda debe ser una cadena de texto.
-    // /^[1-9]\d*$/: Comprueba que página y límite sean números enteros positivos
-    // Si alguna condición es incorrecta, devolvemos un error.
-    if (
-        typeof buscar !== "string" ||
-        buscar.length > 100 ||
-        !/^[1-9]\d*$/.test(String(pagina)) ||
-        !/^[1-9]\d*$/.test(String(limite))
-    ) {
+    // Valida los campos de búsqueda.
+    const textos = [
+        buscar,
+        carrera,
+        competencia,
+        disponibilidad
+    ];
+
+    if (textos.some(texto =>
+        typeof texto !== "string" || texto.length > 100
+    )) {
         throw crearError(
             400,
             "DATOS_INVALIDOS",
             "Los filtros de búsqueda no son válidos."
         );
     }
+
+    // Comprueba que página y límite sean enteros positivos.
+    if (!/^[1-9]\d*$/.test(String(pagina)) ||
+        !/^[1-9]\d*$/.test(String(limite))) {
+
+        throw crearError(
+            400,
+            "DATOS_INVALIDOS",
+            "La página y el límite deben ser números positivos."
+        );
+    }
+
 
     // Number() convierte los valores recibidos a números.
     // Necesario porque vamos a realizar operaciones matemáticas para calcular las páginas.
@@ -513,6 +527,13 @@ async function consultarUsuarios(filtros) {
         );
     }
 
+    // Prepara los filtros para el modelo.
+    const filtrosBusqueda = {
+        carrera: carrera.trim(),
+        competencia: competencia.trim(),
+        disponibilidad: disponibilidad.trim()
+    };
+
     // Llamamos a la función buscarUsuarios() del modelo.
     // Le enviamos:
     // 1. El texto sin espacios al inicio ni al final.
@@ -522,7 +543,8 @@ async function consultarUsuarios(filtros) {
     const resultado = await usuariosModel.buscarUsuarios(
         buscar.trim(),
         numeroLimite,
-        numeroPagina
+        numeroPagina,
+        filtrosBusqueda
     );
 
     // MongoDB guarda el identificador como un ObjectId.

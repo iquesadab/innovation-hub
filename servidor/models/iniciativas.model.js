@@ -106,7 +106,10 @@ async function actualizarIniciativa(id, propietarioId, cambios) {
             _id: convertirId(id),
 
             // Además, comprueba que pertenezca al usuario.
-            propietarioId
+            propietarioId,
+
+            // Solo permite modificar iniciativas abiertas.
+            estado: "abierta"
         },
         {
             // $set es una instrucción de MongoDB.
@@ -129,7 +132,10 @@ async function eliminarIniciativa(id, propietarioId) {
     // Solamente puede coincidir una iniciativa que tenga ese ID y pertenezca a ese propietario.
     const resultado = await obtenerColeccion().deleteOne({
         _id: convertirId(id),
-        propietarioId
+        propietarioId,
+
+        // Solo permite eliminar iniciativas abiertas.
+        estado: "abierta"
     });
 
     // deletedCount indica cuántos documentos se eliminaron.

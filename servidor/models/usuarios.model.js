@@ -42,13 +42,17 @@ async function actualizarUsuario(id, cambios) {
     return resultado.matchedCount;
 }
 
+// Evita que los símbolos especiales alteren las búsquedas.
+function prepararTexto(texto) {
+    return texto.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
  // Esta función busca usuarios en MongoDB.
- // Recibe tres datos:
  // texto: lo que la persona escribió en el buscador.
  // limite: cantidad máxima de usuarios que queremos mostrar.
  // pagina: número de página que queremos consultar.
-async function buscarUsuarios(texto, limite, pagina) {
+ //filtros independientes
+async function buscarUsuarios(texto, limite, pagina, filtros = {}) {
 
     // Objeto vacío para guardar las condiciones al buscar usuarios en MongoDB
     // Si queda vacío {}, MongoDB buscará todos los usuarios.
@@ -64,10 +68,7 @@ async function buscarUsuarios(texto, limite, pagina) {
         // cuando MongoDB realiza búsquedas con expresiones regulares.
         // Por eso, agregamos una barra invertida delante de ellos
         // para que se busquen como caracteres normales.
-        const textoSeguro = texto.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            "\\$&"
-        );
+        const textoSeguro = prepararTexto(texto);
 
         // $or significa "O".
         // MongoDB buscará usuarios que cumplan al menos
@@ -91,6 +92,31 @@ async function buscarUsuarios(texto, limite, pagina) {
                 }
             }
         ];
+    }
+
+    // Filtra por carrera.
+    if (filtros.carrera) {
+        filtro.carrera = {
+            $regex: prepararTexto(filtros.carrera),
+            $options: "i"
+        };
+    }
+
+    // Filtra por competencia.
+    // MongoDB también puede buscar texto dentro de arreglos.
+    if (filtros.competencia) {
+        filtro.competencias = {
+            $regex: prepararTexto(filtros.competencia),
+            $options: "i"
+        };
+    }
+
+    // Filtra por disponibilidad.
+    if (filtros.disponibilidad) {
+        filtro.disponibilidad = {
+            $regex: prepararTexto(filtros.disponibilidad),
+            $options: "i"
+        };
     }
 
     // Calculamos cuántos usuarios debemos saltar antes de mostrar los resultados.
