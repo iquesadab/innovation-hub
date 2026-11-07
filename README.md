@@ -108,4 +108,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 42 | 2026-11-06 | aa701d8 | [fix]: Corrige acceso al cliente de MongoDB |
 | 43 | 2026-11-06 | f42f9f6 | [add]: Agrega gestión de integrantes |
 | 44 | 2026-11-07 | 298f8f7 | [add]: Agrega conversión de iniciativas en proyectos |
+| 45 | 2026-11-07 | a4bbf7a | [fix]: Ajusta filtros de usuarios y reglas de iniciativas |
 <!-- FIN TABLA COMMITS -->
