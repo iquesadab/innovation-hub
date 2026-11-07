@@ -5,8 +5,10 @@ const { MongoClient } = require("mongodb");
 const uri = process.env.MONGO_URI;
 const nombreBaseDatos = process.env.DB_NAME;
 
-// Guarda la conexión a la base de datos.
+// Guarda el cliente de MongoDB y la conexión a la base de datos.
+let clienteMongo;
 let baseDatos;
+
 
 // Conecta el servidor con MongoDB Atlas.
 async function conectarBaseDatos() {
@@ -15,7 +17,7 @@ async function conectarBaseDatos() {
         throw new Error("Faltan las variables de conexión a MongoDB.");
     }
 
-    const clienteMongo = new MongoClient(uri);
+    clienteMongo = new MongoClient(uri);
 
     await clienteMongo.connect();
 
@@ -38,10 +40,16 @@ function obtenerBaseDatos() {
 
 // Devuelve el cliente de MongoDB para poder utilizar transacciones.
 function obtenerCliente() {
+
+    if (!clienteMongo) {
+        throw new Error("El cliente de MongoDB no está conectado.");
+    }
+    
     return clienteMongo;
 }
 
 module.exports = {
     conectarBaseDatos,
-    obtenerBaseDatos
+    obtenerBaseDatos,
+    obtenerCliente
 };
