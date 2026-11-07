@@ -1,9 +1,19 @@
+import Encabezado from "./componentes/layout/Encabezado.jsx";
+
 function App() {
     return (
-        <main>
-            <h1>Innovation Hub</h1>
-            <p>Plataforma de iniciativas y proyectos colaborativos.</p>
-        </main>
+        <>
+            <Encabezado />
+
+            <main className="container py-4">
+                <h1>Bienvenido a Innovation Hub</h1>
+
+                <p>
+                    Explora iniciativas, participa en proyectos
+                    y comparte tus ideas.
+                </p>
+            </main>
+        </>
     );
 }
 

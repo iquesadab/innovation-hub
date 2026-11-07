@@ -1,0 +1,348 @@
+/* VARIABLES */
+
+:root {
+    --primario: #173B57;
+    --primario-oscuro: #102C42;
+
+    --secundario: #16A6A1;
+    --secundario-oscuro: #118783;
+
+    --acento: #F26B5E;
+    --acento-oscuro: #D9584D;
+
+    --fondo: #F5F7F9;
+    --superficie: #FFFFFF;
+
+    --texto-principal: #202A33;
+    --texto-secundario: #607080;
+
+    --borde: #DDE5EC;
+
+    --exito: #22A559;
+    --error: #DC3545;
+    --advertencia: #F59E0B;
+    --informativa: #2563EB;
+}
+
+
+/* ESTILOS GENERALES */
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto-principal);
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+main {
+    min-height: 70vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--texto-principal);
+    /* define un grosor seminegrita para el texto */
+    font-weight: 600;
+}
+
+p {
+    color: var(--texto-secundario);
+}
+
+a {
+    color: var(--primario);
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    background-color: var(--superficie);
+    border-bottom: 1px solid var(--borde);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-brand {
+    color: var(--primario);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: var(--secundario);
+}
+
+.navbar .nav-link {
+    color: var(--texto-principal);
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: var(--secundario);
+}
+
+.navbar .nav-link.active {
+    color: var(--secundario);
+    font-weight: 600;
+}
+
+
+/* BOTONES */
+
+/* personaliza el botón principal de Bootstrap */
+/* bs-btn-bg: define el color de fondo del botón de Bootstrap. bg = background */
+.btn-primary {
+    --bs-btn-color: #FFFFFF;
+    --bs-btn-bg: var(--primario);
+    --bs-btn-border-color: var(--primario);
+
+    --bs-btn-hover-color: #FFFFFF;
+    --bs-btn-hover-bg: var(--secundario);
+    --bs-btn-hover-border-color: var(--secundario);
+
+    --bs-btn-active-color: #FFFFFF;
+    --bs-btn-active-bg: var(--primario-oscuro);
+    --bs-btn-active-border-color: var(--primario-oscuro);
+
+    --bs-btn-disabled-color: #FFFFFF;
+    --bs-btn-disabled-bg: var(--texto-secundario);
+    --bs-btn-disabled-border-color: var(--texto-secundario);
+
+    border-radius: 0.7rem;
+    font-weight: 500;
+}
+
+
+/* personaliza el botón principal con estilo de borde */
+.btn-outline-primary {
+    --bs-btn-color: var(--primario);
+    --bs-btn-border-color: var(--primario);
+
+    --bs-btn-hover-color: #FFFFFF;
+    --bs-btn-hover-bg: var(--primario);
+    --bs-btn-hover-border-color: var(--primario);
+
+    --bs-btn-active-color: #FFFFFF;
+    --bs-btn-active-bg: var(--primario-oscuro);
+    --bs-btn-active-border-color: var(--primario-oscuro);
+
+    border-radius: 0.7rem;
+}
+
+
+/* mantiene el estilo redondeado en otros botones */
+.btn-success,
+.btn-danger,
+.btn-secondary,
+.btn-outline-secondary {
+    border-radius: 0.7rem;
+}
+
+
+/* TARJETAS */
+
+.card {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1rem rgba(23, 59, 87, 0.08);
+
+    /* permite una transición suave al pasar el cursor */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    /* transform: translateY(-3px): mueve el elemento 3 píxeles hacia arriba */
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1.25rem rgba(23, 59, 87, 0.12);
+}
+
+.card-title {
+    color: var(--texto-principal);
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+
+/* BADGES */
+
+.badge {
+    border-radius: 2rem;
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+}
+
+
+/* personaliza los badges principales de Bootstrap */
+.badge.text-bg-primary {
+    background-color: #E7E5FF !important;
+    color: #5540D9 !important;
+}
+
+.badge.text-bg-secondary {
+    background-color: #DDF5F3 !important;
+    color: #087F7A !important;
+}
+
+.badge.text-bg-success {
+    background-color: #DCFCE7 !important;
+    color: #16803C !important;
+}
+
+.badge.text-bg-danger {
+    background-color: #FEE2E2 !important;
+    color: #B42318 !important;
+}
+
+.badge.text-bg-warning {
+    background-color: #FEF3C7 !important;
+    color: #A16207 !important;
+}
+
+
+/* FORMULARIOS */
+
+.form-label {
+    color: var(--texto-principal);
+    font-weight: 500;
+}
+
+/* 
+form-control: aplica el formato de Bootstrap a campos de texto 
+form-select: aplica el formato de Bootstrap a las listas de selección
+*/
+.form-control,
+.form-select {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 0.7rem;
+    padding: 0.75rem;
+}
+
+
+/* cambia el estilo cuando el usuario selecciona un campo */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--secundario);
+    box-shadow: 0 0 0 0.25rem rgba(22, 166, 161, 0.15);
+}
+
+
+/* mantiene visibles los errores de validación */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--error);
+}
+
+.invalid-feedback {
+    color: var(--error);
+}
+
+
+/* ALERTAS */
+
+.alert {
+    border-radius: 0.8rem;
+}
+
+
+/* personaliza las alertas de Bootstrap */
+.alert-success {
+    --bs-alert-color: #166534;
+    --bs-alert-bg: #DCFCE7;
+    --bs-alert-border-color: #BBF7D0;
+}
+
+.alert-danger {
+    --bs-alert-color: #991B1B;
+    --bs-alert-bg: #FEE2E2;
+    --bs-alert-border-color: #FECACA;
+}
+
+.alert-warning {
+    --bs-alert-color: #92400E;
+    --bs-alert-bg: #FEF3C7;
+    --bs-alert-border-color: #FDE68A;
+}
+
+.alert-info {
+    --bs-alert-color: #1E40AF;
+    --bs-alert-bg: #DBEAFE;
+    --bs-alert-border-color: #BFDBFE;
+}
+
+
+/* MODAL */
+
+.modal-content {
+    background-color: var(--superficie);
+    border: none;
+    border-radius: 1rem;
+}
+
+.modal-header {
+    border-bottom-color: var(--borde);
+}
+
+.modal-footer {
+    border-top-color: var(--borde);
+}
+
+.modal-title {
+    color: var(--texto-principal);
+    font-weight: 600;
+}
+
+
+/* TABLAS */
+
+.table {
+    --bs-table-bg: var(--superficie);
+    --bs-table-color: var(--texto-principal);
+    --bs-table-border-color: var(--borde);
+}
+
+
+/* FOOTER */
+
+footer {
+    background-color: var(--primario);
+    margin-top: 4rem;
+    padding: 1rem 0;
+}
+
+footer p {
+    color: #FFFFFF;
+    margin-bottom: 0;
+}
+
+
+/* ACCESIBILIDAD */
+
+/* muestra claramente qué elemento está seleccionado al navegar con teclado */
+.btn:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--secundario);
+    outline-offset: 3px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 767.98px) {
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+}
