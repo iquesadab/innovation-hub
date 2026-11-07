@@ -74,16 +74,19 @@ a {
     color: var(--secundario);
 }
 
+/* Color normal de los enlaces */
 .navbar .nav-link {
     color: var(--texto-principal);
     font-weight: 500;
 }
 
+/* Color al pasar el cursor o seleccionar con teclado */
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
     color: var(--secundario);
 }
 
+/* Color de la opción activa */
 .navbar .nav-link.active {
     color: var(--secundario);
     font-weight: 600;

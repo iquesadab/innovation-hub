@@ -1,18 +1,18 @@
 import Encabezado from "./componentes/layout/Encabezado.jsx";
+import PiePagina from "./componentes/layout/PiePagina.jsx";
+import Inicio from "./paginas/Inicio.jsx";
 
 function App() {
     return (
         <>
+            {/* Encabezado general */}
             <Encabezado />
 
-            <main className="container py-4">
-                <h1>Bienvenido a Innovation Hub</h1>
+            {/* Página principal */}
+            <Inicio />
 
-                <p>
-                    Explora iniciativas, participa en proyectos
-                    y comparte tus ideas.
-                </p>
-            </main>
+            {/* Pie de página general */}
+            <PiePagina />
         </>
     );
 }
