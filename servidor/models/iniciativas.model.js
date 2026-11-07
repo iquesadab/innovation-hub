@@ -179,6 +179,8 @@ async function eliminarMiembro(id, propietarioId, usuarioId) {
             _id: convertirId(id),
             propietarioId,
 
+            estado: "abierta",
+
             // Comprueba que el usuario esté en el equipo.
             miembros: usuarioId
         },

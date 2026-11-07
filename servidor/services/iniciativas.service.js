@@ -122,7 +122,7 @@ function validarDatos(datos) {
 
         // Problema y beneficiarios son opcionales.
         const opcional = campo === "problema" ||
-                         campo === "beneficiarios";
+            campo === "beneficiarios";
 
         // continue permite pasar al siguiente campo del ciclo.
         if (valor === undefined && opcional) {
@@ -457,12 +457,12 @@ async function editarIniciativa(id, datos, usuarioId) {
         );
     }
 
-    // Las iniciativas archivadas no pueden modificarse.
-    if (iniciativa.estado === "archivada") {
+    // Una iniciativa archivada o convertida ya no puede editarse.
+    if (iniciativa.estado !== "abierta") {
         throw crearError(
             409,
-            "INICIATIVA_ARCHIVADA",
-            "No puede modificar una iniciativa archivada."
+            "ESTADO_NO_PERMITIDO",
+            "No puede modificar una iniciativa archivada o convertida."
         );
     }
 
@@ -504,6 +504,15 @@ async function eliminarIniciativa(id, usuarioId) {
         );
     }
 
+    // Una iniciativa convertida debe conservarse porque tiene un proyecto asociado.
+    if (iniciativa.estado === "convertida") {
+        throw crearError(
+            409,
+            "INICIATIVA_CONVERTIDA",
+            "No puede eliminar una iniciativa que ya fue convertida en proyecto."
+        );
+    }
+
     if (iniciativa.estado === "archivada") {
         throw crearError(
             409,
@@ -541,7 +550,7 @@ async function eliminarIniciativa(id, usuarioId) {
 }
 
 
- // Consulta los integrantes de una iniciativa.
+// Consulta los integrantes de una iniciativa.
 async function consultarMiembros(id, usuarioId) {
 
     validarId(id);
@@ -569,7 +578,7 @@ async function consultarMiembros(id, usuarioId) {
 }
 
 
- // Permite al propietario eliminar un integrante del equipo.
+// Permite al propietario eliminar un integrante del equipo.
 async function quitarMiembro(id, miembroId, usuarioId) {
 
     validarId(id);
@@ -603,12 +612,12 @@ async function quitarMiembro(id, miembroId, usuarioId) {
         );
     }
 
-    // No se permite modificar el equipo de una iniciativa archivada.
-    if (iniciativa.estado === "archivada") {
+    // No permite modificar equipos de iniciativas cerradas.
+    if (iniciativa.estado !== "abierta") {
         throw crearError(
             409,
-            "INICIATIVA_ARCHIVADA",
-            "No puede modificar una iniciativa archivada."
+            "ESTADO_NO_PERMITIDO",
+            "No puede modificar el equipo de una iniciativa archivada o convertida."
         );
     }
 
