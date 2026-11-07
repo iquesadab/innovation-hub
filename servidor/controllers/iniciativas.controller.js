@@ -110,11 +110,54 @@ async function eliminar(req, res, next) {
 }
 
 
+ // READ: consulta los integrantes de una iniciativa.
+async function listarMiembros(req, res, next) {
+    try {
+        // Envía el ID de la iniciativa y el usuario autenticado.
+        const miembros = await iniciativasService.consultarMiembros(
+            req.params.id,
+            req.usuarioId
+        );
+
+        res.status(200).json({
+            miembros
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+ // DELETE: permite al propietario eliminar un integrante del equipo.
+async function eliminarMiembro(req, res, next) {
+    try {
+        // Obtiene el ID de la iniciativa y del integrante desde la URL.
+        const miembros = await iniciativasService.quitarMiembro(
+            req.params.id,
+            req.params.miembroId,
+            req.usuarioId
+        );
+
+        res.status(200).json({
+            mensaje: "Integrante eliminado correctamente.",
+            miembros
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
 // Exportamos las funciones para utilizarlas en las rutas.
 module.exports = {
     crear,
     listar,
     consultar,
     actualizar,
-    eliminar
+    eliminar,
+    listarMiembros,
+    eliminarMiembro
 };

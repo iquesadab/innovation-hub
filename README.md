@@ -105,4 +105,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 39 | 2026-11-04 | 82bbef5 | [add]: Agrega búsqueda de usuarios |
 | 40 | 2026-11-05 | b4d379d | [add]: Agrega CRUD de iniciativas |
 | 41 | 2026-11-06 | deee1cc | [add]: Agrega solicitudes de participación |
+| 42 | 2026-11-06 | aa701d8 | [fix]: Corrige acceso al cliente de MongoDB |
 <!-- FIN TABLA COMMITS -->

@@ -541,11 +541,111 @@ async function eliminarIniciativa(id, usuarioId) {
 }
 
 
+ // Consulta los integrantes de una iniciativa.
+async function consultarMiembros(id, usuarioId) {
+
+    validarId(id);
+
+    const iniciativa = await iniciativasModel.buscarPorId(id);
+
+    if (!iniciativa) {
+        throw crearError(
+            404,
+            "INICIATIVA_NO_ENCONTRADA",
+            "No se encontró la iniciativa."
+        );
+    }
+
+    // Solo el propietario puede consultar la lista completa.
+    if (iniciativa.propietarioId !== usuarioId) {
+        throw crearError(
+            403,
+            "ACCESO_DENEGADO",
+            "Solo el propietario puede consultar los integrantes."
+        );
+    }
+
+    return iniciativa.miembros || [];
+}
+
+
+ // Permite al propietario eliminar un integrante del equipo.
+async function quitarMiembro(id, miembroId, usuarioId) {
+
+    validarId(id);
+    validarId(miembroId);
+
+    const iniciativa = await iniciativasModel.buscarPorId(id);
+
+    if (!iniciativa) {
+        throw crearError(
+            404,
+            "INICIATIVA_NO_ENCONTRADA",
+            "No se encontró la iniciativa."
+        );
+    }
+
+    // Comprueba que quien realiza la acción sea el propietario.
+    if (iniciativa.propietarioId !== usuarioId) {
+        throw crearError(
+            403,
+            "ACCESO_DENEGADO",
+            "Solo el propietario puede eliminar integrantes."
+        );
+    }
+
+    // El propietario no puede eliminarse a sí mismo.
+    if (miembroId === iniciativa.propietarioId) {
+        throw crearError(
+            409,
+            "OPERACION_NO_PERMITIDA",
+            "El propietario no puede eliminarse del equipo."
+        );
+    }
+
+    // No se permite modificar el equipo de una iniciativa archivada.
+    if (iniciativa.estado === "archivada") {
+        throw crearError(
+            409,
+            "INICIATIVA_ARCHIVADA",
+            "No puede modificar una iniciativa archivada."
+        );
+    }
+
+    // Comprueba que el integrante pertenezca al equipo.
+    if (!(iniciativa.miembros || []).includes(miembroId)) {
+        throw crearError(
+            404,
+            "MIEMBRO_NO_ENCONTRADO",
+            "El usuario no pertenece al equipo."
+        );
+    }
+
+    const eliminados = await iniciativasModel.eliminarMiembro(
+        id,
+        usuarioId,
+        miembroId
+    );
+
+    if (eliminados === 0) {
+        throw crearError(
+            409,
+            "OPERACION_NO_COMPLETADA",
+            "No se pudo eliminar al integrante."
+        );
+    }
+
+    return await consultarMiembros(id, usuarioId);
+}
+
+
 // Exportamos las funciones que utilizará iniciativas.controller.js.
 module.exports = {
     crearIniciativa,
     consultarDetalle,
     consultarIniciativas,
     editarIniciativa,
-    eliminarIniciativa
+    eliminarIniciativa,
+    consultarMiembros,
+    quitarMiembro
 };

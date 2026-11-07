@@ -170,6 +170,37 @@ async function tieneProyecto(id) {
 }
 
 
+ // Elimina a un integrante del equipo de una iniciativa.
+async function eliminarMiembro(id, propietarioId, usuarioId) {
+
+    const resultado = await obtenerColeccion().updateOne(
+        {
+            // Busca la iniciativa y comprueba quién es el propietario.
+            _id: convertirId(id),
+            propietarioId,
+
+            // Comprueba que el usuario esté en el equipo.
+            miembros: usuarioId
+        },
+        {
+            // $pull elimina el usuario del arreglo miembros.
+            $pull: {
+                miembros: usuarioId
+            },
+
+            // Actualiza la fecha de modificación.
+            $set: {
+                fechaModificacion: new Date()
+            }
+        }
+    );
+
+    // Devuelve 1 si encontró y actualizó la iniciativa.
+    // Devuelve 0 si no encontró una coincidencia.
+    return resultado.modifiedCount;
+}
+
+
 // Exportamos las funciones para poder utilizarlas desde iniciativas.service.js.
 module.exports = {
     crearIniciativa,
@@ -178,5 +209,6 @@ module.exports = {
     actualizarIniciativa,
     eliminarIniciativa,
     tieneSolicitudes,
-    tieneProyecto
+    tieneProyecto,
+    eliminarMiembro
 };

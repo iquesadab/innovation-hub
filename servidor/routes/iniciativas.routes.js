@@ -30,6 +30,15 @@ router.put("/:id", iniciativasController.actualizar);
 // DELETE: elimina o archiva una iniciativa.
 router.delete("/:id", iniciativasController.eliminar);
 
+// READ: consulta los integrantes de una iniciativa.
+// Solo el propietario puede consultar la lista.
+router.get("/:id/miembros", iniciativasController.listarMiembros);
+
+// DELETE: elimina un integrante del equipo.
+// :id es el identificador de la iniciativa.
+// :miembroId es el identificador del usuario que queremos eliminar.
+router.delete("/:id/miembros/:miembroId", iniciativasController.eliminarMiembro);
+
 
 // Exportamos las rutas para utilizarlas desde server.js.
 module.exports = router;
