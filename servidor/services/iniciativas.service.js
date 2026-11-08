@@ -376,13 +376,41 @@ async function consultarIniciativas(filtros, usuarioId) {
         filtro.tipo = type;
     }
 
-    if (category) {
-        filtro.categoria = category;
+    // Prepara búsquedas que aceptan vocales con o sin tilde.
+    function textoSeguro(texto) {
+
+        // Equivalencias de vocales.
+        const vocales = {
+            a: "[aá]",
+            e: "[eé]",
+            i: "[ií]",
+            o: "[oó]",
+            u: "[uúü]"
+        };
+
+        // Recorre cada carácter del texto.
+        return Array.from(texto).map((letra) => {
+
+            // Comprueba si es una vocal.
+            const vocal = vocales[letra.toLowerCase()];
+
+            // Si es una vocal, permite sus variantes.
+            if (vocal) {
+                return vocal;
+            }
+
+            // Escapa los símbolos especiales de expresiones regulares.
+            return letra.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+        }).join("");
     }
 
-    // Evita que los símbolos especiales alteren la búsqueda.
-    function textoSeguro(texto) {
-        return texto.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // Busca categorías sin distinguir tildes ni mayúsculas.
+    if (category) {
+        filtro.categoria = {
+            $regex: `^${textoSeguro(category)}$`,
+            $options: "i"
+        };
     }
 
     // $regex permite buscar coincidencias dentro de un texto.

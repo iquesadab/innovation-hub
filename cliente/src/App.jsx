@@ -8,6 +8,7 @@ import Inicio from "./paginas/Inicio.jsx"; // Inicio para usuarios autenticados.
 import InicioPublico from "./paginas/InicioPublico.jsx"; // Inicio para visitantes.
 import Login from "./paginas/Login.jsx"; // Formulario de inicio de sesión.
 import Registro from "./paginas/Registro.jsx"; // Formulario de registro
+import Catalogo from "./paginas/Catalogo.jsx"; // Página del catálogo de iniciativas
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     const [pagina, setPagina] = useState("inicio");
 
     //  Guarda mensajes informativos.
-    const [mensaje, setMensaje] = useState(""); 
+    const [mensaje, setMensaje] = useState("");
 
     // Recibe los datos cuando el usuario inicia sesión.
     function manejarInicioSesion(resultado) {
@@ -76,9 +77,31 @@ function App() {
             );
         }
 
-        // Muestra el catálogo solo si existe una sesión.
+        // Muestra el catálogo únicamente si el usuario inició sesión.
         if (pagina === "iniciativas" && sesion) {
-            return <Catalogo />;
+            return (
+                <Catalogo
+                    token={sesion.token}
+                    verDetalle={(id) => {
+                        // Temporalmente muestra el ID seleccionado.
+                        console.log("Iniciativa seleccionada:", id);
+                    }}
+                />
+            );
+        }
+
+        // Muestra el catálogo solamente si existe una sesión.
+        if (pagina === "iniciativas" && sesion) {
+            return (
+                <Catalogo
+                    token={sesion.token}
+                    verDetalle={(id) => {
+                        // Temporalmente muestra el ID seleccionado.
+                        // Después lo conectaremos con Detalle.jsx.
+                        console.log("Iniciativa seleccionada:", id);
+                    }}
+                />
+            );
         }
 
         // Evita mostrar páginas que todavía no están disponibles.

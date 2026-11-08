@@ -113,4 +113,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 47 | 2026-11-07 | 0a683b4 | [new]: Agrega encabezado de Innovation Hub en React y mantiene estilos del avance 1 |
 | 48 | 2026-11-07 | 588173e | [new]: Agrega página de inicio y pie de página en React |
 | 49 | 2026-11-07 | dc3bf16 | [update]: Ajusta navegación según la sesión |
+| 50 | 2026-11-07 | be00a04 | [new]: Agrega login, registro e inicio público |
 <!-- FIN TABLA COMMITS -->
