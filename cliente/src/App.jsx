@@ -11,6 +11,7 @@ import Registro from "./paginas/Registro.jsx"; // Formulario de registro
 import Catalogo from "./paginas/Catalogo.jsx"; // Página del catálogo de iniciativas
 import Detalle from "./paginas/Detalle.jsx"; // Detalle de cada iniciativa
 import Publicar from "./paginas/Publicar.jsx"; // Página para publicar nuevas iniciativas
+import Perfil from "./paginas/Perfil.jsx"; // Página para ver el perfil
 
 function App() {
 
@@ -113,6 +114,16 @@ function App() {
             );
         }
 
+        // Muestra el perfil del usuario autenticado.
+        if (pagina === "perfil" && sesion) {
+            return (
+                <Perfil
+                    token={sesion.token}
+                    alActualizarPerfil={manejarActualizacionPerfil}
+                />
+            );
+        }
+
         // Evita mostrar páginas que todavía no están disponibles.
         return sesion
             ? <Inicio />
@@ -168,6 +179,14 @@ function App() {
         setIniciativaSeleccionada(iniciativa.id);
         setMensaje("Iniciativa publicada correctamente.");
         setPagina("detalle");
+    }
+
+    // Actualiza el usuario guardado en la sesión.
+    function manejarActualizacionPerfil(usuarioActualizado) {
+        setSesion((sesionActual) => ({
+            ...sesionActual,
+            usuario: usuarioActualizado
+        }));
     }
 }
 

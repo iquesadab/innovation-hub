@@ -116,4 +116,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 50 | 2026-11-07 | be00a04 | [new]: Agrega login, registro e inicio público |
 | 51 | 2026-11-07 | 74a8bed | [new]: Agrega catálogo de iniciativas con búsqueda y filtros |
 | 52 | 2026-11-07 | 03587ad | [new]: Agrega detalle de iniciativas |
+| 53 | 2026-11-08 | 982a0b5 | [new]: Agrega formulario para publicar iniciativas |
 <!-- FIN TABLA COMMITS -->
