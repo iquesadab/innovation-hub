@@ -1,18 +1,13 @@
-function Encabezado({
-    sesion,
-    pagina,
-    cambiarPagina,
-    cerrarSesion
-}) {
+function Encabezado({ pagina, cambiarPagina, cerrarSesion }) {
 
-    // Cambia de página y cierra el menú móvil si está abierto.
+    // Cambia la página seleccionada.
     function navegar(destino) {
         cambiarPagina(destino);
     }
 
     return (
         <header>
-            {/* Barra de navegación de Bootstrap. */}
+            {/* Barra de navegación de usuarios autenticados. */}
             <nav className="navbar navbar-expand-lg bg-white">
                 <div className="container">
 
@@ -25,7 +20,7 @@ function Encabezado({
                         Innovation Hub
                     </button>
 
-                    {/* Botón que abre el menú en pantallas pequeñas. */}
+                    {/* Botón para mostrar el menú en pantallas pequeñas. */}
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -38,14 +33,14 @@ function Encabezado({
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    {/* Contenedor de los enlaces del menú. */}
+                    {/* Opciones disponibles después de iniciar sesión. */}
                     <div
                         className="collapse navbar-collapse"
                         id="menuPrincipal"
                     >
                         <ul className="navbar-nav ms-auto align-items-lg-center">
 
-                            {/* Enlace de inicio, disponible para todos. */}
+                            {/* Página principal del usuario. */}
                             <li className="nav-item">
                                 <button
                                     type="button"
@@ -56,74 +51,49 @@ function Encabezado({
                                 </button>
                             </li>
 
-                            {/* Opciones que aparecen si el usuario inició sesión. */}
-                            {sesion ? (
-                                <>
-                                    <li className="nav-item">
-                                        <button
-                                            type="button"
-                                            className={`nav-link ${pagina === "iniciativas" ? "active" : ""}`}
-                                            onClick={() => navegar("iniciativas")}
-                                        >
-                                            Iniciativas
-                                        </button>
-                                    </li>
+                            {/* Catálogo de iniciativas. */}
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className={`nav-link ${pagina === "iniciativas" ? "active" : ""}`}
+                                    onClick={() => navegar("iniciativas")}
+                                >
+                                    Iniciativas
+                                </button>
+                            </li>
 
-                                    <li className="nav-item">
-                                        <button
-                                            type="button"
-                                            className="nav-link"
-                                            onClick={() => navegar("publicar")}
-                                        >
-                                            Publicar
-                                        </button>
-                                    </li>
+                            {/* Página para publicar iniciativas. */}
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className={`nav-link ${pagina === "publicar" ? "active" : ""}`}
+                                    onClick={() => navegar("publicar")}
+                                >
+                                    Publicar
+                                </button>
+                            </li>
 
-                                    <li className="nav-item">
-                                        <button
-                                            type="button"
-                                            className="nav-link"
-                                            onClick={() => navegar("perfil")}
-                                        >
-                                            Perfil
-                                        </button>
-                                    </li>
+                            {/* Página del perfil. */}
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className={`nav-link ${pagina === "perfil" ? "active" : ""}`}
+                                    onClick={() => navegar("perfil")}
+                                >
+                                    Perfil
+                                </button>
+                            </li>
 
-                                    {/* Cierra la sesión del usuario. */}
-                                    <li className="nav-item ms-lg-3">
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-primary"
-                                            onClick={cerrarSesion}
-                                        >
-                                            Cerrar sesión
-                                        </button>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    {/* Opciones que aparecen sin iniciar sesión. */}
-                                    <li className="nav-item">
-                                        <button
-                                            type="button"
-                                            className={`nav-link ${pagina === "login" ? "active" : ""}`}
-                                            onClick={() => navegar("login")}
-                                        >
-                                            Iniciar sesión
-                                        </button>
-                                    </li>
-
-                                    <li className="nav-item ms-lg-3">
-                                        <button
-                                            type="button"
-                                            className="btn btn-primary"
-                                            onClick={() => navegar("registro")}
-                                        >
-                                            Registrarse
-                                        </button>
-                                    </li>
-                                </>
-                            )}
+                            {/* Botón para cerrar la sesión. */}
+                            <li className="nav-item ms-lg-3">
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-primary"
+                                    onClick={cerrarSesion}
+                                >
+                                    Cerrar sesión
+                                </button>
+                            </li>
 
                         </ul>
                     </div>
@@ -133,4 +103,5 @@ function Encabezado({
     );
 }
 
-export default Encabezado; // Permite utilizar el encabezado en App.jsx.
+// Permite utilizar el encabezado desde App.jsx.
+export default Encabezado;
