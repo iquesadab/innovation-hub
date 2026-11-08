@@ -52,3 +52,29 @@ export async function obtenerIniciativas(token, filtros = {}) {
     // Devuelve las iniciativas y los datos de paginación.
     return datos;
 }
+
+// Consulta una iniciativa específica utilizando su ID.
+export async function obtenerDetalleIniciativa(token, id) {
+
+    // Envía la solicitud al backend con el token.
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    // Convierte la respuesta del servidor a un objeto.
+    const datos = await respuesta.json();
+
+    // Comprueba si ocurrió algún error.
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.error?.mensaje ||
+            "No se pudo consultar la iniciativa."
+        );
+    }
+
+    // Devuelve la iniciativa recibida del backend.
+    return datos.iniciativa;
+}

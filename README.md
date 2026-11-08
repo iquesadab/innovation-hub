@@ -114,4 +114,5 @@ La interfaz fue desarrollada con un enfoque responsive utilizando la grilla y la
 | 48 | 2026-11-07 | 588173e | [new]: Agrega página de inicio y pie de página en React |
 | 49 | 2026-11-07 | dc3bf16 | [update]: Ajusta navegación según la sesión |
 | 50 | 2026-11-07 | be00a04 | [new]: Agrega login, registro e inicio público |
+| 51 | 2026-11-07 | 74a8bed | [new]: Agrega catálogo de iniciativas con búsqueda y filtros |
 <!-- FIN TABLA COMMITS -->

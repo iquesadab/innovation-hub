@@ -9,7 +9,7 @@ import InicioPublico from "./paginas/InicioPublico.jsx"; // Inicio para visitant
 import Login from "./paginas/Login.jsx"; // Formulario de inicio de sesión.
 import Registro from "./paginas/Registro.jsx"; // Formulario de registro
 import Catalogo from "./paginas/Catalogo.jsx"; // Página del catálogo de iniciativas
-
+import Detalle from "./paginas/Detalle.jsx"; // Detalle de cada iniciativa
 
 function App() {
 
@@ -21,6 +21,9 @@ function App() {
 
     //  Guarda mensajes informativos.
     const [mensaje, setMensaje] = useState("");
+
+    // Guarda el ID de la iniciativa seleccionada.
+    const [iniciativaSeleccionada, setIniciativaSeleccionada] = useState(null);
 
     // Recibe los datos cuando el usuario inicia sesión.
     function manejarInicioSesion(resultado) {
@@ -52,7 +55,8 @@ function App() {
         setPagina("login");
     }
 
-    // Selecciona qué componente debe mostrar React según la página actual
+
+    // Selecciona qué componente debe mostrar React según la página actual.
     function mostrarPagina() {
 
         // Muestra un inicio diferente según exista una sesión.
@@ -77,29 +81,23 @@ function App() {
             );
         }
 
-        // Muestra el catálogo únicamente si el usuario inició sesión.
+        // Muestra el catálogo para usuarios autenticados.
         if (pagina === "iniciativas" && sesion) {
             return (
                 <Catalogo
                     token={sesion.token}
-                    verDetalle={(id) => {
-                        // Temporalmente muestra el ID seleccionado.
-                        console.log("Iniciativa seleccionada:", id);
-                    }}
+                    verDetalle={abrirDetalle}
                 />
             );
         }
 
-        // Muestra el catálogo solamente si existe una sesión.
-        if (pagina === "iniciativas" && sesion) {
+        // Muestra los detalles de la iniciativa seleccionada.
+        if (pagina === "detalle" && sesion && iniciativaSeleccionada) {
             return (
-                <Catalogo
+                <Detalle
                     token={sesion.token}
-                    verDetalle={(id) => {
-                        // Temporalmente muestra el ID seleccionado.
-                        // Después lo conectaremos con Detalle.jsx.
-                        console.log("Iniciativa seleccionada:", id);
-                    }}
+                    iniciativaId={iniciativaSeleccionada}
+                    volverCatalogo={volverCatalogo}
                 />
             );
         }
@@ -109,6 +107,7 @@ function App() {
             ? <Inicio />
             : <InicioPublico cambiarPagina={cambiarPagina} />;
     }
+
 
     return (
         <>
@@ -142,6 +141,17 @@ function App() {
             <PiePagina />
         </>
     );
+
+    // Guarda la iniciativa seleccionada y abre su detalle.
+    function abrirDetalle(id) {
+        setIniciativaSeleccionada(id);
+        cambiarPagina("detalle");
+    }
+
+    // Regresa al catálogo de iniciativas.
+    function volverCatalogo() {
+        cambiarPagina("iniciativas");
+    }
 }
 
 export default App; // Permite utilizar App desde main.jsx.
