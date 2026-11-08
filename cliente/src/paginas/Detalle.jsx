@@ -1,28 +1,48 @@
 import { useEffect, useState } from "react";
 
-import { obtenerDetalleIniciativa } from "../servicios/iniciativas.api.js";
+// Funciones para consultar y eliminar iniciativas.
+import {
+    obtenerDetalleIniciativa,
+    eliminarIniciativa
+} from "../servicios/iniciativas.api.js";
 
-function Detalle({ token, iniciativaId, volverCatalogo }) {
+
+// Página que muestra la información de una iniciativa.
+function Detalle({
+    token,
+    iniciativaId,
+    usuarioId,
+    volverCatalogo,
+    irASolicitar,
+    irAGestionar,
+    irAEditar
+}) {
 
     // Guarda la información de la iniciativa.
     const [iniciativa, setIniciativa] = useState(null);
 
-    // Controla el estado de carga y los errores.
+    // Controla la carga y los errores.
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
 
-    // Consulta los detalles cuando se abre la página.
+    // Indica si estamos eliminando la iniciativa.
+    const [eliminando, setEliminando] = useState(false);
+
+
+    // Consulta el detalle cuando se abre la página.
     useEffect(() => {
 
         // Evita actualizar el componente después de salir.
         let cancelado = false;
 
         async function cargarDetalle() {
+
             setCargando(true);
             setError("");
 
             try {
-                // Obtiene la iniciativa desde MongoDB.
+
+                // Consulta la iniciativa en el backend.
                 const resultado = await obtenerDetalleIniciativa(
                     token,
                     iniciativaId
@@ -42,7 +62,7 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
 
             } finally {
 
-                // Finaliza el estado de carga.
+                // Finaliza la carga.
                 if (!cancelado) {
                     setCargando(false);
                 }
@@ -57,12 +77,69 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
 
     }, [token, iniciativaId]);
 
+
+    // Comprueba si el usuario es propietario de la iniciativa.
+    // La comparación se hace como texto para evitar diferencias de tipo.
+    const esPropietario = Boolean(
+        iniciativa &&
+        usuarioId &&
+        String(iniciativa.propietarioId) === String(usuarioId)
+    );
+
+
+    // Comprueba si la iniciativa permite nuevas solicitudes.
+    const permiteSolicitudes = Boolean(
+        iniciativa &&
+        iniciativa.estado === "abierta" &&
+        !["privada", "institucional"].includes(iniciativa.visibilidad)
+    );
+
+
+    // Elimina la iniciativa después de pedir confirmación.
+    async function manejarEliminar() {
+
+        // Pide confirmación para evitar eliminaciones accidentales.
+        const confirmar = window.confirm(
+            "¿Está seguro de que desea eliminar esta iniciativa?"
+        );
+
+        // Si el usuario cancela, no hacemos nada.
+        if (!confirmar) {
+            return;
+        }
+
+        // Indica que comenzó la eliminación.
+        setEliminando(true);
+        setError("");
+
+        try {
+
+            // Solicita la eliminación al backend.
+            await eliminarIniciativa(token, iniciativaId);
+
+            // Regresa al catálogo después de eliminar.
+            volverCatalogo();
+
+        } catch (error) {
+
+            // Muestra el error si no se pudo eliminar.
+            setError(error.message);
+
+        } finally {
+
+            // Finaliza el proceso.
+            setEliminando(false);
+        }
+    }
+
+
     // Traduce los tipos de iniciativas.
     const nombresTipos = {
         idea: "Idea",
         necesidad: "Necesidad",
         reto: "Reto"
     };
+
 
     return (
         <main className="container py-5">
@@ -76,6 +153,7 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                 Volver al catálogo
             </button>
 
+
             {/* Mensaje mientras se consulta la iniciativa. */}
             {cargando && (
                 <p role="status">
@@ -83,19 +161,22 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                 </p>
             )}
 
-            {/* Mensaje si ocurre algún error. */}
+
+            {/* Muestra los errores de consulta o eliminación. */}
             {!cargando && error && (
                 <div className="alert alert-danger" role="alert">
                     {error}
                 </div>
             )}
 
+
             {/* Información de la iniciativa. */}
-            {!cargando && !error && iniciativa && (
+            {!cargando && iniciativa && (
                 <>
+
+                    {/* Título, resumen y estado. */}
                     <section className="mb-4">
 
-                        {/* Título y resumen. */}
                         <h1 className="mb-3">
                             {iniciativa.titulo}
                         </h1>
@@ -104,8 +185,8 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                             {iniciativa.resumen}
                         </p>
 
-                        {/* Tipo y estado. */}
                         <div className="d-flex gap-2 flex-wrap">
+
                             <span className="badge text-bg-primary">
                                 {nombresTipos[iniciativa.tipo] || iniciativa.tipo}
                             </span>
@@ -113,11 +194,80 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                             <span className="badge text-bg-secondary">
                                 {iniciativa.estado}
                             </span>
+
                         </div>
+
                     </section>
+
+
+                    {/* Botones según el usuario que está consultando. */}
+                    <section className="mb-4">
+
+                        <div className="d-flex flex-wrap gap-2">
+
+                            {/* El propietario puede administrar su iniciativa. */}
+                            {esPropietario ? (
+                                <>
+
+                                    {/* Abre la página para editar. */}
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={irAEditar}
+                                    >
+                                        Editar iniciativa
+                                    </button>
+
+
+                                    {/* Abre las solicitudes recibidas. */}
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-primary"
+                                        onClick={irAGestionar}
+                                    >
+                                        Gestionar solicitudes
+                                    </button>
+
+
+                                    {/* Solicita eliminar la iniciativa. */}
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-danger"
+                                        disabled={eliminando}
+                                        onClick={manejarEliminar}
+                                    >
+                                        {eliminando
+                                            ? "Eliminando..."
+                                            : "Eliminar iniciativa"}
+                                    </button>
+
+                                </>
+
+                            ) : (
+
+                                // Otros usuarios pueden solicitar participación
+                                // si la iniciativa está abierta y es visible.
+                                permiteSolicitudes && (
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        onClick={irASolicitar}
+                                    >
+                                        Solicitar participación
+                                    </button>
+
+                                )
+                            )}
+
+                        </div>
+
+                    </section>
+
 
                     {/* Información general. */}
                     <section className="card mb-4">
+
                         <div className="card-body">
 
                             <h2 className="h5 mb-3">
@@ -140,11 +290,15 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                             </p>
 
                         </div>
+
                     </section>
 
-                    {/* Muestra la descripción si está disponible. */}
+
+                    {/* Descripción de la iniciativa. */}
                     {iniciativa.descripcion !== undefined && (
+
                         <section className="card mb-4">
+
                             <div className="card-body">
 
                                 <h2 className="h5">
@@ -154,12 +308,16 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                                 <p>{iniciativa.descripcion}</p>
 
                             </div>
+
                         </section>
                     )}
 
-                    {/* Muestra el problema que busca resolver. */}
+
+                    {/* Problema que busca resolver. */}
                     {iniciativa.problema && (
+
                         <section className="card mb-4">
+
                             <div className="card-body">
 
                                 <h2 className="h5">
@@ -169,12 +327,16 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                                 <p>{iniciativa.problema}</p>
 
                             </div>
+
                         </section>
                     )}
 
-                    {/* Muestra los beneficiarios. */}
+
+                    {/* Personas beneficiadas. */}
                     {iniciativa.beneficiarios && (
+
                         <section className="card mb-4">
+
                             <div className="card-body">
 
                                 <h2 className="h5">
@@ -184,12 +346,16 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                                 <p>{iniciativa.beneficiarios}</p>
 
                             </div>
+
                         </section>
                     )}
 
-                    {/* Muestra las competencias cuando están disponibles. */}
+
+                    {/* Competencias necesarias. */}
                     {Array.isArray(iniciativa.competencias) && (
+
                         <section className="card mb-4">
+
                             <div className="card-body">
 
                                 <h2 className="h5">
@@ -197,27 +363,43 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                                 </h2>
 
                                 {iniciativa.competencias.length > 0 ? (
+
                                     <div className="d-flex flex-wrap gap-2">
-                                        {iniciativa.competencias.map((competencia) => (
-                                            <span
-                                                className="badge text-bg-primary"
-                                                key={competencia}
-                                            >
-                                                {competencia}
-                                            </span>
-                                        ))}
+
+                                        {iniciativa.competencias.map(
+                                            (competencia) => (
+
+                                                <span
+                                                    className="badge text-bg-primary"
+                                                    key={competencia}
+                                                >
+                                                    {competencia}
+                                                </span>
+
+                                            )
+                                        )}
+
                                     </div>
+
                                 ) : (
-                                    <p>No se especificaron competencias.</p>
+
+                                    <p>
+                                        No se especificaron competencias.
+                                    </p>
+
                                 )}
 
                             </div>
+
                         </section>
                     )}
 
-                    {/* Información del equipo, cuando el backend la permite. */}
+
+                    {/* Información del equipo. */}
                     {iniciativa.miembrosEstimados !== undefined && (
+
                         <section className="card mb-4">
+
                             <div className="card-body">
 
                                 <h2 className="h5">
@@ -230,13 +412,16 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
                                 </p>
 
                                 {Array.isArray(iniciativa.miembros) && (
+
                                     <p>
                                         <strong>Integrantes actuales:</strong>{" "}
                                         {iniciativa.miembros.length}
                                     </p>
+
                                 )}
 
                             </div>
+
                         </section>
                     )}
 
@@ -247,5 +432,6 @@ function Detalle({ token, iniciativaId, volverCatalogo }) {
     );
 }
 
-// Permite importar la página desde App.jsx.
+
+// Permite utilizar la página desde App.jsx.
 export default Detalle;

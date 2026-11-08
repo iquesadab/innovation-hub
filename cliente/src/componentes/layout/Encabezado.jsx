@@ -73,6 +73,17 @@ function Encabezado({ pagina, cambiarPagina, cerrarSesion }) {
                                 </button>
                             </li>
 
+                            {/* Nueva opción para consultar solicitudes enviadas. */}
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className={`nav-link ${pagina === "misSolicitudes" ? "active" : ""}`}
+                                    onClick={() => navegar("misSolicitudes")}
+                                >
+                                    Mis solicitudes
+                                </button>
+                            </li>
+
                             {/* Página del perfil. */}
                             <li className="nav-item">
                                 <button

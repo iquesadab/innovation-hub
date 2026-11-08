@@ -108,3 +108,67 @@ export async function crearIniciativa(token, iniciativa) {
     // Devuelve la iniciativa que se guardó en MongoDB.
     return datos.iniciativa;
 }
+
+
+ // UPDATE: permite modificar una iniciativa existente.
+export async function actualizarIniciativa(token, id, cambios) {
+
+    // Envía una petición PUT con los datos modificados.
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+
+        // Envía el token y especifica que los datos son JSON.
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+
+        // Convierte los cambios a formato JSON.
+        body: JSON.stringify(cambios)
+    });
+
+    // Convierte la respuesta del backend en un objeto.
+    const datos = await respuesta.json();
+
+    // Si ocurre un error, muestra el mensaje del backend.
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.error?.mensaje ||
+            datos.mensaje ||
+            "No se pudo actualizar la iniciativa."
+        );
+    }
+
+    // Devuelve la iniciativa actualizada.
+    return datos.iniciativa;
+}
+
+
+// DELETE: solicita eliminar una iniciativa existente.
+export async function eliminarIniciativa(token, id) {
+
+    // Envía una petición DELETE al backend.
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+
+        // Envía el token para identificar al usuario.
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    // Lee la respuesta enviada por el backend.
+    const datos = await respuesta.json();
+
+    // Comprueba si ocurrió algún error.
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.error?.mensaje ||
+            datos.mensaje ||
+            "No se pudo eliminar la iniciativa."
+        );
+    }
+
+    // Devuelve la confirmación del backend.
+    return datos;
+}
