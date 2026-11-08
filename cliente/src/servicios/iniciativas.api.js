@@ -53,6 +53,7 @@ export async function obtenerIniciativas(token, filtros = {}) {
     return datos;
 }
 
+
 // Consulta una iniciativa específica utilizando su ID.
 export async function obtenerDetalleIniciativa(token, id) {
 
@@ -76,5 +77,34 @@ export async function obtenerDetalleIniciativa(token, id) {
     }
 
     // Devuelve la iniciativa recibida del backend.
+    return datos.iniciativa;
+}
+
+
+ // Envía una nueva iniciativa al backend para guardarla.
+export async function crearIniciativa(token, iniciativa) {
+
+    // Realiza una solicitud POST con los datos de la iniciativa.
+    const respuesta = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(iniciativa)
+    });
+
+    // Convierte la respuesta a un objeto JavaScript.
+    const datos = await respuesta.json();
+
+    // Muestra un error si el backend rechaza la solicitud.
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.error?.mensaje ||
+            "No se pudo publicar la iniciativa."
+        );
+    }
+
+    // Devuelve la iniciativa que se guardó en MongoDB.
     return datos.iniciativa;
 }

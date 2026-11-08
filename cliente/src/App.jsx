@@ -1,15 +1,16 @@
-import { useState } from "react"; // Permite guardar información que cambia.
+import { useState } from "react"; // Permite guardar información que cambia
 
-import Encabezado from "./componentes/layout/Encabezado.jsx"; // Menú privado.
-import EncabezadoPublico from "./componentes/layout/EncabezadoPublico.jsx"; // Menú público.
-import PiePagina from "./componentes/layout/PiePagina.jsx"; // Pie de página.
+import Encabezado from "./componentes/layout/Encabezado.jsx"; // Menú privado
+import EncabezadoPublico from "./componentes/layout/EncabezadoPublico.jsx"; // Menú público
+import PiePagina from "./componentes/layout/PiePagina.jsx"; // Pie de página
 
-import Inicio from "./paginas/Inicio.jsx"; // Inicio para usuarios autenticados.
-import InicioPublico from "./paginas/InicioPublico.jsx"; // Inicio para visitantes.
-import Login from "./paginas/Login.jsx"; // Formulario de inicio de sesión.
+import Inicio from "./paginas/Inicio.jsx"; // Inicio para usuarios autenticados
+import InicioPublico from "./paginas/InicioPublico.jsx"; // Inicio para visitantes
+import Login from "./paginas/Login.jsx"; // Formulario de inicio de sesión
 import Registro from "./paginas/Registro.jsx"; // Formulario de registro
 import Catalogo from "./paginas/Catalogo.jsx"; // Página del catálogo de iniciativas
 import Detalle from "./paginas/Detalle.jsx"; // Detalle de cada iniciativa
+import Publicar from "./paginas/Publicar.jsx"; // Página para publicar nuevas iniciativas
 
 function App() {
 
@@ -102,12 +103,21 @@ function App() {
             );
         }
 
+        // Muestra el formulario para publicar iniciativas.
+        if (pagina === "publicar" && sesion) {
+            return (
+                <Publicar
+                    token={sesion.token}
+                    alPublicar={manejarPublicacion}
+                />
+            );
+        }
+
         // Evita mostrar páginas que todavía no están disponibles.
         return sesion
             ? <Inicio />
             : <InicioPublico cambiarPagina={cambiarPagina} />;
     }
-
 
     return (
         <>
@@ -151,6 +161,13 @@ function App() {
     // Regresa al catálogo de iniciativas.
     function volverCatalogo() {
         cambiarPagina("iniciativas");
+    }
+
+    // Abre el detalle de la iniciativa que se acaba de publicar.
+    function manejarPublicacion(iniciativa) {
+        setIniciativaSeleccionada(iniciativa.id);
+        setMensaje("Iniciativa publicada correctamente.");
+        setPagina("detalle");
     }
 }
 
