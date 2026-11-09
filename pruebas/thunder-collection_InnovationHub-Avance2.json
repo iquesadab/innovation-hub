@@ -1,0 +1,321 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "InnovationHub-Avance2",
+    "collectionId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+    "dateExported": "2026-11-09T02:25:01.239Z",
+    "version": "1.4",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "5907ff58-eb4c-445b-8e0f-a7915f26bcf3",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "01 - Login correcto",
+            "url": "http://localhost:3001/api/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2026-11-08T23:29:49.817Z",
+            "modified": "2026-11-08T23:29:49.818Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"correo\": \"ana@ejemplo.com\",",
+                    "  \"contrasena\": \"ClaveSegura123\"",
+                    "}"
+                ],
+                "form": []
+            }
+        },
+        {
+            "_id": "7997d9bc-2b70-4b1d-be11-95ea47c1433c",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "02 - Login Incorrecto",
+            "url": "http://localhost:3001/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2026-11-09T00:12:36.753Z",
+            "modified": "2026-11-09T00:12:36.753Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"correo\": \"ana@ejemplo.com\",",
+                    "  \"contrasena\": \"ClaveIncorrecta123\"",
+                    "}"
+                ],
+                "form": []
+            }
+        },
+        {
+            "_id": "4a450544-91b9-4efa-bba4-2a9cbcf20f96",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "03 - Usuario inexistente",
+            "url": "http://localhost:3001/api/auth/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2026-11-09T00:14:13.134Z",
+            "modified": "2026-11-09T00:14:13.134Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"correo\": \"usuarioquenoexiste@ejemplo.com\",",
+                    "  \"contrasena\": \"ClavePrueba123\"",
+                    "}"
+                ],
+                "form": []
+            }
+        },
+        {
+            "_id": "ffe7c43b-66e3-460a-9c41-6487859fd573",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "04 - Acceso sin token",
+            "url": "http://localhost:3001/api/usuarios/perfil",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2026-11-09T00:16:26.118Z",
+            "modified": "2026-11-09T00:16:26.118Z",
+            "headers": []
+        },
+        {
+            "_id": "88ed1248-f9c1-46d3-8b46-ca58faeba1ae",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "05 - Consultar iniciativas",
+            "url": "http://localhost:3001/api/initiatives",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2026-11-09T00:20:41.407Z",
+            "modified": "2026-11-09T00:20:41.407Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "8e2444b3-d307-430d-aef7-83bd512ef836",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "06 - Iniciativa inexistente",
+            "url": "http://localhost:3001/api/initiatives/000000000000000000000000",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2026-11-09T00:22:41.384Z",
+            "modified": "2026-11-09T00:22:41.384Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "e8c5479c-910d-4492-8167-af700ad30705",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "07 - Iniciativa con datos invalidos",
+            "url": "http://localhost:3001/api/initiatives",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2026-11-09T01:30:25.465Z",
+            "modified": "2026-11-09T01:30:25.465Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"titulo\": \"\",",
+                    "  \"tipo\": \"\",",
+                    "  \"categoria\": \"\",",
+                    "  \"resumen\": \"\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "ab9a3c7d-58ee-45da-b605-9153bd777cc2",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "08 - Iniciativas sin autorizacion",
+            "url": "http://localhost:3001/api/initiatives",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2026-11-09T01:34:02.387Z",
+            "modified": "2026-11-09T01:34:02.387Z",
+            "headers": []
+        },
+        {
+            "_id": "bcca845f-106c-445b-95be-2a484f8804e4",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "09 - Solicitud correcta",
+            "url": "http://localhost:3001/api/solicitudes/iniciativas/6af010251f0d993c6eedc95b",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2026-11-09T01:37:44.623Z",
+            "modified": "2026-11-09T01:37:44.623Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"motivo\": \"Me gustaría participar en esta iniciativa porque me interesa colaborar con el equipo.\",",
+                    "  \"experiencia\": \"Tengo conocimientos básicos de desarrollo web.\",",
+                    "  \"disponibilidad\": \"Puedo colaborar durante las tardes.\",",
+                    "  \"competencias\": [",
+                    "    \"JavaScript\",",
+                    "    \"HTML\",",
+                    "    \"CSS\"",
+                    "  ]",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWU2OTIyYTRhOTgyMWQwMmI2ZjNmOSIsImlhdCI6MTc5NDE4ODM2OSwiZXhwIjoxNzk0MTk1NTY5fQ.TcS8P4zSPhzkiAjb-CH3fPHdRS6iA5ZVtTy8m9QRyuE"
+            }
+        },
+        {
+            "_id": "fb659b7e-159b-4adb-829b-cbf534aedd3d",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "10 - Solicitud con datos invalidos",
+            "url": "http://localhost:3001/api/solicitudes/iniciativas/6af010251f0d993c6eedc95b",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2026-11-09T01:43:09.128Z",
+            "modified": "2026-11-09T01:43:09.128Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"motivo\": \"\",",
+                    "  \"experiencia\": \"\",",
+                    "  \"disponibilidad\": \"\",",
+                    "  \"competencias\": []",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWQ3MmIxZDQyNjUyY2VkOTllMTIyNyIsImlhdCI6MTc5NDE4ODY4NywiZXhwIjoxNzk0MTk1ODg3fQ.6_c7RBChsRt3R98opSuG-KUzqMCbasyPxfJm5XGxhkY"
+            }
+        },
+        {
+            "_id": "850694cf-2ce3-43fd-a7b2-bae69dc016e3",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "11 - Solicitud a iniciativa inexistente",
+            "url": "http://localhost:3001/api/solicitudes/iniciativas/000000000000000000000000",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2026-11-09T01:48:28.059Z",
+            "modified": "2026-11-09T01:48:28.059Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"motivo\": \"Me interesa participar en esta iniciativa porque quiero colaborar con el equipo.\",",
+                    "  \"experiencia\": \"Tengo conocimientos básicos de programación.\",",
+                    "  \"disponibilidad\": \"Puedo participar durante las tardes.\",",
+                    "  \"competencias\": [\"JavaScript\", \"HTML\"]",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWQ3MmIxZDQyNjUyY2VkOTllMTIyNyIsImlhdCI6MTc5NDE4ODY4NywiZXhwIjoxNzk0MTk1ODg3fQ.6_c7RBChsRt3R98opSuG-KUzqMCbasyPxfJm5XGxhkY"
+            }
+        },
+        {
+            "_id": "d8354ec2-cb53-4ead-ac5a-1598a78fe0e5",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "12 - Solicitudes sin autorizacion",
+            "url": "http://localhost:3001/api/solicitudes/mis-solicitudes",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2026-11-09T01:50:35.025Z",
+            "modified": "2026-11-09T01:50:35.025Z",
+            "headers": []
+        },
+        {
+            "_id": "446e5ff7-a11b-4483-97ec-f31cafc5e352",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "13 - Consultar proyectos",
+            "url": "http://localhost:3001/api/projects",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2026-11-09T01:51:58.997Z",
+            "modified": "2026-11-09T01:51:58.997Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "abbf9a76-c4ed-4597-8143-cdc81f305b55",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "14 - Proyecto con datos invalidos",
+            "url": "http://localhost:3001/api/proyectos/desde-iniciativa/123456789012345678901234567",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2026-11-09T01:55:05.435Z",
+            "modified": "2026-11-09T01:55:05.435Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "c608ee5b-a5c4-4f81-915a-622ceffbaa3f",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "15 - Proyecto inexistente",
+            "url": "http://localhost:3001/api/proyectos/000000000000000000000000",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2026-11-09T02:21:53.315Z",
+            "modified": "2026-11-09T02:21:53.315Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWEzNDRjNTVjNDI3YzhlZWZkNGJkNyIsImlhdCI6MTc5NDE4MzEzNCwiZXhwIjoxNzk0MTkwMzM0fQ.f4Amic1DCk8mAR0Fm8Xp_ps_yQJHYfuRpsm1D-rvz7M"
+            }
+        },
+        {
+            "_id": "c55bf66b-d2f6-49d4-b9eb-4668bb76c312",
+            "colId": "14823c7a-d6bd-4f6b-9693-2a3a900e4e43",
+            "containerId": "",
+            "name": "16 - Proyectos sin autorizacion",
+            "url": "http://localhost:3001/api/proyectos",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2026-11-09T02:23:17.650Z",
+            "modified": "2026-11-09T02:23:17.650Z",
+            "headers": []
+        }
+    ],
+    "ref": "iXawbdlPaYwTcUBbQe3QG0CZvIJ4FYjUyFn6EAkEz3hQdYxDzxv427cnXQ3uPAPsBZMFpuFQK1x8jjU1TMbBkg"
+}
