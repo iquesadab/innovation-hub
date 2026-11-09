@@ -1,28 +1,22 @@
-
 import { useState } from "react"; // Permite guardar información que cambia
 
-// Componentes del diseño general.
-import Encabezado from "./componentes/layout/Encabezado.jsx";
-import EncabezadoPublico from "./componentes/layout/EncabezadoPublico.jsx";
-import PiePagina from "./componentes/layout/PiePagina.jsx";
 
-// Páginas que ya teníamos.
-import Inicio from "./paginas/Inicio.jsx";
-import InicioPublico from "./paginas/InicioPublico.jsx";
-import Login from "./paginas/Login.jsx";
-import Registro from "./paginas/Registro.jsx";
-import Catalogo from "./paginas/Catalogo.jsx";
-import Detalle from "./paginas/Detalle.jsx";
-import Publicar from "./paginas/Publicar.jsx";
-import Perfil from "./paginas/Perfil.jsx";
-
-// Nuevas páginas para trabajar con solicitudes.
-import SolicitarParticipacion from "./paginas/SolicitarParticipacion.jsx";
-import MisSolicitudes from "./paginas/MisSolicitudes.jsx";
-import GestionarSolicitudes from "./paginas/GestionarSolicitudes.jsx";
-
-// Nueva página para editar iniciativas.
-import EditarIniciativa from "./paginas/EditarIniciativa.jsx";
+import Encabezado from "./componentes/layout/Encabezado.jsx"; // Importa el encabezado para usuarios que iniciaron sesión.
+import EncabezadoPublico from "./componentes/layout/EncabezadoPublico.jsx"; // Importa el encabezado para visitantes.
+import PiePagina from "./componentes/layout/PiePagina.jsx"; // Importa el pie de página de la aplicación.
+import Inicio from "./paginas/Inicio.jsx"; // Importa la página de inicio para usuarios autenticados.
+import InicioPublico from "./paginas/InicioPublico.jsx"; // Importa la página de inicio pública.
+import Login from "./paginas/Login.jsx"; // Importa el formulario para iniciar sesión.
+import Registro from "./paginas/Registro.jsx"; // Importa el formulario para registrar usuarios.
+import Catalogo from "./paginas/Catalogo.jsx"; // Importa la página que muestra las iniciativas disponibles.
+import Detalle from "./paginas/Detalle.jsx"; // Importa la página que muestra la información de una iniciativa.
+import Publicar from "./paginas/Publicar.jsx"; // Importa el formulario para crear nuevas iniciativas.
+import Perfil from "./paginas/Perfil.jsx"; // Importa la página para consultar y modificar el perfil.
+import SolicitarParticipacion from "./paginas/SolicitarParticipacion.jsx"; // Importa el formulario para solicitar participación en una iniciativa.
+import MisSolicitudes from "./paginas/MisSolicitudes.jsx"; // Importa la página donde el usuario consulta sus solicitudes.
+import GestionarSolicitudes from "./paginas/GestionarSolicitudes.jsx"; // Importa la página para aceptar o rechazar solicitudes recibidas.
+import EditarIniciativa from "./paginas/EditarIniciativa.jsx"; // Importa el formulario para modificar una iniciativa existente.
+import Proyectos from "./paginas/Proyectos.jsx"; // Importa la página donde se consultan los proyectos.
 
 
 function App() {
@@ -298,6 +292,15 @@ function App() {
                     token={sesion.token}
                     alActualizarPerfil={manejarActualizacionPerfil}
                 />
+            );
+        }
+
+        // Comprueba si el usuario seleccionó la página de proyectos.
+        if (pagina === "proyectos" && sesion) {
+
+            // Muestra los proyectos y envía el token del usuario.
+            return (
+                <Proyectos token={sesion.token} />
             );
         }
 

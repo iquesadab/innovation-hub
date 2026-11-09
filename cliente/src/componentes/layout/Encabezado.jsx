@@ -84,6 +84,19 @@ function Encabezado({ pagina, cambiarPagina, cerrarSesion }) {
                                 </button>
                             </li>
 
+
+                            {/* Agrega la opción de proyectos al menú. */}
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className={`nav-link ${pagina === "proyectos" ? "active" : ""}`}
+                                    onClick={() => navegar("proyectos")}
+                                >
+                                    Proyectos
+                                </button>
+                            </li>
+
+
                             {/* Página del perfil. */}
                             <li className="nav-item">
                                 <button
