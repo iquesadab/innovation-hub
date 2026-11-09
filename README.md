@@ -385,4 +385,5 @@ La colección de pruebas de Thunder Client debe guardarse en la carpeta `pruebas
 | 55 | 2026-11-08 | 32b2db8 | [new]: Agrega solicitudes de participación y gestión de iniciativas |
 | 56 | 2026-11-08 | 6df0dbf | [docs]: Actualiza el README con la informacion del Avance 2 |
 | 57 | 2026-11-08 | 61851ab | [test]: Agrega las pruebas de la API con Thunder Client |
+| 58 | 2026-11-08 | 36eb61e | [docs]: Actualiza la tabla de commits del proyecto |
 <!-- FIN TABLA COMMITS -->

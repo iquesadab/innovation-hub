@@ -43,10 +43,9 @@ Formato general de error:
 |---|---|---|
 | POST | `/api/auth/register` | Registrar usuario |
 | POST | `/api/auth/login` | Iniciar sesión |
-| POST | `/api/auth/logout` | Cerrar sesión |
-| GET | `/api/users/me` | Consultar perfil propio |
-| PUT | `/api/users/me` | Actualizar perfil |
-| GET | `/api/users` | Buscar usuarios |
+| GET | `/api/auth/me` | Consultar perfil propio |
+| PATCH | `/api/auth/me` | Actualizar perfil |
+| GET | `/api/auth/usuarios` | Buscar usuarios |
 
 Registro:
 
@@ -150,12 +149,12 @@ Respuesta de listado (`200`):
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/api/requests` | Crear solicitud |
-| GET | `/api/requests/mine` | Consultar mis solicitudes |
-| GET | `/api/initiatives/:id/requests` | Consultar solicitudes recibidas |
-| PUT | `/api/requests/:id` | Modificar solicitud pendiente |
-| DELETE | `/api/requests/:id` | Cancelar solicitud |
-| PUT | `/api/requests/:id/status` | Aceptar o rechazar solicitud |
+| POST | `/api/solicitudes/iniciativas/:iniciativaId` | Crear solicitud |
+| GET | `/api/solicitudes/mis-solicitudes` | Consultar mis solicitudes |
+| GET | `/api/solicitudes/iniciativas/:iniciativaId` | Consultar solicitudes recibidas |
+| PUT | `/api/solicitudes/:id` | Modificar solicitud pendiente |
+| PATCH | `/api/solicitudes/:id/cancelar` | Cancelar solicitud |
+| PATCH | `/api/solicitudes/:id/revisar` | Aceptar o rechazar solicitud |
 
 Crear solicitud:
 
@@ -173,7 +172,7 @@ Cambiar estado:
 
 ```json
 {
-  "estado": "aceptada"
+  "decision": "aceptada"
 }
 ```
 
@@ -188,8 +187,8 @@ Reglas:
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/api/initiatives/:id/team` | Consultar integrantes |
-| DELETE | `/api/initiatives/:id/team/:userId` | Retirar integrante |
+| GET | `/api/initiatives/:id/miembros` | Consultar integrantes |
+| DELETE | `/api/initiatives/:id/miembros/:miembroId` | Retirar integrante |
 
 Reglas:
 - Solo el propietario puede retirar integrantes.
@@ -200,7 +199,7 @@ Reglas:
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/api/initiatives/:id/convert` | Convertir iniciativa en proyecto |
+| POST | `/api/projects/desde-iniciativa/:iniciativaId` | Convertir iniciativa en proyecto |
 | GET | `/api/projects` | Listar proyectos |
 | GET | `/api/projects/:id` | Consultar proyecto |
 
