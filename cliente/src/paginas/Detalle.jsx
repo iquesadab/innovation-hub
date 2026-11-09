@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ConvertirProyecto from "../componentes/proyectos/ConvertirProyecto.jsx"; // Importa el formulario para convertir una iniciativa.
 
 // Funciones para consultar y eliminar iniciativas.
 import {
@@ -15,7 +16,8 @@ function Detalle({
     volverCatalogo,
     irASolicitar,
     irAGestionar,
-    irAEditar
+    irAEditar,
+    alConvertirProyecto
 }) {
 
     // Guarda la información de la iniciativa.
@@ -423,6 +425,15 @@ function Detalle({
                             </div>
 
                         </section>
+                    )}
+
+                    {/* Solo el propietario puede ver el formulario de conversión. */}
+                    {esPropietario && iniciativa.estado === "abierta" && (
+                        <ConvertirProyecto
+                            token={token}
+                            iniciativaId={iniciativaId}
+                            alConvertir={alConvertirProyecto}
+                        />
                     )}
 
                 </>

@@ -388,4 +388,5 @@ La colección de pruebas de Thunder Client debe guardarse en la carpeta `pruebas
 | 58 | 2026-11-08 | 36eb61e | [docs]: Actualiza la tabla de commits del proyecto |
 | 59 | 2026-11-08 | df5b2f6 | [docs]: Corrige las rutas del contrato de API |
 | 60 | 2026-11-08 | 71513e4 | [config]: Configura la URL del servidor con variables de entorno |
+| 61 | 2026-11-08 | df27378 | [new]: Agrega consulta y detalle de proyectos con GitHub |
 <!-- FIN TABLA COMMITS -->

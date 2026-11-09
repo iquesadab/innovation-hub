@@ -211,6 +211,7 @@ function App() {
                     irASolicitar={abrirSolicitud}
                     irAGestionar={abrirGestionSolicitudes}
                     irAEditar={abrirEditarIniciativa}
+                    alConvertirProyecto={manejarConversionProyecto}
                 />
             );
         }
@@ -310,6 +311,11 @@ function App() {
             : <InicioPublico cambiarPagina={cambiarPagina} />;
     }
 
+    // Abre la página de proyectos después de convertir una iniciativa.
+    function manejarConversionProyecto() {
+        setMensaje("Iniciativa convertida en proyecto correctamente.");
+        cambiarPagina("proyectos");
+    }
 
     return (
         <>
