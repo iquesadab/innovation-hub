@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/initiatives";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/initiatives`;
 
 // Consulta las iniciativas utilizando el token y los filtros.
 export async function obtenerIniciativas(token, filtros = {}) {

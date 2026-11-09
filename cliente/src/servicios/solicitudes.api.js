@@ -1,7 +1,7 @@
 // Dirección principal del backend para trabajar con solicitudes.
 // Todas las operaciones de este archivo utilizarán esta dirección.
 // Debe coincidir con la ruta configurada en server.js.
-const API_URL = "http://localhost:3001/api/solicitudes";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/solicitudes`;
 
 
 // Esta función permite enviar peticiones al backend.

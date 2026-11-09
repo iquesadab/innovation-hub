@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/auth"; // Dirección de autenticación del backend.
+const API_URL = `${import.meta.env.VITE_API_URL}/api/auth`; // Dirección de autenticación del backend.
 
 // Envía el correo y la contraseña para iniciar sesión.
 export async function iniciarSesion(correo, contrasena) {
