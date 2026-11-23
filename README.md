@@ -322,6 +322,79 @@ Se deben verificar los siguientes casos:
 
 La colección de pruebas de Thunder Client debe guardarse en la carpeta `pruebas/` del repositorio.
 
+## Tarea 3 — Propuesta de migración a SQL Server
+
+### Descripción
+
+En esta tarea se desarrolló una propuesta para migrar la base de datos de Innovation Hub desde MongoDB hacia SQL Server.
+
+El objetivo es representar la información mediante tablas relacionadas, conservando las funcionalidades y el contrato de la API que utiliza actualmente React.
+
+La propuesta contempla el uso futuro de ASP.NET Core y Entity Framework Core. No se reemplazó el servidor Express ni la base de datos MongoDB durante esta tarea.
+
+### Modelo relacional
+
+Se diseñó una base de datos llamada `InnovationHub`, compuesta por 12 tablas:
+
+- Usuarios
+- Competencias
+- UsuarioCompetencias
+- Iniciativas
+- IniciativaCompetencias
+- IniciativaMiembros
+- Solicitudes
+- SolicitudCompetencias
+- Proyectos
+- ProyectoMiembros
+- Etiquetas
+- IniciativaEtiquetas
+
+Se utilizaron llaves primarias, llaves foráneas, restricciones y tablas intermedias para representar las relaciones.
+
+También se elaboró un diagrama entidad-relación y un plan de migración de los documentos de MongoDB al modelo relacional.
+
+### Consultas SQL
+
+Se documentaron seis consultas para demostrar el funcionamiento del modelo:
+
+1. Consulta con relación uno a muchos.
+2. Consulta con relación muchos a muchos.
+3. Consulta con agrupación.
+4. Actualización de un registro.
+5. Eliminación de un registro.
+6. Intento de inserción que incumple una restricción.
+
+### Diseño de rutas GET
+
+Se documentaron dos rutas existentes:
+
+- `GET /api/initiatives`: listado de iniciativas con filtros y paginación.
+- `GET /api/initiatives/:id`: consulta del detalle de una iniciativa.
+
+Se explica cómo obtener la información desde SQL Server y conservar las respuestas JSON que espera React.
+
+### Investigación sobre Entity Framework Core
+
+Se investigaron los siguientes conceptos:
+
+- Diferencia entre `Select` e `Include`.
+- Uso de `AsNoTracking`.
+- Relaciones muchos a muchos.
+- Paginación con `Skip` y `Take`.
+
+### Documentación de la Tarea 3
+
+- [Modelo de datos y plan de migración](docs/modelo-datos.md)
+- [Consultas SQL](docs/consultas.sql)
+- [Diseño de rutas GET](docs/rutas.md)
+- [Investigación de Entity Framework Core](docs/investigacion-efcore.md)
+
+### Ejecución
+
+Los scripts de creación de tablas se trabajaron en SQL Server Management Studio.
+
+La aplicación Innovation Hub continúa funcionando con React, Express y MongoDB. La migración a SQL Server se presenta como una propuesta de diseño y documentación.
+
 
 ### Resumen de commits
 
@@ -393,4 +466,5 @@ La colección de pruebas de Thunder Client debe guardarse en la carpeta `pruebas
 | 63 | 2026-11-08 | 3e35ffb | [docs]: Actualiza la tabla de commits del proyecto |
 | 64 | 2026-11-22 | 4491f58 | [new]: Agrega modelo relacional y plan de migración a SQL Server |
 | 65 | 2026-11-22 | 64beddb | [new]: Agrega consultas SQL del modelo relacional |
+| 66 | 2026-11-22 | 815f041 | [new]: Agrega investigación EF Core y rutas SQL |
 <!-- FIN TABLA COMMITS -->

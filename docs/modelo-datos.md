@@ -1,3 +1,4 @@
+
 # Modelo de datos — Innovation Hub
 
 ## 1. Base de datos
@@ -11,6 +12,7 @@ Se utiliza MongoDB Atlas con el controlador oficial `mongodb` de Node.js.
 Guarda la información de las personas registradas.
 
 Campos principales:
+
 - `_id`: identificador único.
 - `nombre`: nombre completo.
 - `correo`: correo único e inmutable.
@@ -25,15 +27,17 @@ Campos principales:
 Guarda las propuestas publicadas.
 
 Campos principales:
+
 - `_id`: identificador.
 - `titulo`, `tipo`, `categoria`, `resumen`.
 - `descripcion`, `problema`, `beneficiarios`.
 - `competencias`: competencias requeridas.
+- `etiquetas`: etiquetas para clasificar la iniciativa.
 - `miembrosEstimados`: cantidad prevista de integrantes.
 - `propietarioId`: referencia a usuarios.
 - `miembros`: lista de identificadores de usuarios aceptados.
 - `visibilidad`: publica, institucional, restringida o privada.
-- `estado`: activa o archivada.
+- `estado`: abierta, convertida o archivada.
 - `fechaCreacion`, `fechaModificacion`.
 
 ## 4. Colección solicitudes
@@ -41,6 +45,7 @@ Campos principales:
 Guarda las solicitudes de participación.
 
 Campos principales:
+
 - `_id`: identificador.
 - `iniciativaId`: referencia a iniciativas.
 - `usuarioId`: referencia al solicitante.
@@ -54,14 +59,15 @@ Campos principales:
 Guarda las iniciativas convertidas en proyectos.
 
 Campos principales:
+
 - `_id`: identificador.
 - `iniciativaId`: referencia a la iniciativa original.
 - `propietarioId`: referencia al propietario.
 - `nombre`, `descripcion`, `objetivo`.
 - `fechaInicio`, `estado`.
-- `repositorioUrl`: enlace opcional a GitHub.
+- `repositorioGitHub`: enlace opcional a GitHub.
 - `miembros`: integrantes del equipo.
-- `fechaCreacion`.
+- `fechaCreacion`, `fechaModificacion`.
 
 ## 6. Relaciones
 
@@ -69,13 +75,16 @@ Campos principales:
 - Una iniciativa tiene un único propietario.
 - Una iniciativa puede recibir varias solicitudes.
 - Una solicitud pertenece a una iniciativa y a un usuario.
+- Una iniciativa puede tener varios integrantes.
+- Una iniciativa puede requerir varias competencias.
+- Una iniciativa puede tener varias etiquetas.
 - Una iniciativa puede convertirse en proyecto cuando tiene al menos un integrante adicional al propietario.
 
 ## 7. Decisiones de diseño
 
 Se utilizan referencias mediante identificadores para relacionar usuarios, iniciativas, solicitudes y proyectos.
 
-Se utilizan arreglos embebidos para datos sencillos como competencias y miembros del equipo.
+Se utilizan arreglos embebidos para datos sencillos como competencias, etiquetas y miembros del equipo.
 
 Esta combinación permite consultar las entidades por separado sin duplicar toda la información de los usuarios en cada iniciativa.
 
@@ -85,8 +94,9 @@ Esta combinación permite consultar las entidades por separado sin duplicar toda
 - Los identificadores relacionados deben existir.
 - No se permiten solicitudes pendientes duplicadas del mismo usuario para la misma iniciativa.
 - El servidor valida permisos, visibilidad y estados.
-- Se utilizarán índices para búsquedas frecuentes y restricciones de unicidad.
+- Se utilizan índices para búsquedas frecuentes y restricciones de unicidad.
 
+---
 
 ## 9. Diseño relacional para SQL Server
 
@@ -98,7 +108,7 @@ En MongoDB utilizamos colecciones, referencias y arreglos. En SQL Server utiliza
 
 ### 9.1. Tablas propuestas
 
-El diseño contempla las siguientes 10 tablas:
+El diseño contempla las siguientes **12 tablas**:
 
 | Tabla | Descripción |
 |---|---|
@@ -112,13 +122,14 @@ El diseño contempla las siguientes 10 tablas:
 | SolicitudCompetencias | Relaciona las solicitudes con las competencias declaradas. |
 | Proyectos | Guarda los proyectos creados a partir de iniciativas. |
 | ProyectoMiembros | Relaciona los proyectos con sus integrantes. |
+| Etiquetas | Contiene las etiquetas utilizadas para clasificar iniciativas. |
+| IniciativaEtiquetas | Relaciona las iniciativas con sus etiquetas. |
 
 Las tablas intermedias permiten representar las relaciones de muchos a muchos, evitando guardar listas de identificadores dentro de una misma columna.
 
-
 ### 9.2. Diagrama entidad-relación
 
-El siguiente diagrama representa las 10 tablas propuestas para SQL Server, incluyendo sus llaves primarias, llaves foráneas y relaciones.
+El siguiente diagrama representa las 12 tablas propuestas para SQL Server, incluyendo sus llaves primarias, llaves foráneas y relaciones.
 
 ![Diagrama entidad-relación de Innovation Hub](diagrama-entidad-relacion.png)
 
@@ -129,6 +140,7 @@ El siguiente diagrama representa las 10 tablas propuestas para SQL Server, inclu
 | Usuario - Competencia | Muchos a muchos | Tabla intermedia UsuarioCompetencias. |
 | Usuario - Iniciativa | Uno a muchos | PropietarioId en Iniciativas. |
 | Iniciativa - Competencia | Muchos a muchos | Tabla intermedia IniciativaCompetencias. |
+| Iniciativa - Etiqueta | Muchos a muchos | Tabla intermedia IniciativaEtiquetas. |
 | Iniciativa - Solicitud | Uno a muchos | IniciativaId en Solicitudes. |
 | Proyecto - Usuario | Muchos a muchos | Tabla intermedia ProyectoMiembros. |
 | Proyecto - Iniciativa | Uno a uno opcional | IniciativaId en Proyectos, con restricción UNIQUE. |
@@ -139,6 +151,8 @@ El siguiente diagrama representa las 10 tablas propuestas para SQL Server, inclu
 - **Iniciativa - Usuario:** una iniciativa puede tener varios integrantes y un usuario puede participar en varias iniciativas. Se utiliza IniciativaMiembros.
 - **Solicitud - Competencia:** una solicitud puede declarar varias competencias. Se utiliza SolicitudCompetencias.
 - **Usuario - Proyecto:** además de participar en proyectos, un usuario puede ser propietario de varios. Se utiliza PropietarioId en Proyectos.
+
+---
 
 ## 10. Del documento a la tabla
 
@@ -155,7 +169,7 @@ En MongoDB, algunos datos se almacenan como arreglos dentro de un documento. En 
 | solicitudes | Solicitudes | Los campos pasan a columnas y los identificadores de usuario e iniciativa se convierten en llaves foráneas. |
 | proyectos | Proyectos | Los campos pasan a columnas y los identificadores de iniciativa y propietario se convierten en llaves foráneas. |
 
-La tabla Competencias se agrega como catálogo para evitar repetir los nombres de las competencias en diferentes registros.
+Las tablas Competencias y Etiquetas se agregan como catálogos para evitar repetir los mismos nombres en diferentes registros.
 
 ### 10.2. Conversión de arreglos y referencias
 
@@ -163,6 +177,7 @@ La tabla Competencias se agrega como catálogo para evitar repetir los nombres d
 |---|---|
 | usuarios.competencias | UsuarioCompetencias |
 | iniciativas.competencias | IniciativaCompetencias |
+| iniciativas.etiquetas | IniciativaEtiquetas |
 | iniciativas.miembros | IniciativaMiembros |
 | solicitudes.competencias | SolicitudCompetencias |
 | proyectos.miembros | ProyectoMiembros |
@@ -172,19 +187,20 @@ La tabla Competencias se agrega como catálogo para evitar repetir los nombres d
 | proyectos.propietarioId | Proyectos.PropietarioId |
 | proyectos.iniciativaId | Proyectos.IniciativaId |
 
-Las referencias que antes utilizaban ObjectId se representarán mediante columnas de tipo INT.
+Las referencias que antes utilizaban ObjectId se representarán mediante columnas de tipo INT en el modelo SQL Server propuesto.
 
-Durante la migración será necesario conservar la equivalencia entre cada ObjectId original y el nuevo identificador numérico.
+Durante una futura migración será necesario conservar la equivalencia entre cada ObjectId original y el identificador numérico correspondiente.
 
 ### 10.3. Campos adicionales del diseño relacional
 
 Además de los campos existentes en MongoDB, se proponen algunos campos para mejorar la organización de la información:
 
-- Competencias.Nombre: permite mantener un catálogo de competencias.
-- UsuarioCompetencias.Nivel: permite indicar el nivel de una competencia.
-- IniciativaMiembros.Rol: identifica el rol del integrante.
-- IniciativaMiembros.FechaIncorporacion: registra cuándo ingresó.
-- IniciativaMiembros.Estado: permite identificar si su participación está activa.
+- `Competencias.Nombre`: permite mantener un catálogo de competencias.
+- `Etiquetas.Nombre`: permite mantener un catálogo de etiquetas.
+- `UsuarioCompetencias.Nivel`: permite indicar el nivel de una competencia.
+- `IniciativaMiembros.Rol`: identifica el rol del integrante.
+- `IniciativaMiembros.FechaIncorporacion`: registra cuándo ingresó.
+- `IniciativaMiembros.Estado`: permite identificar si su participación está activa.
 
 Estos campos son parte de la propuesta relacional y no necesariamente existen en los documentos actuales de MongoDB.
 
@@ -192,7 +208,7 @@ Estos campos son parte de la propuesta relacional y no necesariamente existen en
 
 ## 11. Descripción de las tablas
 
-A continuación, se describen las 10 tablas creadas en SQL Server, sus columnas, tipos de datos y restricciones principales.
+A continuación, se describen las 12 tablas creadas en SQL Server, sus columnas, tipos de datos y restricciones principales.
 
 ### 11.1. Tabla Usuarios
 
@@ -244,7 +260,7 @@ Guarda las iniciativas publicadas por los usuarios.
 | Id | INT | Sí | PK | IDENTITY(1,1) |
 | PropietarioId | INT | Sí | FK | Referencia Usuarios(Id) |
 | Titulo | NVARCHAR(150) | Sí | — | Título de la iniciativa |
-| Tipo | NVARCHAR(60) | Sí | — | Tipo de iniciativa |
+| Tipo | NVARCHAR(60) | Sí | — | idea, necesidad o reto |
 | Categoria | NVARCHAR(100) | Sí | — | Categoría |
 | Resumen | NVARCHAR(500) | Sí | — | Resumen |
 | Descripcion | NVARCHAR(MAX) | Sí | — | Descripción |
@@ -252,11 +268,11 @@ Guarda las iniciativas publicadas por los usuarios.
 | Beneficiarios | NVARCHAR(1000) | No | — | NULL |
 | MiembrosEstimados | INT | No | — | Mayor que cero si se indica |
 | Visibilidad | NVARCHAR(20) | Sí | — | CHECK de visibilidad |
-| Estado | NVARCHAR(20) | Sí | — | activa o archivada |
+| Estado | NVARCHAR(20) | Sí | — | abierta, convertida o archivada |
 | FechaCreacion | DATETIME2 | Sí | — | DEFAULT GETDATE() |
 | FechaModificacion | DATETIME2 | Sí | — | DEFAULT GETDATE() |
 
-**Relaciones:** cada iniciativa pertenece a un usuario y puede tener competencias, integrantes, solicitudes y un proyecto asociado.
+**Relaciones:** cada iniciativa pertenece a un usuario y puede tener competencias, etiquetas, integrantes, solicitudes y un proyecto asociado.
 
 **Regla de visibilidad:** publica, institucional, restringida o privada.
 
@@ -337,7 +353,11 @@ Guarda los proyectos que se crean a partir de iniciativas.
 
 La restricción UNIQUE sobre IniciativaId garantiza que una iniciativa genere como máximo un proyecto.
 
-**Estados permitidos:** planificacion, en desarrollo, pausado, finalizado y archivado.
+**Estados del diseño SQL actual:** planificacion, en desarrollo, pausado, finalizado y archivado.
+
+En MongoDB también se observa el estado `activo`. Por lo tanto, esta diferencia deberá revisarse antes de una migración real.
+
+El campo `RepositorioUrl` de SQL Server corresponde a `repositorioGitHub` de MongoDB. El ejemplo real también contiene `fechaModificacion`, campo que se deberá incorporar si se requiere conservarlo durante la migración.
 
 ### 11.10. Tabla ProyectoMiembros
 
@@ -351,6 +371,30 @@ Relaciona los proyectos con sus integrantes.
 **Llave primaria compuesta:** ProyectoId + UsuarioId.
 
 Esto evita que un usuario aparezca dos veces como integrante del mismo proyecto.
+
+### 11.11. Tabla Etiquetas
+
+Almacena las etiquetas utilizadas para clasificar las iniciativas.
+
+| Columna | Tipo de dato | Obligatorio | Llave | Regla |
+|---|---|---|---|---|
+| Id | INT | Sí | PK | IDENTITY(1,1) |
+| Nombre | NVARCHAR(50) | Sí | — | UNIQUE |
+
+**Relaciones:** una etiqueta puede utilizarse en varias iniciativas.
+
+### 11.12. Tabla IniciativaEtiquetas
+
+Relaciona las iniciativas con sus etiquetas.
+
+| Columna | Tipo de dato | Obligatorio | Llave | Regla |
+|---|---|---|---|---|
+| IniciativaId | INT | Sí | PK, FK | Referencia Iniciativas(Id) |
+| EtiquetaId | INT | Sí | PK, FK | Referencia Etiquetas(Id) |
+
+**Llave primaria compuesta:** IniciativaId + EtiquetaId.
+
+Esto evita asignar dos veces la misma etiqueta a una iniciativa.
 
 ---
 
@@ -379,6 +423,8 @@ Por ejemplo, no se puede crear una solicitud para una iniciativa que no existe.
 | Proyectos | PropietarioId | Usuarios | NO ACTION |
 | ProyectoMiembros | ProyectoId | Proyectos | NO ACTION |
 | ProyectoMiembros | UsuarioId | Usuarios | NO ACTION |
+| IniciativaEtiquetas | IniciativaId | Iniciativas | NO ACTION |
+| IniciativaEtiquetas | EtiquetaId | Etiquetas | NO ACTION |
 
 En los scripts se utiliza el comportamiento predeterminado de SQL Server, equivalente a NO ACTION.
 
@@ -415,15 +461,16 @@ También se revisará cuáles campos son obligatorios, cuáles pueden estar vac�
 
 Cada colección principal se convertirá en una tabla.
 
-Los arreglos de competencias y miembros se convertirán en tablas intermedias.
+Los arreglos de competencias, etiquetas y miembros se convertirán en tablas intermedias.
 
 Las referencias entre documentos se convertirán en llaves foráneas.
 
 Por ejemplo:
 
-- iniciativas.propietarioId se convierte en Iniciativas.PropietarioId.
-- iniciativas.competencias se convierte en registros de IniciativaCompetencias.
-- proyectos.miembros se convierte en registros de ProyectoMiembros.
+- `iniciativas.propietarioId` se convierte en `Iniciativas.PropietarioId`.
+- `iniciativas.competencias` se convierte en registros de `IniciativaCompetencias`.
+- `iniciativas.etiquetas` se convierte en registros de `IniciativaEtiquetas`.
+- `proyectos.miembros` se convierte en registros de `ProyectoMiembros`.
 
 ### 13.3. Paso 3. Orden de creación de tablas
 
@@ -436,14 +483,15 @@ El orden utilizado en SQL Server es:
 3. Solicitudes.
 4. Proyectos.
 5. UsuarioCompetencias, IniciativaCompetencias, IniciativaMiembros, SolicitudCompetencias y ProyectoMiembros.
+6. Etiquetas e IniciativaEtiquetas.
 
 Este orden permite crear primero las tablas principales y después las que dependen de ellas.
 
 ### 13.4. Paso 4. Conversión de identificadores
 
-MongoDB utiliza identificadores ObjectId y SQL Server utiliza identificadores numéricos INT.
+MongoDB utiliza identificadores ObjectId y el diseño actual de SQL Server utiliza identificadores numéricos INT.
 
-Para conservar las relaciones se preparará una tabla de equivalencias durante la migración.
+Para conservar las relaciones en una futura migración se preparará una tabla de equivalencias.
 
 Ejemplo:
 
@@ -456,6 +504,8 @@ Ejemplo:
 Estos identificadores son ilustrativos y no representan datos reales de la base actual.
 
 Cuando se migre una iniciativa, su PropietarioId deberá utilizar el nuevo identificador numérico del usuario correspondiente.
+
+Esta sección describe una posible migración futura. No implica modificar los identificadores de la aplicación Express actual.
 
 ### 13.5. Paso 5. Datos de prueba
 
@@ -498,9 +548,9 @@ Los demás campos obligatorios se completarían con valores válidos al insertar
 
 | Id | PropietarioId | Titulo | Visibilidad | Estado |
 |---|---|---|---|---|
-| 1 | 1 | Plataforma de tutorías | publica | activa |
-| 2 | 2 | Sistema de biblioteca | institucional | activa |
-| 3 | 3 | Aplicación de voluntariado | restringida | activa |
+| 1 | 1 | Plataforma de tutorías | publica | abierta |
+| 2 | 2 | Sistema de biblioteca | institucional | abierta |
+| 3 | 3 | Aplicación de voluntariado | restringida | abierta |
 
 Los campos restantes se completarían con información válida según la estructura de la tabla.
 
@@ -554,7 +604,35 @@ Los campos de descripción, objetivo y fecha de inicio se completarían con valo
 | 1 | 1 |
 | 1 | 2 |
 
-Con estos datos se pueden comprobar las relaciones entre usuarios, competencias, iniciativas, solicitudes y proyectos.
+#### Etiquetas
+
+| Id | Nombre |
+|---|---|
+| 1 | Educación |
+| 2 | Tutorías |
+| 3 | Tecnología |
+| 4 | Voluntariado |
+| 5 | Comunidad |
+
+#### IniciativaEtiquetas
+
+| IniciativaId | EtiquetaId |
+|---|---|
+| 1 | 1 |
+| 1 | 2 |
+| 1 | 3 |
+| 2 | 1 |
+| 2 | 3 |
+| 3 | 4 |
+| 3 | 5 |
+
+Estos datos permiten comprobar la relación muchos a muchos entre iniciativas y etiquetas.
+
+Por ejemplo, la iniciativa Plataforma de tutorías tiene tres etiquetas: Educación, Tutorías y Tecnología.
+
+La etiqueta Educación también está relacionada con Sistema de biblioteca.
+
+Con estos datos se pueden comprobar las relaciones entre usuarios, competencias, etiquetas, iniciativas, solicitudes y proyectos.
 
 ### 13.6. Paso 6. Validación de la migración
 
@@ -563,7 +641,7 @@ Después de migrar los datos se realizarán las siguientes comprobaciones:
 1. Comparar la cantidad de documentos de cada colección con la cantidad de registros de su tabla principal.
 2. Verificar que todos los usuarios, iniciativas, solicitudes y proyectos tengan sus datos correspondientes.
 3. Comprobar que las llaves foráneas apunten a registros existentes.
-4. Revisar que los arreglos de competencias y miembros se hayan convertido correctamente en registros de las tablas intermedias.
+4. Revisar que los arreglos de competencias, etiquetas y miembros se hayan convertido correctamente en registros de las tablas intermedias.
 5. Confirmar que no existan relaciones duplicadas.
 6. Ejecutar consultas JOIN para comprobar que las relaciones funcionan.
 7. Verificar las restricciones UNIQUE, CHECK y NOT NULL.
@@ -578,7 +656,7 @@ El modelo relacional propuesto permite representar en SQL Server la información
 
 La separación de datos en tablas facilita la organización y permite utilizar llaves primarias, llaves foráneas y restricciones para mantener la integridad de la información.
 
-Las tablas intermedias resuelven las relaciones de muchos a muchos, como usuarios con competencias y proyectos con integrantes.
+Las tablas intermedias resuelven las relaciones de muchos a muchos, como usuarios con competencias, iniciativas con etiquetas y proyectos con integrantes.
 
 También se conserva la relación entre las iniciativas y los proyectos, garantizando que una iniciativa pueda generar como máximo un proyecto.
 
